@@ -1,0 +1,117 @@
+@use '../helpers/' as *;
+
+.customers-card {
+  padding: 15px;
+
+  min-height: 100%;
+  border: 1px solid var(--color-white);
+  border-radius: 10px;
+
+  backdrop-filter: blur(20px);
+  background: rgba(226, 211, 206, 0.2);
+
+  &__inner {
+    position: relative;
+    padding-block: fluid(70, 60);
+    padding-inline: fluid(80, 30);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--color-white);
+    border-radius: 10px;
+
+    &::before {
+      position: absolute;
+      content: '';
+
+      width: 50px;
+      height: 20px;
+      top: -15px;
+      left: 50%;
+      background-image: url(/images/customers/decor.svg);
+      background-repeat: no-repeat;
+      transform: translate3d(-50%, 0, 0);
+      background-color: var(--color-bg--rose);
+    }
+
+    @media (width <= 900px) {
+      align-items: center;
+      padding-block: 70px;
+      padding-inline: 70px;
+      text-align: center;
+
+      @media (width <= 500px) {
+        padding-inline: 20px;
+      }
+    }
+  }
+
+  &__img {
+    position: relative;
+
+    margin-bottom: fluid(55, 30);
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      left: 20px;
+      bottom: -30px;
+      width: 102px;
+      height: 102px;
+      background-image: url(/images/customers/author-blur.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -1;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 100%;
+      box-shadow: 0 3px 20px 0 rgba(139, 167, 178, 0.16);
+    }
+  }
+
+  &__text {
+    margin-bottom: fluid(80, 30);
+
+    font-weight: 300;
+    font-size: fluid(32, 18);
+    line-height: 1.7619;
+    color: #1d1a1a;
+  }
+
+  &__content {
+  }
+
+  &__author {
+    position: relative;
+    padding-left: 10px;
+    margin-top: auto;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: fluid(19, 14);
+    line-height: 0.945;
+    color: #1d1a1a;
+
+    ::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 6px;
+      height: 2px;
+      background-color: #1d1a1a;
+
+      transform: translate3d(0, -50%, 0);
+    }
+  }
+
+  &__coauthor {
+    font-weight: 300;
+    font-size: fluid(16, 14);
+    line-height: 0.945;
+    color: #1d1a1a;
+  }
+}

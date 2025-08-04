@@ -1,0 +1,69 @@
+@use '../helpers/' as *;
+
+.footer {
+  &__menu {
+    margin-bottom: fluid(115, 75);
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: fluid(60, 30);
+
+    @media(width <= 500px) {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     row-gap: 30px;
+     justify-items: center;
+    }
+  }
+
+  &__list-link {
+    font-weight: 400;
+    font-size: 16px;
+    font-family: var(--font-family-title);
+    text-transform: uppercase;
+    color: var(--color-title);
+    cursor: pointer;
+    transition: color .3s ease;
+  }
+
+  &__list-btn{
+    position: relative;
+    padding: 11px 24px;
+    background-color: transparent;
+    border-radius: 61px;
+    text-transform: uppercase;
+    border: none;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: var(--font-family-title);
+    text-transform: uppercase;
+    color: var(--color-title);
+    cursor: pointer;
+    transition: color .3s ease;
+
+    @include hover {
+      color: var(--color-accent);
+
+      svg{
+        path{
+          fill: var(--color-accent);
+        }
+      }
+    }
+
+    svg{
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+
+      path{
+        fill: var(--color-white);
+      }
+    }
+  }
+}

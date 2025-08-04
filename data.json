@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "imgUrl": "/images/slides/1.png",
+    "location": "Austria       ",
+    "title": "Winter Park Ski Holiday",
+    "rating": 4,
+    "price": 1490,
+    "region": "Antarctica"
+  },
+  {
+    "id": 2,
+    "imgUrl": "/images/slides/2.png",
+    "location": "Peru",
+    "title": "Machu Picchu",
+    "rating": 5,
+    "price": 2300,
+    "region": "North America"
+  },
+  {
+    "id": 3,
+    "imgUrl": "/images/slides/3.png",
+    "location": "Croatia ",
+    "title": "Hvar",
+    "rating": 4,
+    "price": 4500,
+    "region": "Europe"
+  },
+  {
+    "id": 4,
+    "imgUrl": "/images/slides/4.png",
+    "location": "Jordan",
+    "title": "Wadi Musa",
+    "rating": 4,
+    "price": 4500,
+    "region": "Asia"
+  },
+  {
+    "id": 5,
+    "imgUrl": "/images/slides/5.png",
+    "location": "Europe",
+    "title": "Winter Park Ski Holiday",
+    "rating": 5,
+    "price": 4900,
+    "region": "Antarctica"
+  },
+  {
+    "id": 6,
+    "imgUrl": "/images/slides/6.png",
+    "location": "Jordan",
+    "title": "Wadi Musa",
+    "rating": 4,
+    "price": 4500,
+    "region": "Asia"
+  },
+  {
+    "id": 7,
+    "imgUrl": "/images/slides/7.png",
+    "location": "Jordan",
+    "title": "Wadi Musa",
+    "rating": 4,
+    "price": 4500,
+    "region": "Asia"
+  },
+  {
+    "id": 8,
+    "imgUrl": "/images/slides/8.png",
+    "location": "Jordan",
+    "title": "Wadi Musa",
+    "rating": 4,
+    "price": 4500,
+    "region": "Asia"
+  },
+  {
+    "id": 9,
+    "imgUrl": "/images/slides/9.png",
+    "location": "Jordan",
+    "title": "Wadi Musa",
+    "rating": 4,
+    "price": 4500,
+    "region": "Asia"
+  },
+  {
+    "id": 10,
+    "imgUrl": "/images/slides/10.png",
+    "location": "Jordan",
+    "title": "Wadi Musa",
+    "rating": 4,
+    "price": 4500,
+    "region": "Asia"
+  },
+  {
+    "id": 11,
+    "imgUrl": "/images/slides/11.png",
+    "location": "Jordan",
+    "title": "Wadi Musa",
+    "rating": 4,
+    "price": 4500,
+    "region": "Asia"
+  },
+  {
+    "id": 12,
+    "imgUrl": "/images/slides/12.png",
+    "location": "Jordan",
+    "title": "Wadi Musa",
+    "rating": 4,
+    "price": 4500,
+    "region": "Asia"
+  }
+]

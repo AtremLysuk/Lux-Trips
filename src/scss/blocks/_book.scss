@@ -1,0 +1,73 @@
+@use '../helpers/' as *;
+
+.book {
+  padding-bottom: 80px;
+  position: relative;
+
+  &::after{
+    position: absolute;
+
+    content: '';
+
+    width: 100%;
+    height: 60%;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-image: url(/images/booktop\ .png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+
+    @media(width <= 1150) {
+     top: 0;
+    }
+
+  }
+
+  &__container {
+    position: relative;
+    z-index: 100;
+  }
+
+
+  &__title {
+    --decorWidth: 112px;
+    --decorHeight: 211px;
+
+    position: relative;
+    display: block;
+    padding-top: fluid(47, 10);
+    margin-bottom: fluid(75, 65);
+    margin-inline: auto;
+    text-align: center;
+    max-width: 185px;
+
+    &::after{
+      position: absolute;
+
+      content: '';
+      width: var(--decorWidth);
+      height: var(--decorHeight);
+      top: 50%;
+      left: 50%;
+      background-image: url(/images/book/decor.svg);
+      transform: translate3d(-50%, -50%, 0);
+      z-index: 50;
+    }
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: fluid(30, 15);
+
+    @media(width <= 900px) {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     gap: 15px;
+    }
+  }
+}

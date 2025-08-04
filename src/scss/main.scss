@@ -1,0 +1,23 @@
+@use 'normalize';
+@use 'fonts';
+@use 'variables';
+@use 'utils';
+@use 'globals';
+
+@use 'blocks/header';
+@use 'blocks/search';
+@use 'blocks/header-top';
+@use 'blocks/hero';
+@use 'blocks/experience';
+@use 'blocks/slider-card';
+@use 'blocks/pacages-card';
+@use 'blocks/packages';
+@use 'blocks/book';
+@use 'blocks/book-card';
+@use 'blocks/customers-card';
+@use 'blocks/trips';
+@use 'blocks/customize';
+@use 'blocks/customers';
+
+@use 'blocks/footer-menu';
+@use 'blocks/footer';

@@ -1,0 +1,82 @@
+@use '../helpers/' as *;
+
+.experience {
+  padding-block: fluid(120, 100);
+  background-image: url(/images/book/pacakges-bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+
+  &__title {
+    display: block;
+    margin-inline: auto;
+    padding-bottom: fluid(60, 40);
+    max-width: 290px;
+    text-align: center;
+  }
+
+  &-next {
+    svg {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 75px;
+      height: 75px;
+      z-index: 100;
+      cursor: pointer;
+      transform: translate(0, -50%);
+
+      :where([fill]:not([fill='none'], [fill^='url'])) {
+        fill: #79655e;
+      }
+
+      :where([stroke]:not([stroke='none'], [stroke^='url'])) {
+        stroke: #fff;
+      }
+    }
+  }
+}
+
+.experience-header {
+  padding-inline: 80px;
+
+  &__items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 36px;
+    padding-bottom: 35px;
+
+    @media (width <= 950px) {
+      row-gap: 20px;
+    }
+  }
+
+  &__item {
+  }
+
+  &__btn {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 0.985;
+    color: var(--color-text-rose);
+    transition-duration: var(--transition-duration);
+    cursor: pointer;
+
+    &.active {
+      color: greenyellow;
+    }
+  }
+}
+.experience-slider {
+  position: relative;
+}
+
+.experience__active-line {
+  transform: translateX(-50%);
+}

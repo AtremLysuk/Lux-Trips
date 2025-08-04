@@ -1,0 +1,32 @@
+@use 'helpers' as *;
+
+:root {
+  // colors
+  --color-dark: #000;
+  --color-white: #fff;
+  --color-title:  #0c0b10;;
+  --color-bg--rose: #e2d3ce;
+  --color-text-rose:  #79655e;
+  --color-accent: red;
+
+  --border-white:  1px solid var(--color-white);
+  --border-rose: 1.61px solid var(--color-bg--rose);
+  --border-dark : 1.61px solid var(--color-dark);
+
+  // typography
+
+  --font-family-base: "Manrope", sans-serif;
+  --font-family-title: "Forum", sans-serif;
+
+  --container-width: 1100px;
+  --container-wide-width: 1440px;
+  --container-padding-x: 16px;
+
+  --radii-10: 10px;
+
+  // @include laptop {
+  //   --container-width: #{rem(1280)};
+  // }
+
+  --transition-duration: 0.2s;
+}

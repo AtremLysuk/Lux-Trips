@@ -1,0 +1,132 @@
+@use '../helpers/' as *;
+
+.header {
+  position: relative;
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 0.985;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #0c0b10;
+  }
+}
+
+.layers {
+  height: 110vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  will-change: transform;
+
+  &__base {
+    transform: translate3d(0, calc(var(--scrollTop) / 1.9), 0);
+    z-index: 0;
+  }
+
+  &__subtitle {
+    padding-top: 8%;
+    transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+  }
+
+  &__title {
+    position: relative;
+    max-width: 900px;
+    margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    @include fluid-text(197, 72);
+    letter-spacing: 0.3em;
+
+    text-align: center;
+    font-weight: 400;
+    line-height: 0.6494;
+
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fcfcfc;
+    font-family: var(--font-family-title);
+    z-index: 2;
+
+    // &::after{
+    //   content: attr(data-text);
+    //   position: absolute;
+    //   top: -200px;
+    //   left: 0;
+    //   width: 138px;
+    //   height: 75px;
+    //   z-index: 100;
+    // }
+
+    p {
+      letter-spacing: 1rem;
+      line-height: 0.6494;
+      will-change: transform;
+      transform: translate3d(0, calc(var(--scrollTop) / 2), 0)
+    }
+
+    span {
+      position: relative;
+      margin-top: 15px;
+      font-size: fluid(160, 70);
+      transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+    }
+
+
+
+    &-places {
+      position: relative;
+      margin-top: 15px;
+      transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+    }
+  }
+
+  &__middle {
+    transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
+    z-index: 1;
+  }
+
+
+  &__front {
+    transform: translate3d(0, calc(var(--scrollTop) / 5.8), 0);
+    z-index: 5;
+  }
+}
+.layer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+}
+
+.header-title-places {
+  display: block;
+  position: relative;
+  margin-top: 15px;
+  transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+
+  &::after {
+    position: absolute;
+
+    content: '';
+    width: 112px;
+    height: 211px;
+
+    top: -100%;
+    left: 37%;
+    background-image: url('./public/bgtop/pins.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 15;
+  }
+}

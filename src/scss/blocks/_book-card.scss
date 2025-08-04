@@ -1,0 +1,46 @@
+@use '../helpers/' as *;
+
+.book {
+  // .book__item
+
+  &__item {
+    position: relative;
+
+    
+
+
+    &-image {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+
+      @media(width <= 900px) {
+        height: 344px;
+      }
+      @media(width <= 670px) {
+        height: 250px;
+     
+      }
+      @media(width <= 500px) {
+        height: 190px;
+     
+      }
+
+    }
+    &-title {
+      position: absolute;
+      font-weight: 400;
+      font-size: 44px;
+      line-height: 0.985;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--color-white);
+
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+  }
+}
