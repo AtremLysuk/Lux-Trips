@@ -3,6 +3,18 @@
 .header {
   position: relative;
 
+  &__container {
+    border: 1px solid green;
+    max-width: 1472px;
+    margin-inline: auto;
+    padding-inline: 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
   &__subtitle {
     font-weight: 400;
     font-size: 25px;
@@ -22,7 +34,7 @@
   text-align: center;
   overflow: hidden;
   position: relative;
-  will-change: transform;
+
 
   &__base {
     transform: translate3d(0, calc(var(--scrollTop) / 1.9), 0);
@@ -56,21 +68,20 @@
     font-family: var(--font-family-title);
     z-index: 2;
 
-    // &::after{
-    //   content: attr(data-text);
-    //   position: absolute;
-    //   top: -200px;
-    //   left: 0;
-    //   width: 138px;
-    //   height: 75px;
-    //   z-index: 100;
-    // }
-
     p {
-      letter-spacing: 1rem;
+      font-weight: 400;
+      @include fluid-text(197, 72);
       line-height: 0.6494;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      color: #fcfcfc;
       will-change: transform;
-      transform: translate3d(0, calc(var(--scrollTop) / 2), 0)
+      transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+
+      @media (width <= 380px) {
+        font-size: 62px;
+      }
     }
 
     span {
@@ -78,9 +89,11 @@
       margin-top: 15px;
       font-size: fluid(160, 70);
       transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+
+      @media (width <= 380px) {
+        font-size: 62px;
+      }
     }
-
-
 
     &-places {
       position: relative;
@@ -93,7 +106,6 @@
     transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
     z-index: 1;
   }
-
 
   &__front {
     transform: translate3d(0, calc(var(--scrollTop) / 5.8), 0);
@@ -109,6 +121,9 @@
 }
 
 .header-title-places {
+  --widthDecor: 100px;
+  --heightDecor: 200px;
+
   display: block;
   position: relative;
   margin-top: 15px;
@@ -118,15 +133,235 @@
     position: absolute;
 
     content: '';
-    width: 112px;
-    height: 211px;
+    width: fluid(112, 72);
+    height: fluid(213, 138);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    backdrop-filter: blur(5px);
 
     top: -100%;
     left: 37%;
-    background-image: url('./public/bgtop/pins.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     z-index: 15;
+  }
+}
+
+.header-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding-inline: fluid(30, 20);
+  padding-block: fluid(30, 20);
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__inner-logo {
+    width: fluid(64, 125);
+    height: fluid(76, 40);
+
+    @media (width <= 1050px) {
+      margin-right: 67px;
+      order: 2;
+    }
+
+    @media (width <= 550px) {
+      display: none;
+    }
+  }
+
+  &__inner-button {
+    height: 45px;
+    padding: fluid(11, 9) fluid(24, 13);
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #000;
+    font-family: var(--font-family-title);
+    background: url(/icons/header-top/button-decor.svg) no-repeat center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 61px;
+    cursor: pointer;
+    transition: color 0.4s ease, transform 0.4s ease;
+    will-change: color, transform;
+
+    &:hover {
+      color: red;
+      transform: scale(1.1);
+    }
+
+    @media (width <= 1050px) {
+      order: 1;
+    }
+  }
+}
+
+.header-menu {
+  @media (width <= 1050px) {
+    display: none;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: fluid(40, 20);
+  }
+
+  &__link {
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #000;
+    font-family: var(--font-family-title);
+    cursor: pointer;
+  }
+}
+
+.burger-menu {
+  opacity: 0;
+  visibility: 0;
+
+  min-height: 100vh;
+  width: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(121, 101, 94, 0.8);
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  transform-origin: right top;
+  transform: scale(0) translate(0, 0) rotate(0.001deg);
+  transition: all 1s ease;
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform-origin: right top;
+  }
+
+  &__wrapper {
+    padding: 50px;
+  }
+
+  &__nav {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__logo {
+    margin-bottom: 20px;
+    path {
+      fill: #fff;
+    }
+  }
+
+  &__list {
+    text-align: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: var(--color-white);
+  }
+
+  &__link {
+    font-size: 30px;
+    letter-spacing: -0.03em;
+    font-family: var(--font-family-title);
+    cursor: pointer;
+  }
+}
+
+.burger-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translate(0, 0) rotate(0.001deg);
+}
+
+.burger-menu__button {
+  display: none;
+  @media (width <= 1050px) {
+    display: block;
+    order: 3;
+    width: 60px;
+    height: 25px;
+    background-color: transparent;
+    border: none;
+
+    span {
+      position: relative;
+      display: block;
+      width: 60px;
+      height: 1px;
+      background-color: #fff;
+      transform: translateX(-5px);
+      transform-origin: revert;
+      will-change: width;
+      transition: width 0.4s ease;
+
+      &::after {
+        content: '';
+
+        position: absolute;
+        width: 45px;
+        height: 1px;
+        background-color: #fff;
+        will-change: transform;
+        transition: all 0.5s ease;
+      }
+      &::before {
+        content: '';
+
+        position: absolute;
+        width: 60px;
+        height: 1px;
+        background-color: #fff;
+        will-change: transform;
+        transition: transform 0.4s ease;
+      }
+
+      &::after {
+        top: -9px;
+        left: 0;
+      }
+      &::before {
+        top: 9px;
+        left: 0;
+      }
+    }
+
+    &.active {
+      span {
+        width: 0px;
+
+        &::after {
+          transform: rotate(45deg);
+          width: 30px;
+        }
+
+        &::before {
+          width: 30px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
   }
 }

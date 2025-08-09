@@ -4,9 +4,10 @@
 @use 'utils';
 @use 'globals';
 
+
+@use 'blocks/button-decorate';
 @use 'blocks/header';
 @use 'blocks/search';
-@use 'blocks/header-top';
 @use 'blocks/hero';
 @use 'blocks/experience';
 @use 'blocks/slider-card';

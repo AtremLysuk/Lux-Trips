@@ -1,21 +1,14 @@
 // import { useMotionValueEvent, useScroll } from 'motion/react';
 
 import { useEffect } from 'react';
-
-import Header from './components/Header/header';
-import Search from './components/Search/Search';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
+import Homepage from './pages/HomePage/Homepage';
 import { ReactLenis } from 'lenis/react';
-import HeaderTop from './components/HeaderTop/HeaderTop';
-import Experience from './sections/Experience/Experience';
-import Packages from './sections/Packages/Packages';
-import Book from './sections/Book/Book';
-import Trips from './sections/Trips/Trips';
-import Customize from './sections/Customize/Customize';
-import Customers from './sections/Customers/Customers';
-import Footer from './components/Footer/Footer';
+import BookPage from './pages/BookPage/BookPage';
+
 
 function App() {
-
   useEffect(() => {
     window.addEventListener('scroll', () => {
       document.body.style.cssText = `--scrollTop: ${window.scrollY}px`;
@@ -24,15 +17,12 @@ function App() {
 
   return (
     <ReactLenis root>
-      <Header />
-      <Search />
-      <Experience />
-      <Packages />
-      <Book />
-      <Trips />
-      <Customize />
-      <Customers />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Homepage />} />
+          <Route path='/products' element={<BookPage />} />
+        </Route>
+      </Routes>
     </ReactLenis>
   );
 }

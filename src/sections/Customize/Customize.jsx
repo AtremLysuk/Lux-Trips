@@ -1,3 +1,5 @@
+import ButtonDecorate from "@/components/ButtonDecorate/ButtonDecorate";
+
 const Customize = () => {
   const blocksData = [
     {
@@ -39,11 +41,12 @@ const Customize = () => {
             </div>
           ))}
         </div>
-        <div className="customize__button">
+        <ButtonDecorate title='Start a trip request' href="/" />
+        {/* <div className="customize__button">
           <a className="customize__link" href="/">
             Start a trip request
           </a>
-        </div>
+        </div> */}
         <div className="customize__bottom">
           <p>It’s Free! - no credit card required</p>
         </div>
