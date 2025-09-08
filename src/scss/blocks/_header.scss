@@ -4,7 +4,6 @@
   position: relative;
 
   &__container {
-    border: 1px solid green;
     max-width: 1472px;
     margin-inline: auto;
     padding-inline: 16px;
@@ -34,7 +33,6 @@
   text-align: center;
   overflow: hidden;
   position: relative;
-
 
   &__base {
     transform: translate3d(0, calc(var(--scrollTop) / 1.9), 0);
@@ -152,17 +150,40 @@
   z-index: 1000;
   padding-inline: fluid(30, 20);
   padding-block: fluid(30, 20);
+  transition: padding 0.4s ease;
+
+  &--scrolled {
+    padding-block: 5px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3);
+
+    .header-top__inner-logo {
+      svg {
+        height: 45px;
+      }
+    }
+
+    .header-top__inner-button {
+      a {
+        svg {
+          height: 45px;
+        }
+      }
+    }
+  }
 
   &__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &-burger-button {
+      display: contents;
+      cursor: pointer;
+    }
   }
 
   &__inner-logo {
-    width: fluid(64, 125);
-    height: fluid(76, 40);
-
     @media (width <= 1050px) {
       margin-right: 67px;
       order: 2;
@@ -174,27 +195,55 @@
   }
 
   &__inner-button {
+    place-self: center;
+    width: 165px;
     height: 45px;
-    padding: fluid(11, 9) fluid(24, 13);
-    font-weight: 400;
-    font-size: 16px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #000;
-    font-family: var(--font-family-title);
-    background: url(/icons/header-top/button-decor.svg) no-repeat center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 61px;
+    position: relative;
     cursor: pointer;
-    transition: color 0.4s ease, transform 0.4s ease;
-    will-change: color, transform;
 
-    &:hover {
-      color: red;
-      transform: scale(1.1);
+    @include hover {
+      a {
+        color: var(--color-white);
+      }
+
+      svg {
+        path {
+          stroke: var(--color-accent);
+          fill: var(--color-accent);
+        }
+      }
+    }
+
+    a {
+      position: absolute;
+      width: 100%;
+      font-family: var(--font-family-title);
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--color-dark);
+      text-decoration: none;
+
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      transition: color 0.3s ease;
+    }
+
+    svg {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      transition: all 0.3s ease;
+
+      path {
+        stroke: #fff;
+        fill: #fff;
+      }
     }
 
     @media (width <= 1050px) {
@@ -243,7 +292,7 @@
   overflow: auto;
   transform-origin: right top;
   transform: scale(0) translate(0, 0) rotate(0.001deg);
-  transition: all 1s ease;
+  transition: all 0.7s ease;
 
   &__wrapper {
     width: 100%;
@@ -264,6 +313,10 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    @media (width <= 370px) {
+      padding: 10px;
+    }
   }
 
   &__logo {
@@ -298,34 +351,38 @@
 
 .burger-menu__button {
   display: none;
+  cursor: pointer;
   @media (width <= 1050px) {
+    position: relative;
     display: block;
     order: 3;
     width: 60px;
     height: 25px;
     background-color: transparent;
     border: none;
+    z-index: 20;
+    cursor: pointer;
 
     span {
       position: relative;
       display: block;
-      width: 60px;
+      width: 40px;
       height: 1px;
       background-color: #fff;
       transform: translateX(-5px);
       transform-origin: revert;
       will-change: width;
-      transition: width 0.4s ease;
+      transition: width 0.7s ease;
 
       &::after {
         content: '';
 
         position: absolute;
-        width: 45px;
+        width: 25px;
         height: 1px;
         background-color: #fff;
         will-change: transform;
-        transition: all 0.5s ease;
+        transition: width 0.9s ease;
       }
       &::before {
         content: '';
@@ -335,7 +392,7 @@
         height: 1px;
         background-color: #fff;
         will-change: transform;
-        transition: transform 0.4s ease;
+        transition: width 0.5s ease;
       }
 
       &::after {
@@ -350,16 +407,11 @@
 
     &.active {
       span {
-        width: 0px;
+        width: 100%;
 
-        &::after {
-          transform: rotate(45deg);
-          width: 30px;
-        }
-
+        &::after,
         &::before {
-          width: 30px;
-          transform: rotate(-45deg);
+          width: 100%;
         }
       }
     }

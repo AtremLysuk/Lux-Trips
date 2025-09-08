@@ -1,11 +1,10 @@
 @use '../helpers/' as *;
 
 .search {
-  // background: url(/public/images/footer/bg_footer.png)no-repeat top/cover;
+  position: relative;
 
-  &__container--wide {
+  z-index: 100;
 
-  }
   &__container {
     position: relative;
     padding: 23px 26px;
@@ -281,7 +280,4 @@
     max-width: 126px;
   }
 }
-.button {
-}
-.button--dark {
-}
+

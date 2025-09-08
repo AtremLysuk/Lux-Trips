@@ -1,22 +1,15 @@
 import '@/scss/blocks/_button-decorate.scss';
 
-
-
 const ButtonDecorate = (props) => {
-
-  const {
-    className,
-    href,
-    title, 
-  } = props;
+  const { className, href, title } = props;
 
   return (
-    <div className="customize__button">
-    <a className="customize__link" href={href}>
-      {title}
-    </a>
-  </div>
-  )
-}
+    <div className={`${className}-button`}>
+      <a className={`${className}-link`} href={href}>
+        {title}
+      </a>
+    </div>
+  );
+};
 
-export default ButtonDecorate
+export default ButtonDecorate;

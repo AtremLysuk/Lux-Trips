@@ -3,8 +3,10 @@ import PacagesCard from '@/components/PacagesCard/PacagesCard';
 
 import { useEffect, useLayoutEffect, useState } from 'react';
 
+
 const Packages = () => {
   const [isSliderWidth, setIsSliderWidth] = useState(false);
+
 
   const packagesItems = [
     {
@@ -54,7 +56,8 @@ const Packages = () => {
       setIsSliderWidth(true);
     }
   }, []);
-  
+
+
   return (
     <section className="packages" aria-labelledby="packages-title">
       <div className="packages__container container">
@@ -107,7 +110,7 @@ const Packages = () => {
         )}
         {isSliderWidth && (
           <div className="packages-slider__wrapper">
-            <div className='packages-slider__header'>
+            <div className="packages-slider__header">
               <h2 className="inner-left__item-title h2" id="packages-title">
                 Luxury Packages
               </h2>
@@ -115,7 +118,11 @@ const Packages = () => {
                 view all
               </a>
             </div>
-            <MySlider isPackageCard={true} items={packagesItems} className="packages" />
+            <MySlider
+              isPackageCard={true}
+              items={packagesItems}
+              className="packages"
+            />
           </div>
         )}
       </div>
@@ -124,48 +131,3 @@ const Packages = () => {
 };
 
 export default Packages;
-
-{
-  /* <div className="packages__inner">
-<div className="packages__inner-left inner-left">
-  <div className="inner-left__items">
-    <div className="inner-left__item">
-      <div>
-        <h2 className="inner-left__item-title h2" id="packages-title">
-          Luxury Packages
-        </h2>
-        <a className="inner-left__item-link" href="/">
-          view all
-        </a>
-      </div>
-    </div>
-
-    <div className="inner-left__item-card packages-card">
-      {packagesItems
-        .filter((el) => el.id === 1)
-        .map((el) => (
-          <PacagesCard el={el} key={el.title} />
-        ))}
-    </div>
-  </div>
-</div>
-<div className="packages__inner-center inner-center">
-  <div className="inner-center__items">
-    {packagesItems
-      .filter((el) => el.id === 2 || el.id === 3)
-      .map((el) => (
-        <PacagesCard el={el} key={el.title} />
-      ))}
-  </div>
-</div>
-<div className="packages__inner-right inner-right">
-  <div className="inner-right__items">
-    {packagesItems
-      .filter((el) => el.id === 4 || el.id === 5)
-      .map((el) => (
-        <PacagesCard el={el} key={el.title} />
-      ))}
-  </div>
-</div>
-</div> */
-}

@@ -1,0 +1,102 @@
+@use '../helpers/' as *;
+
+.request {
+  &__title {
+    padding-top: fluid(150, 90);
+    padding-bottom: fluid(90, 40);
+    text-align: center;
+  }
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 30px;
+
+    @include mobile {
+      display: flex;
+      flex-direction: column;
+      row-gap: 50px;
+    }
+
+
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 30px;
+
+    @include mobile {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  &__content-image {
+    border-radius: 10px;
+    overflow: hidden;
+
+    @include mobile {
+      margin-inline: auto;
+    }
+
+    img{
+      max-width: 100%;
+
+    }
+  }
+
+  &__content-title {
+  }
+
+  &__content-text {
+
+    margin-bottom: fluid(70, 20);
+  }
+
+  &__content-items {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: start;
+
+    @include mobile {
+      width: 100%;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
+    }
+  }
+
+  &__content-item{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 40px;
+
+    @include mobile {
+      height: 100%;
+      max-width: 155px;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: end;
+    }
+
+    svg{
+
+      path {
+        stroke: #79655e;
+      }
+
+      @include mobile {
+        margin-bottom: auto;
+      }
+    }
+  }
+
+  &__form-wrapper {
+  }
+}
+

@@ -1,0 +1,49 @@
+@use '../helpers/' as * ;
+
+.travel {
+  padding-top: fluid(100, 55);
+  padding-bottom: fluid(600, 400);
+  background-image: url(/images/why/bg-contact.png);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+
+
+  &__inner {
+    max-width: 540px;
+    margin-inline: auto;
+    margin-bottom: 25px;
+
+    display: grid;
+    gap: 50px;
+
+  }
+
+
+  &__text-top {
+    line-height: 1.798;
+
+    @media(width <= 500px) {
+      line-height: 1.5;
+    }
+  }
+
+
+  &__text-cebter {
+    font-weight: 400;
+    font-size: fluid(40, 30);
+    line-height: 1.012;
+    color: #0c0b10;
+  }
+
+  &__text-bot {
+    margin-bottom: 60px;
+    line-height: 1.798;
+
+    @media(width <= 500px) {
+      line-height: 1.5;
+    }
+  }
+
+}
+

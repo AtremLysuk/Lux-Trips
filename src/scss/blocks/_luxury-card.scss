@@ -1,0 +1,151 @@
+@use '../helpers/' as *;
+
+.luxury {
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    cursor: pointer;
+  }
+
+  &__image {
+    position: relative;
+
+    img {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 100px;
+      right: 13%;
+      bottom: 34px;
+      background-image: url(/icons/slides/rating-full.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      z-index: 50;
+    }
+  }
+
+  &__content {
+    padding: 35px;
+    position: absolute;
+    width: 100%;
+    height: 240px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    color: var(--color-white);
+  }
+
+  &__content-location {
+    display: block;
+    padding-left: 13px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+
+      width: 9px;
+      height: 11px;
+      background: url(/icons/slides/location.svg) no-repeat center/cover;
+      transform: translate(0, -50%);
+      z-index: 100;
+    }
+  }
+
+  &__content-title {
+    max-width: 200px;
+    margin-bottom: auto;
+  }
+
+  &__content-price {
+    font-weight: 400;
+    font-size: fluid(24, 21);
+    line-height: 0.985;
+  }
+
+  &__rating {
+    position: absolute;
+
+    right: 11%;
+    bottom: 35px;
+    width: 20px;
+    height: 120px;
+    z-index: 50;
+
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--color-white);
+  }
+
+  &-btn__wrapper {
+    position: absolute;
+    left: 50%;
+    bottom: 300px;
+
+    z-index: 55;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  &-btn {
+    width: 330px;
+    height: 55px;
+    position: relative;
+    z-index: 65;
+    font-weight: 400;
+    font-family: var(--font-family-title);
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-title);
+    border: none;
+    border-radius: 74px;
+    background-color: var(--color-white);
+    transition: color 0.3s ease;
+    cursor: pointer;
+
+    @media(width <= 380px){
+      width: 300px;
+    }
+
+    @include hover{
+      color: var(--color-accent);
+    }
+
+
+    svg {
+      position: absolute;
+      left: 0;
+      top: -50%;
+      z-index: -1;
+
+      @media(width <= 380px) {
+        width: 300px;
+      }
+
+      path {
+        fill: var(--color-white);
+      }
+
+      rect {
+        fill: var(--color-white);
+      }
+    }
+  }
+}

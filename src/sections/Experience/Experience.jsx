@@ -3,6 +3,7 @@ import MySlider from '@/components/MySlider/MySlider';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
+
 const Experience = () => {
   const [activeRegion, setActiveRegion] = useState('World');
 
@@ -129,8 +130,10 @@ const Experience = () => {
     },
   ];
 
+
   return (
     <section className="experience">
+
       <div className="experience__container container">
         <h2 className="experience__title h2">Top Rated Experiences</h2>
         <ul className="experience-header__items">

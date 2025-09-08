@@ -9,6 +9,18 @@ body {
   background-color: var(--color-bg--rose);
 }
 
+#root{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer{
+  margin-top: auto;
+}
+
+
+
 h1,
 .h1,
 h2,

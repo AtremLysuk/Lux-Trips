@@ -6,13 +6,16 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  @media(width >= 1440px) {
+    background-position: center top;
+  }
 
   &__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 35px;
+    padding-bottom: 70px;
   }
 
   &__logo {

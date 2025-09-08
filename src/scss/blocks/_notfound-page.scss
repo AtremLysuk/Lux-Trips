@@ -1,0 +1,133 @@
+@use '../helpers/' as *;
+
+.notfound {
+  background-image: url(/images/client/client-bg.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+
+  @media (width >= 1200px) {
+    background-position: center 0;
+  }
+
+  &__container {
+  }
+  &__inner {
+    padding-top: 200px;
+    padding-bottom: 100px;
+
+    display: grid;
+    place-items: center;
+
+
+    &__link {
+      margin-top: 100px;
+
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 18px;
+
+
+      &::before {
+        position: absolute;
+
+        content: '';
+        width: 444px;
+
+        max-width: 100%;
+        width: 100%;
+        height: 100px;
+        left: 50%;
+        top: 42%;
+        transform: translate3d(-50%, -50%, 0);
+        background-image: url(/icons/request/requestbuttononmobile-decor.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        z-index: 51;
+
+        @media (width <= 1100px) {
+          background-image: url(/icons/request/requestbuttononmobile-decor.svg);
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+        }
+
+        @media (width <= 650px) {
+          display: none;
+        }
+      }
+
+      &::after {
+        position: absolute;
+
+        content: '';
+        width: 344px;
+        height: 100px;
+        left: 50%;
+        top: 42%;
+        transform: translate3d(-50%, -50%, 0);
+        background-image: url(/images/Customize/decor-2.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 40;
+        display: none;
+
+        @media (width <= 650px) {
+          display: block;
+        }
+
+        @media (width <= 350px) {
+          display: none;
+        }
+      }
+
+      a {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        padding: 8px fluid(150, 50);
+        font-family: var(--font-family-title);
+        font-weight: 400;
+        font-size: 24px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--color-white);
+        border-radius: 74px;
+        background-color: var(--color-dark);
+        border: none;
+        z-index: 60;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.3s ease;
+
+        @media (width >= 1600px) {
+          padding: 0px 100px;
+        }
+
+        @media (width <= 1100px) {
+          background-color: transparent;
+        }
+
+        @media (width <= 350px) {
+          background-color: var(--color-title);
+        }
+
+        @include hover {
+          color: var(--color-accent);
+        }
+      }
+    }
+  }
+
+  &__title {
+    padding-top: fluid(90, 40);
+    text-align: center;
+  }
+
+}

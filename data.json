@@ -2,7 +2,7 @@
   {
     "id": 1,
     "imgUrl": "/images/slides/1.png",
-    "location": "Austria       ",
+    "location": "Austria",
     "title": "Winter Park Ski Holiday",
     "rating": 4,
     "price": 1490,
@@ -20,7 +20,7 @@
   {
     "id": 3,
     "imgUrl": "/images/slides/3.png",
-    "location": "Croatia ",
+    "location": "Croatia",
     "title": "Hvar",
     "rating": 4,
     "price": 4500,
@@ -105,6 +105,186 @@
     "title": "Wadi Musa",
     "rating": 4,
     "price": 4500,
+    "region": "Asia"
+  },
+  {
+    "id": 13,
+    "imgUrl": "/images/slides/1.png",
+    "location": "Italy",
+    "title": "Venice Canals",
+    "rating": 5,
+    "price": 3100,
+    "region": "Europe"
+  },
+  {
+    "id": 14,
+    "imgUrl": "/images/slides/2.png",
+    "location": "Brazil",
+    "title": "Rio de Janeiro",
+    "rating": 4,
+    "price": 2800,
+    "region": "South America"
+  },
+  {
+    "id": 15,
+    "imgUrl": "/images/slides/3.png",
+    "location": "Egypt",
+    "title": "Pyramids of Giza",
+    "rating": 5,
+    "price": 4700,
+    "region": "Africa"
+  },
+  {
+    "id": 16,
+    "imgUrl": "/images/slides/4.png",
+    "location": "Japan",
+    "title": "Kyoto Temples",
+    "rating": 4,
+    "price": 3500,
+    "region": "Asia"
+  },
+  {
+    "id": 17,
+    "imgUrl": "/images/slides/5.png",
+    "location": "Australia",
+    "title": "Great Barrier Reef",
+    "rating": 5,
+    "price": 5200,
+    "region": "Australia"
+  },
+  {
+    "id": 18,
+    "imgUrl": "/images/slides/6.png",
+    "location": "Mexico",
+    "title": "Chichen Itza",
+    "rating": 4,
+    "price": 2900,
+    "region": "North America"
+  },
+  {
+    "id": 19,
+    "imgUrl": "/images/slides/7.png",
+    "location": "Iceland",
+    "title": "Blue Lagoon",
+    "rating": 5,
+    "price": 3800,
+    "region": "Europe"
+  },
+  {
+    "id": 20,
+    "imgUrl": "/images/slides/8.png",
+    "location": "South Africa",
+    "title": "Table Mountain",
+    "rating": 4,
+    "price": 4100,
+    "region": "Africa"
+  },
+  {
+    "id": 21,
+    "imgUrl": "/images/slides/9.png",
+    "location": "New Zealand",
+    "title": "Milford Sound",
+    "rating": 5,
+    "price": 5500,
+    "region": "Australia"
+  },
+  {
+    "id": 22,
+    "imgUrl": "/images/slides/10.png",
+    "location": "India",
+    "title": "Taj Mahal",
+    "rating": 4,
+    "price": 3300,
+    "region": "Asia"
+  },
+  {
+    "id": 23,
+    "imgUrl": "/images/slides/11.png",
+    "location": "Canada",
+    "title": "Banff National Park",
+    "rating": 5,
+    "price": 4800,
+    "region": "North America"
+  },
+  {
+    "id": 24,
+    "imgUrl": "/images/slides/12.png",
+    "location": "Greece",
+    "title": "Santorini",
+    "rating": 5,
+    "price": 4200,
+    "region": "Europe"
+  },
+  {
+    "id": 25,
+    "imgUrl": "/images/slides/1.png",
+    "location": "Chile",
+    "title": "Torres del Paine",
+    "rating": 4,
+    "price": 5000,
+    "region": "South America"
+  },
+  {
+    "id": 26,
+    "imgUrl": "/images/slides/2.png",
+    "location": "Norway",
+    "title": "Northern Lights",
+    "rating": 5,
+    "price": 6000,
+    "region": "Europe"
+  },
+  {
+    "id": 27,
+    "imgUrl": "/images/slides/3.png",
+    "location": "Vietnam",
+    "title": "Ha Long Bay",
+    "rating": 4,
+    "price": 2700,
+    "region": "Asia"
+  },
+  {
+    "id": 28,
+    "imgUrl": "/images/slides/4.png",
+    "location": "Kenya",
+    "title": "Masai Mara Safari",
+    "rating": 5,
+    "price": 5500,
+    "region": "Africa"
+  },
+  {
+    "id": 29,
+    "imgUrl": "/images/slides/5.png",
+    "location": "USA",
+    "title": "Grand Canyon",
+    "rating": 4,
+    "price": 3400,
+    "region": "North America"
+  },
+  {
+    "id": 30,
+    "imgUrl": "/images/slides/6.png",
+    "location": "China",
+    "title": "Great Wall of China",
+    "rating": 5,
+    "price": 4300,
+    "region": "Asia"
+  },
+  {
+    "id": 31,
+    "imgUrl": "/images/slides/7.png",
+    "location": "Peru",
+    "title": "Amazon Rainforest",
+    "rating": 4,
+    "price": 3900,
+    "region": "South America"
+  },
+  {
+    "id": 32,
+    "imgUrl": "/images/slides/8.png",
+    "location": "Thailand",
+    "title": "Phuket Beaches",
+    "rating": 4,
+    "price": 2500,
     "region": "Asia"
   }
 ]

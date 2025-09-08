@@ -8,7 +8,7 @@
 @use 'blocks/button-decorate';
 @use 'blocks/header';
 @use 'blocks/search';
-@use 'blocks/hero';
+
 @use 'blocks/experience';
 @use 'blocks/slider-card';
 @use 'blocks/pacages-card';
@@ -19,6 +19,18 @@
 @use 'blocks/trips';
 @use 'blocks/customize';
 @use 'blocks/customers';
+@use 'blocks/products';
+@use 'blocks/products-item';
+@use 'blocks/luxury';
+@use 'blocks/luxury-card';
+@use 'blocks/why-top';
+@use 'blocks/why-center';
+@use 'blocks/why-bottom';
+@use 'blocks/contacts';
+@use 'blocks/client';
+@use 'blocks/request-page';
+@use 'blocks/request-form';
+@use 'blocks/notfound-page';
 
 @use 'blocks/footer-menu';
 @use 'blocks/footer';

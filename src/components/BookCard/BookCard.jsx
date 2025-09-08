@@ -1,18 +1,22 @@
+
+import { Link } from 'react-router-dom';
 import '@/scss/blocks/_book-card.scss'; 
 
 const BookCard = (props) => {
 
   const {
+    id,
     imgUrl,
     title,
+    path,
   } = props.el;
   
 
   return (
-    <div className='book__item'>
+    <Link className='book__item' to={path} state={id} >
       <img className='book__item-image' src={imgUrl} alt="" width={540} height={191} />
       <h3 className='book__item-title'>{title}</h3>
-    </div>
+    </Link>
   )
 }
 

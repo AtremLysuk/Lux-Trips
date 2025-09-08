@@ -1,4 +1,5 @@
-import ButtonDecorate from "@/components/ButtonDecorate/ButtonDecorate";
+import Subscribe from "@/components/Subscribe/Subscribe";
+import { Link } from "react-router-dom";
 
 const Customize = () => {
   const blocksData = [
@@ -41,44 +42,15 @@ const Customize = () => {
             </div>
           ))}
         </div>
-        <ButtonDecorate title='Start a trip request' href="/" />
-        {/* <div className="customize__button">
-          <a className="customize__link" href="/">
+        <div className="customize__button">
+          <Link className="customize__link" to="/">
             Start a trip request
-          </a>
-        </div> */}
+          </Link>
+        </div>
         <div className="customize__bottom">
           <p>It’s Free! - no credit card required</p>
         </div>
-        <div className="subscribe">
-          <div className="subscribe__inner">
-            <h2 className="subscribe__title h2">
-              Get weekly inspiration and expert advice
-            </h2>
-            <div className="subscribe__text">
-              <p id="subscribe-title">Sign up for our Weekly Newsletter</p>
-            </div>
-            <form
-              className="subscribe__form"
-              id="subscribe-form"
-              aria-labelledby="subscribe-title"
-            >
-              <input
-                className="subscribe__form-input"
-                type="email"
-                aria-label="e-mail input"
-                placeholder="MishaDarko@gmail.com"
-              />
-              <button
-                className="subscribe__form-button"
-                type="submit"
-                aria-label="subscribe button"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
+        <Subscribe />
       </div>
     </section>
   );
