@@ -1,6 +1,5 @@
 @use '../helpers/' as *;
 
-
 .products {
   padding-top: fluid(155, 90);
   padding-bottom: fluid(65, 80);
@@ -15,19 +14,17 @@
     margin-bottom: 60px;
   }
 
-
   &__items {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: fluid(30, 15);
 
-    @media(width <= 900px) {
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     gap: 30px;
+    @media (width <= 900px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
     }
   }
 }
-

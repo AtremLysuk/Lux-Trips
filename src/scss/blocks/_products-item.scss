@@ -11,13 +11,15 @@
     justify-content: center;
 
     &-image {
-
+      overflow: hidden;
       position: relative;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+
       img {
         min-height: 191px;
         max-width: 100%;
         object-fit: cover;
-        border-radius: 10px;
       }
     }
 
@@ -63,6 +65,7 @@
       text-transform: uppercase;
       text-align: center;
       color: var(--color-white);
+      z-index: 20;
     }
 
     &-link {

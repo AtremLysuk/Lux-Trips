@@ -1,5 +1,6 @@
 import '@/scss/blocks/_pacages-card.scss';
 
+
 const PacagesCard = (props) => {
   const { id, imgUrl, title, palacesCount } = props.el;
 

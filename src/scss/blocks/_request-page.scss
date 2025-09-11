@@ -1,6 +1,11 @@
 @use '../helpers/' as *;
 
 .request {
+  background-image: url(/images/client/client-bg.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+  
   &__title {
     padding-top: fluid(150, 90);
     padding-bottom: fluid(90, 40);
@@ -46,11 +51,9 @@
     }
   }
 
-  &__content-title {
-  }
+
 
   &__content-text {
-
     margin-bottom: fluid(70, 20);
   }
 
@@ -94,9 +97,6 @@
         margin-bottom: auto;
       }
     }
-  }
-
-  &__form-wrapper {
   }
 }
 

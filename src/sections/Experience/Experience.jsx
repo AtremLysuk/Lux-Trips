@@ -3,7 +3,6 @@ import MySlider from '@/components/MySlider/MySlider';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
-
 const Experience = () => {
   const [activeRegion, setActiveRegion] = useState('World');
 
@@ -130,12 +129,29 @@ const Experience = () => {
     },
   ];
 
-
   return (
     <section className="experience">
-
       <div className="experience__container container">
-        <h2 className="experience__title h2">Top Rated Experiences</h2>
+        <div className='experience__title-wrapper'>
+          <h2 className="experience__title h2">Top Rated Experiences</h2>
+          <svg
+            width="112"
+            height="212"
+            viewBox="0 0 112 212"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56.001 191.387C39.4401 160.046 27.8542 138.255 10.8652 105.884L33.6846 62.8315L33.6855 62.8296L56.0029 20.3813L78.502 62.8315L78.5029 62.8306L101.137 105.883L56.001 191.387Z"
+              stroke="white"
+            />
+            <path
+              d="M56.001 210.699C35.646 172.25 21.4329 145.569 0.566408 105.885L28.5557 53.1768L28.5566 53.1748L56.0029 1.07031L83.6729 53.1758L111.435 105.883L56.001 210.699Z"
+              stroke="white"
+            />
+          </svg>
+        </div>
+
         <ul className="experience-header__items">
           {regions.map((el) => (
             <li className="experience-header__item" key={el}>

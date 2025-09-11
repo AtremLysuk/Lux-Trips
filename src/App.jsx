@@ -12,18 +12,32 @@ import Contacts from './pages/Contacts/Contacts';
 import ClientPage from './pages/ClientPage/ClientPage';
 import RequestPage from './pages/RequestPage/RequestPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const lenisRef = useRef(null);
-  
-
-
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
       document.body.style.cssText = `--scrollTop: ${window.scrollY}px`;
     });
+  }, []);
+
+  useEffect(() => {
+    const lenis = lenisRef.current?.lenis;
+
+    if (!lenis) return;
+
+    function raf(time) {
+      lenis.raf(time);
+      ScrollTrigger.update();
+      requestAnimationFrame(raf);
+    }
+    console.log("scrolltrigger updated")
+    requestAnimationFrame(raf);
   }, []);
 
   return (

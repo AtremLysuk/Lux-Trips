@@ -1,12 +1,23 @@
 @use '../helpers/' as *;
 
 .luxury {
+  background-image: url(/public/images/client/client-bg.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+
+
   &__item {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: end;
     cursor: pointer;
+
+    &-sceleton {
+      min-height: 550px;
+      min-width: 410px;
+    }
   }
 
   &__image {
@@ -120,14 +131,13 @@
     transition: color 0.3s ease;
     cursor: pointer;
 
-    @media(width <= 380px){
+    @media (width <= 380px) {
       width: 300px;
     }
 
-    @include hover{
+    @include hover {
       color: var(--color-accent);
     }
-
 
     svg {
       position: absolute;
@@ -135,7 +145,7 @@
       top: -50%;
       z-index: -1;
 
-      @media(width <= 380px) {
+      @media (width <= 380px) {
         width: 300px;
       }
 

@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
+import { forwardRef } from 'react';
 
 // import '@/scss/blocks/__request-form.scss';
 
-const RequestForm = () => {
+const RequestForm = forwardRef((props, ref) => {
   const {
     register,
     handleSubmit,
@@ -61,7 +62,7 @@ const RequestForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="request__form">
+    <form onSubmit={handleSubmit(onSubmit)} className="request__form" ref={ref}>
       <div className="request__form-wrapper">
         <div className="request__form-dates">
           {fields
@@ -151,6 +152,6 @@ const RequestForm = () => {
       </div>
     </form>
   );
-};
+});
 
 export default RequestForm;

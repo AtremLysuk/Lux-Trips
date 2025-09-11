@@ -2,8 +2,12 @@
 
 .request {
   &__form {
+    --blur: blur(10px);
+
+
     background-color: var(--color-white);
     border-radius: 10px;
+    filter: var(--blur);
 
     label {
       display: grid;

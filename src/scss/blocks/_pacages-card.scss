@@ -10,6 +10,13 @@
     img {
       transform: scale(1.2);
     }
+
+    .packages-card__button{
+      color: var(--color-accent);
+      & > * {
+        color: var(--color-accent);
+      }
+    }
   }
 
   &__image {
@@ -63,10 +70,8 @@
   }
 
   &__button {
-    // width: 135px;
     width: 35.5%;
     height: 45%;
-    // height: 257px;
     position: absolute;
     backdrop-filter: blur(10px);
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
@@ -87,15 +92,6 @@
     transition-duration: var(--transition-duration);
     transform-origin: center;
     will-change: scale color;
-
-    @include hover {
-      color: var(--color-accent);
-
-      & > * {
-        color: var(--color-accent);
-      }
-    }
   }
 
-  // .packages-card__button-link
 }

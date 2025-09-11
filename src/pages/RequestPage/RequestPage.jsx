@@ -1,12 +1,25 @@
 import ContentItem from '@/components/ContentItem/ContentItem';
 import RequestForm from '@/components/RequestForm/RequestForm';
 import '@/scss/blocks/_request-page.scss';
-
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { useRef } from 'react';
 
 import { useLocation } from 'react-router-dom';
+import { SplitText } from 'gsap/SplitText';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const RequestPage = () => {
   const location = useLocation();
+  const animationContainerRef = useRef(null);
+  const titleRef = useRef(null);
+  const contentRef = useRef(null);
+  const imageRef = useRef(null);
+  const cardTitleRef = useRef(null);
+  const formRef = useRef(null);
+  const textContainerRef = useRef(null);
 
   const requestItems = [
     {
@@ -20,15 +33,6 @@ const RequestPage = () => {
         'Do you wish to feel like a Formula 1 driver and test the famous circuit in Monza? Or do you prefer to sit back and relax while our driver brings you across the most picturesque Amalfi coast? All you have to do is choose the destination and we will arrange the rest!',
       ],
       items: ['clock24', 'man', 'car', 'bag', 'heart', 'tickets'],
-      // formFields: [
-      //   'name',
-      //   'email',
-      //   'message',
-      //   'location',
-      //   'dateFrom',
-      //   'dateTo',
-      //   'guests',
-      // ],
     },
     {
       id: 2,
@@ -127,14 +131,81 @@ const RequestPage = () => {
 
   const currentItem = requestItems.find((el) => el.id === location.state);
 
+  
+
+  useGSAP(
+    () => {
+      const masterTimeline = gsap.timeline();
+
+      masterTimeline.from(titleRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
+
+      masterTimeline.from(
+        [imageRef.current, cardTitleRef.current],
+        {
+          opacity: 0,
+          y: 50,
+          duration: 0.8,
+          ease: 'power3.out',
+          stagger: 0.2,
+        },
+        '-=0.5'
+      );
+
+      masterTimeline.from(
+        formRef.current,
+        {
+          opacity: 0,
+          '--blur': '10px',
+          duration: 1,
+          ease: 'power3.out',
+        },
+        '-=0.6'
+      );
+    },
+    { scope: animationContainerRef, dependencies: currentItem }
+  );
+
+  useGSAP(
+    () => {
+      const textItems = gsap.utils.toArray('.request__content-text-p');
+      const mySplitText = new SplitText(textItems, { type: 'lines' });
+
+      gsap.from(
+        mySplitText.lines,
+        {
+          opacity: 0,
+          y: 30,
+          duration: 1,
+          stagger: 0.05,
+          mask: true,
+
+          ScrollTrigger: {
+            trigger: textContainerRef,
+            target: textItems[0],
+            start: 'top center',
+          },
+        },
+        '-=0.05'
+      );
+    },
+    { scope: textContainerRef, dependencies: currentItem }
+  );
+
   return (
     <main>
-      <section className="request">
+      <section className="request" ref={animationContainerRef}>
         {currentItem !== undefined && (
           <div className="request__container container">
-            <h2 className="request__title h2">{currentItem.title}</h2>
+            <h2 className="request__title h2" ref={titleRef}>
+              {currentItem.title}
+            </h2>
             <div className="request__inner">
-              <div className="request__content">
+              <div className="request__content" ref={contentRef}>
                 <div className="request__content-image">
                   <img
                     src={currentItem.imgSrc}
@@ -142,14 +213,17 @@ const RequestPage = () => {
                     width={540}
                     height={190}
                     loading="lazy"
+                    ref={imageRef}
                   />
                 </div>
-                <h3 className="request__content-title h3">
+                <h3 className="request__content-title h3" ref={cardTitleRef}>
                   {currentItem.contentTitle}
                 </h3>
-                <div className="request__content-text">
+                <div className="request__content-text" ref={textContainerRef}>
                   {currentItem.descriptions.map((el) => (
-                    <p key={el}>{el}</p>
+                    <p className="request__content-text-p" key={el}>
+                      {el}
+                    </p>
                   ))}
                 </div>
                 <div className="request__content-items">
@@ -158,7 +232,7 @@ const RequestPage = () => {
                   ))}
                 </div>
               </div>
-              <RequestForm />
+              <RequestForm ref={formRef} />
             </div>
           </div>
         )}

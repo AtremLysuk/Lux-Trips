@@ -6,62 +6,128 @@ import { useGSAP } from '@gsap/react';
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-
 import { useLenis } from 'lenis/react';
 import { useLenisScrollTrigger } from '@/Hooks/useLenisScrollTrigger';
-
-
-
 
 const Luxury = () => {
   const [currentItemsCount, setCurrentItemsCount] = useState(6);
   const itemsRef = useRef(null);
-  const lenis = useLenis()
-  useLenisScrollTrigger()
-
-
+  const lenis = useLenis();
+  useLenisScrollTrigger();
 
   const packagesItems = useItemsStore((state) => state.packagesItems);
   const isLoading = useItemsStore((state) => state.isLoading);
   const isError = useItemsStore((state) => state.isError);
 
-
   const fetchPackagesItems = useItemsStore((state) => state.fetchPackagesItems);
+  const skeletonItems = [
+    {
+      id: 1,
+      imgUrl: '/images/slides/1.png',
+      location: 'Austria',
+      title: 'Winter Park Ski Holiday',
+      rating: 4,
+      price: 1490,
+      region: 'Antarctica',
+    },
+    {
+      id: 2,
+      imgUrl: '/images/slides/1.png',
+      location: 'Austria',
+      title: 'Winter Park Ski Holiday',
+      rating: 4,
+      price: 1490,
+      region: 'Antarctica',
+    },
+    {
+      id: 1,
+      imgUrl: '/images/slides/1.png',
+      location: 'Austria',
+      title: 'Winter Park Ski Holiday',
+      rating: 4,
+      price: 1490,
+      region: 'Antarctica',
+    },
+    {
+      id: 1,
+      imgUrl: '/images/slides/1.png',
+      location: 'Austria',
+      title: 'Winter Park Ski Holiday',
+      rating: 4,
+      price: 1490,
+      region: 'Antarctica',
+    },
+    {
+      id: 1,
+      imgUrl: '/images/slides/1.png',
+      location: 'Austria',
+      title: 'Winter Park Ski Holiday',
+      rating: 4,
+      price: 1490,
+      region: 'Antarctica',
+    },
+    {
+      id: 1,
+      imgUrl: '/images/slides/1.png',
+      location: 'Austria',
+      title: 'Winter Park Ski Holiday',
+      rating: 4,
+      price: 1490,
+      region: 'Antarctica',
+    },
+  ];
+  console.log(skeletonItems);
 
   useEffect(() => {
     fetchPackagesItems();
   }, []);
 
+  // const animateItems = () => {
+  //   if (packagesItems.length > 0 && !isLoading) {
+  //     const newItems = gsap.utils.toArray('.luxury__item:not(.is-animated)');
 
+  //     if (newItems.length === 0) {
+  //       return;
+  //     }
 
-  const animateItems = () => {
-
-
-    if (packagesItems.length > 0) {
-      // Получаем только НОВЫЕ элементы для анимации
-      const newItems = gsap.utils.toArray(
-        gsap.utils.selector(itemsRef)('.luxury__item')
-      ); 
-      
-      newItems.forEach((item) => {
-        gsap.from(item, {
-          opacity: 0,
-          scale: 0.8,
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 80%',
-          },
-        });
-      }); 
-      if (lenis) lenis.resize();
-    }
-  }; 
+  //     gsap.from(newItems, {
+  //       y: 100,
+  //       opacity: 0,
+  //       stagger: {
+  //         each: 0.3,
+  //         onComplete: function () {
+  //           this.targets()[0].classList.add('is-animated');
+  //         },
+  //       },
+  //       ease: 'power2.out',
+  //       duration: 0.8,
+  //     });
+  //     if (lenis) lenis.resize();
+  //   }
+  // };
 
   useGSAP(
     () => {
-      animateItems();
+      if (!isLoading && packagesItems.length > 0) {
+        const items = gsap.utils.toArray('.luxury__item:not(.is-animated)');
+        gsap.fromTo(
+          items,
+          {
+            opacity: 0,
+            y: 100,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: {
+              each: 0.3,
+              onComplete: () => {
+                items.forEach((el) => el.classList.add('is-animated'));
+              },
+            },
+          }
+        );
+      }
     },
     { scope: itemsRef, dependencies: [packagesItems, currentItemsCount] }
   );
@@ -70,16 +136,18 @@ const Luxury = () => {
     setCurrentItemsCount((prev) => prev + 6);
   };
 
-
-
-
-
   return (
     <section className="luxury">
       <div className="luxury__container container">
         <div className="luxury__inner">
           <h2 className="luxury__title h2">Luxury packages</h2>
-          {!isError && packagesItems.length > 0 && (
+          {isLoading &&
+            skeletonItems.map((el, index) => (
+              <div className="luxury__items" key={index}>
+                <div className="luxury__item-sceleton"></div>
+              </div>
+            ))}
+          {!isError && !isLoading && packagesItems.length > 0 && (
             <div className="luxury__items" ref={itemsRef}>
               {packagesItems
                 .filter((el) => el.id <= currentItemsCount)

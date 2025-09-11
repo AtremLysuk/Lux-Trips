@@ -95,7 +95,7 @@ const Header = () => {
       <div className="header__container container">
         <div
           className={`${
-            scrollY > 150 ? 'header-top header-top--scrolled' : 'header-top'
+            scrollY > 50 ? 'header-top header-top--scrolled' : 'header-top'
           } `}
           ref={headerMenuRef}
         >
