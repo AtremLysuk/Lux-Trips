@@ -1,7 +1,17 @@
-import Subscribe from "@/components/Subscribe/Subscribe";
-import { Link } from "react-router-dom";
+import Subscribe from '@/components/Subscribe/Subscribe';
+import { Link } from 'react-router-dom';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+import CSSRulePlugin from 'gsap/CSSRulePlugin';
+
+gsap.registerPlugin(ScrollTrigger, CSSRulePlugin);
 
 const Customize = () => {
+  const titleRef = useRef(null);
+  const containerRef = useRef(null);
+  const triggerRef = useRef(null);
   const blocksData = [
     {
       number: 1,
@@ -23,10 +33,71 @@ const Customize = () => {
     },
   ];
 
+  useGSAP(
+    () => {
+      if (titleRef.current) {
+        document.fonts.ready.then(() => {
+          gsap.set(titleRef.current, { visibility: 'visible' });
+          gsap.fromTo(
+            titleRef.current,
+            { opacity: 0, filter: 'blur(10px)' },
+            {
+              opacity: 1,
+              filter: 'blur(0px)',
+              duration: 1.5,
+              ease: 'power3.out',
+
+              scrollTrigger: {
+                trigger: titleRef.current,
+                start: 'top 80%',
+              },
+            }
+          );
+        });
+      }
+    },
+    { scope: containerRef }
+  );
+
+  useGSAP(
+    () => {
+      const afterRule = CSSRulePlugin.getRule('.customize::after');
+      const beforeRule = CSSRulePlugin.getRule('.customize::before');
+      if (beforeRule && afterRule && triggerRef.current) {
+        gsap.fromTo(
+          afterRule,
+          { cssRule: { transform: 'translateY(400px)' } },
+          {
+            cssRule: { transform: 'translateY(-100px)' },
+            scrollTrigger: {
+              trigger: triggerRef.current,
+              start: 'top 90%',
+              scrub: true,
+            },
+          }
+        );
+        gsap.fromTo(
+          beforeRule,
+          { cssRule: { transform: 'translate(-200px, 200px)' } },
+          {
+            cssRule: { transform: 'translate(0px , -200px)' },
+            ease: 'none',
+            scrollTrigger: {
+              trigger: triggerRef.current,
+              start: 'top 90%',
+              scrub: true,
+            },
+          }
+        );
+      }
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="customize">
-      <div className="customize__container container">
-        <h2 className="customize__title h2">
+    <section className="customize" ref={containerRef}>
+      <div className="customize__container container" ref={triggerRef}>
+        <h2 className="customize__title h2" ref={titleRef}>
           Customise <br /> your trip with us
         </h2>
         <div className="customize__items">

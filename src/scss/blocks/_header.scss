@@ -35,13 +35,13 @@
   position: relative;
 
   &__base {
-    transform: translate3d(0, calc(var(--scrollTop) / 1.9), 0);
+    transform: translate3d(0, calc(var(--scrollTop) * 0.4), 0);
     z-index: 0;
   }
 
   &__subtitle {
     padding-top: 8%;
-    transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+    transform: translate3d(0, calc(var(--scrollTop) * 0.25), 0);
   }
 
   &__title {
@@ -75,7 +75,7 @@
       text-align: center;
       color: #fcfcfc;
       will-change: transform;
-      transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+      transform: translate3d(0, calc(var(--scrollTop) * 0.5), 0);
 
       @media (width <= 380px) {
         font-size: 62px;
@@ -86,7 +86,7 @@
       position: relative;
       margin-top: 15px;
       font-size: fluid(160, 70);
-      transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+      transform: translate3d(0, calc(var(--scrollTop) * 0.35), 0);
 
       @media (width <= 380px) {
         font-size: 62px;
@@ -96,17 +96,17 @@
     &-places {
       position: relative;
       margin-top: 15px;
-      transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+      transform: translate3d(0, calc(var(--scrollTop) * 0.3), 0);
     }
   }
 
   &__middle {
-    transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
+    transform: translate3d(0, calc(var(--scrollTop) * 0.35), 0);
     z-index: 1;
   }
 
   &__front {
-    transform: translate3d(0, calc(var(--scrollTop) / 5.8), 0);
+    transform: translate3d(0, calc(var(--scrollTop) * 0.15), 0);
     z-index: 5;
   }
 }
@@ -125,7 +125,7 @@
   display: block;
   position: relative;
   margin-top: 15px;
-  transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+  transform: translate3d(0, calc(var(--scrollTop) * 0.5), 0);
 
   &::after {
     position: absolute;
@@ -264,6 +264,7 @@
   }
 
   &__link {
+    position: relative;
     font-weight: 400;
     font-size: 16px;
     letter-spacing: 0.04em;
@@ -271,6 +272,22 @@
     color: #000;
     font-family: var(--font-family-title);
     cursor: pointer;
+
+    &.active {
+      &::after {
+        position: absolute;
+
+        content: '';
+        width: 20px;
+        height: 12px;
+        bottom: -60%;
+        left: 50%;
+        background-image: url(/images/slides/icon-active.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        transform: translate3d(-50%, -50%, 0);
+      }
+    }
   }
 }
 
@@ -284,7 +301,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(121, 101, 94, 0.8);
+  background-color: rgba(121, 101, 94, 1);
   backdrop-filter: blur(15px);
   display: flex;
   justify-content: center;

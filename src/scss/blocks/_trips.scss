@@ -203,7 +203,8 @@
     font-weight: 400;
     font-size: fluid(40, 26);
     line-height: 1.012;
-    color: var(--color-title);
+
+    will-change: opacity transform;
     @media (width <= 600px) {
       margin-left: 5px;
     }

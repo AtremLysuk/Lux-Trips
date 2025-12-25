@@ -4,13 +4,15 @@ import '@/scss/blocks/_header.scss';
 const Hero = () => {
 
 
-
   return (
-    <div className="header layers" style={{ position: 'relative' }}>
+    <div
+      className="header layers"
+      style={{position: 'relative'}}
+    >
       <h2 className="header__subtitle">the world’s most</h2>
       <div
         className="layer layers__base"
-        style={{ backgroundImage: 'url(./bgtop/bg_top-3.png)' }}
+        style={{backgroundImage: 'url(./bgtop/bg_top-3.png)'}}
       ></div>
       <div className="header__title layer layers__subtitle visually-hidden">
         <h2 className="header__subtitle">the world’s most</h2>
@@ -29,7 +31,7 @@ const Hero = () => {
 
       <div
         className="layer layers__middle"
-        style={{ backgroundImage: 'url(/bgtop/bg_top-2.png)' }}
+        style={{backgroundImage: 'url(/bgtop/bg_top-2.png)'}}
       ></div>
       <div
         className="layer layers__front"

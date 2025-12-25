@@ -6,14 +6,18 @@ import { useGSAP } from '@gsap/react';
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+
 import { useLenis } from 'lenis/react';
-import { useLenisScrollTrigger } from '@/Hooks/useLenisScrollTrigger';
+
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Luxury = () => {
   const [currentItemsCount, setCurrentItemsCount] = useState(6);
   const itemsRef = useRef(null);
   const lenis = useLenis();
-  useLenisScrollTrigger();
+
 
   const packagesItems = useItemsStore((state) => state.packagesItems);
   const isLoading = useItemsStore((state) => state.isLoading);
@@ -40,7 +44,7 @@ const Luxury = () => {
       region: 'Antarctica',
     },
     {
-      id: 1,
+      id: 3,
       imgUrl: '/images/slides/1.png',
       location: 'Austria',
       title: 'Winter Park Ski Holiday',
@@ -49,7 +53,7 @@ const Luxury = () => {
       region: 'Antarctica',
     },
     {
-      id: 1,
+      id: 4,
       imgUrl: '/images/slides/1.png',
       location: 'Austria',
       title: 'Winter Park Ski Holiday',
@@ -58,7 +62,7 @@ const Luxury = () => {
       region: 'Antarctica',
     },
     {
-      id: 1,
+      id: 5,
       imgUrl: '/images/slides/1.png',
       location: 'Austria',
       title: 'Winter Park Ski Holiday',
@@ -67,7 +71,7 @@ const Luxury = () => {
       region: 'Antarctica',
     },
     {
-      id: 1,
+      id: 6,
       imgUrl: '/images/slides/1.png',
       location: 'Austria',
       title: 'Winter Park Ski Holiday',
@@ -76,64 +80,45 @@ const Luxury = () => {
       region: 'Antarctica',
     },
   ];
-  console.log(skeletonItems);
 
   useEffect(() => {
     fetchPackagesItems();
   }, []);
 
-  // const animateItems = () => {
-  //   if (packagesItems.length > 0 && !isLoading) {
-  //     const newItems = gsap.utils.toArray('.luxury__item:not(.is-animated)');
-
-  //     if (newItems.length === 0) {
-  //       return;
-  //     }
-
-  //     gsap.from(newItems, {
-  //       y: 100,
-  //       opacity: 0,
-  //       stagger: {
-  //         each: 0.3,
-  //         onComplete: function () {
-  //           this.targets()[0].classList.add('is-animated');
-  //         },
-  //       },
-  //       ease: 'power2.out',
-  //       duration: 0.8,
-  //     });
-  //     if (lenis) lenis.resize();
-  //   }
-  // };
-
   useGSAP(
     () => {
       if (!isLoading && packagesItems.length > 0) {
         const items = gsap.utils.toArray('.luxury__item:not(.is-animated)');
+
         gsap.fromTo(
           items,
+          { autoAlpha: 0, y: 50 },
           {
-            opacity: 0,
-            y: 100,
-          },
-          {
+            autoAlpha: 1,
+            immediateRender: false,
             opacity: 1,
             y: 0,
-            stagger: {
-              each: 0.3,
-              onComplete: () => {
-                items.forEach((el) => el.classList.add('is-animated'));
-              },
+            stagger: 0.3,
+            onStart: () =>
+              items.forEach((el) => gsap.set(el, { visibility: 'visible' })),
+            onComplete: () => {
+              items.forEach((el) => el.classList.add('is-animated'));
             },
           }
         );
       }
     },
+
     { scope: itemsRef, dependencies: [packagesItems, currentItemsCount] }
   );
 
   const handleLoadMore = () => {
     setCurrentItemsCount((prev) => prev + 6);
+
+    setTimeout(() => {
+      lenis?.resize();
+      ScrollTrigger.refresh();
+    }, 100);
   };
 
   return (

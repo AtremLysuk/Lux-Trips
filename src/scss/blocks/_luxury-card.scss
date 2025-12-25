@@ -6,6 +6,11 @@
   background-position: center top;
   background-size: contain;
 
+  &__items {
+    overflow: hidden;
+    
+  }
+
 
   &__item {
     position: relative;
@@ -13,6 +18,10 @@
     flex-direction: column;
     justify-content: end;
     cursor: pointer;
+    opacity: 0;
+    transform: translateY(50px);
+    visibility: hidden;
+    will-change: transform, opacity;
 
     &-sceleton {
       min-height: 550px;
@@ -23,9 +32,11 @@
   &__image {
     position: relative;
 
+
     img {
       max-width: 100%;
       width: 100%;
+
     }
 
     &::after {

@@ -192,31 +192,30 @@ const WhyCenter = () => {
           },
         });
       });
+
+      gsap.from(cloudLeftRef.current, {
+        opacity: 0.1,
+        x: -100,
+        duration: 1.5,
+        scrollTrigger: {
+          trigger: cloudLeftRef.current,
+          start: 'top 80%',
+        },
+      });
+
+      gsap.from(cloudRightRef.current, {
+        opacity: 0.1,
+        x: 100,
+        duration: 1.5,
+        scrollTrigger: {
+          trigger: cloudLeftRef.current,
+          start: 'center 60%',
+        },
+      });
     },
     { scope: containerRef }
   );
 
-  useGSAP(() => {
-    gsap.from(cloudLeftRef.current, {
-      opacity: 0.1,
-      x: -100,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: cloudLeftRef.current,
-        start: 'top 80%',
-      },
-    });
-
-    gsap.from(cloudRightRef.current, {
-      opacity: 0.1,
-      x: 100,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: cloudLeftRef.current,
-        start: 'center 60%',
-      },
-    });
-  });
 
   return (
     <section className="experiencee" ref={containerRef}>

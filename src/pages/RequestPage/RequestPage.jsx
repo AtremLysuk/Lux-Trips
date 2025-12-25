@@ -5,13 +5,17 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useRef } from 'react';
 
+
 import { useLocation } from 'react-router-dom';
 import { SplitText } from 'gsap/SplitText';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
+import { useLenis } from 'lenis/react';
+
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const RequestPage = () => {
+  const lenis = useLenis()
   const location = useLocation();
   const animationContainerRef = useRef(null);
   const titleRef = useRef(null);
@@ -131,69 +135,83 @@ const RequestPage = () => {
 
   const currentItem = requestItems.find((el) => el.id === location.state);
 
-  
-
   useGSAP(
     () => {
-      const masterTimeline = gsap.timeline();
+      if (titleRef.current && imageRef.current && cardTitleRef.current) {
+        const masterTimeline = gsap.timeline();
 
-      masterTimeline.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
+        gsap.set(titleRef.current, { visibility: 'visible' });
 
-      masterTimeline.from(
-        [imageRef.current, cardTitleRef.current],
-        {
+        masterTimeline.from(titleRef.current, {
           opacity: 0,
           y: 50,
-          duration: 0.8,
-          ease: 'power3.out',
-          stagger: 0.2,
-        },
-        '-=0.5'
-      );
-
-      masterTimeline.from(
-        formRef.current,
-        {
-          opacity: 0,
-          '--blur': '10px',
           duration: 1,
           ease: 'power3.out',
-        },
-        '-=0.6'
-      );
+        });
+
+        masterTimeline.from(
+          [imageRef.current, cardTitleRef.current],
+          {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger: 0.3,
+          },
+          '-=0.3'
+        );
+
+        masterTimeline.fromTo(
+          formRef.current,
+          {
+            opacity: 0,
+            filter: 'blur(10px)',
+          },
+          {
+            opacity: 1,
+            filter: 'blur(0px)',
+            duration: 1,
+            ease: 'power3.out',
+          },
+          '-=0.6'
+        );
+
+        lenis.resize()
+      }
     },
-    { scope: animationContainerRef, dependencies: currentItem }
+    { scope: animationContainerRef, dependencies: [currentItem] }
   );
 
   useGSAP(
     () => {
-      const textItems = gsap.utils.toArray('.request__content-text-p');
-      const mySplitText = new SplitText(textItems, { type: 'lines' });
+      document.fonts.ready.then(() => {
+        gsap.set(textContainerRef.current, { visibility: 'visible' });
 
-      gsap.from(
-        mySplitText.lines,
-        {
-          opacity: 0,
-          y: 30,
-          duration: 1,
-          stagger: 0.05,
-          mask: true,
+        const textItems = gsap.utils.toArray('.request__content-text-p');
+        const mySplitText = new SplitText(textItems, { type: 'lines' });
 
-          ScrollTrigger: {
-            trigger: textContainerRef,
-            target: textItems[0],
-            start: 'top center',
+        gsap.from(
+          mySplitText.lines,
+          {
+            opacity: 0,
+            y: 30,
+            visibility: 'visible',
+            duration: 1,
+            stagger: 0.1,
+            mask: true,
+            delay: 0.2,
+            onComplete: () => mySplitText.revert(),
+
+            scrollTrigger: {
+              trigger: textContainerRef.current,
+              start: 'top 80%',
+            },
           },
-        },
-        '-=0.05'
-      );
+          '-=0.05'
+        );
+      });
     },
-    { scope: textContainerRef, dependencies: currentItem }
+    { scope: textContainerRef, dependencies: [currentItem] }
   );
 
   return (

@@ -8,20 +8,9 @@ import Customize from './../../sections/Customize/Customize';
 import Customers from '@/sections/Customers/Customers';
 import Hero from '@/sections/Hero/Hero';
 
-import { useLenis } from 'lenis/react';
-import { useEffect, useLayoutEffect, useState } from 'react';
+
 
 const Homepage = () => {
-
-  const lenis = useLenis();
-
-  useEffect(() => {
-    if (lenis) {
-      lenis.resize();
-      lenis.scrollTo(0, { smooth: true, duration: 2 });       
-    }
-  }, []);
-
 
 
   return (

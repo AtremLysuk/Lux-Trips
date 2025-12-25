@@ -1,12 +1,19 @@
+import '@/scss/blocks/_packages.scss';
+
 import MySlider from '@/components/MySlider/MySlider';
 import PacagesCard from '@/components/PacagesCard/PacagesCard';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
-import { useEffect, useLayoutEffect, useState } from 'react';
+gsap.registerPlugin(ScrollTrigger);
 
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 const Packages = () => {
   const [isSliderWidth, setIsSliderWidth] = useState(false);
 
+  const containerRef = useRef(null);
 
   const packagesItems = [
     {
@@ -57,10 +64,32 @@ const Packages = () => {
     }
   }, []);
 
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        '.inner-left__item-title',
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.inner-left__item-title',
+            start: 'top 70%',
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   return (
     <section className="packages" aria-labelledby="packages-title">
-      <div className="packages__container container">
+      <div className="packages__container container" ref={containerRef}>
         {!isSliderWidth && (
           <div className="packages__inner">
             <div className="packages__inner-left inner-left">

@@ -10,6 +10,8 @@ const BookCard = (props) => {
     title,
     path,
   } = props.el;
+
+
   
 
   return (

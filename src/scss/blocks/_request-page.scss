@@ -5,11 +5,12 @@
   background-repeat: no-repeat;
   background-position: center top;
   background-size: contain;
-  
+
   &__title {
     padding-top: fluid(150, 90);
     padding-bottom: fluid(90, 40);
     text-align: center;
+    visibility: hidden;
   }
   &__inner {
     display: grid;
@@ -21,8 +22,6 @@
       flex-direction: column;
       row-gap: 50px;
     }
-
-
   }
 
   &__content {
@@ -45,16 +44,24 @@
       margin-inline: auto;
     }
 
-    img{
+    img {
       max-width: 100%;
-
     }
   }
 
-
-
   &__content-text {
     margin-bottom: fluid(70, 20);
+    visibility: hidden;
+    overflow: hidden;
+
+    p {
+      opacity: 1;
+      will-change: transform, opacity;
+    }
+
+    p:not(:last-child) {
+      margin-bottom: 20px;
+    }
   }
 
   &__content-items {
@@ -72,7 +79,7 @@
     }
   }
 
-  &__content-item{
+  &__content-item {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -87,8 +94,7 @@
       justify-content: end;
     }
 
-    svg{
-
+    svg {
       path {
         stroke: #79655e;
       }
@@ -99,4 +105,3 @@
     }
   }
 }
-

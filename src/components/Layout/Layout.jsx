@@ -1,14 +1,19 @@
 import { Outlet } from 'react-router-dom';
+import useLenisScrollTrigger from '@/Hooks/useLenisScrollTrigger';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-// import useScrollTriggerRefresh from '@/Hooks/useScrollTriggerRefresh';
+import { Suspense } from 'react';
 
 const Layout = () => {
-  // useScrollTriggerRefresh()
+  useLenisScrollTrigger();
+
   return (
     <>
       <Header />
-      <Outlet />
+      <Suspense fallback={<h2>Loading....</h2>}>
+        <Outlet />
+      </Suspense>
+
       <Footer />
     </>
   );

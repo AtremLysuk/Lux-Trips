@@ -2,20 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
-
-import { Link } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
 import { useLenis } from 'lenis/react';
-import { useLenisScrollTrigger } from '@/Hooks/useLenisScrollTrigger';
+
 
 gsap.registerPlugin(SplitText);
 
 const Header = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-
+  const [ activeLinkIndex, setActiveLinkIndex ] = useState(0)
   const lenis = useLenis();
-  useLenisScrollTrigger();
+
   const headerMenuRef = useRef(null);
   const burgerContainer = useRef(null);
 
@@ -332,11 +330,11 @@ const Header = () => {
             </div>
             <nav className="header-top__inner-menu header-menu">
               <ul className="header-menu__list">
-                {headerlinks.map((el) => (
+                {headerlinks.map((el, index) => (
                   <li className="header-menu__item" key={el.title}>
-                    <Link className="header-menu__link" to={el.path}>
+                    <NavLink className="header-menu__link" to={el.path}>
                       {el.title}
-                    </Link>
+                    </NavLink>
                   </li>
                 ))}
               </ul>
@@ -411,6 +409,10 @@ const Header = () => {
                 onClick={() => {
                   setIsBurgerOpen((prev) => !prev);
                 }}
+                aria-label={
+                  !isBurgerOpen ? 'открыть бургер-меню' : 'закрыть бургер-меню'
+                }
+                aria-expanded={isBurgerOpen}
               >
                 <span></span>
               </button>
@@ -655,9 +657,9 @@ const Header = () => {
                   <ul className="burger-menu__list">
                     {headerlinks.map((el) => (
                       <li className="burger-menu__item" key={el.title}>
-                        <a className="burger-menu__link" href={el.path}>
+                        <NavLink className="burger-menu__link" href={el.path}>
                           {el.title}
-                        </a>
+                        </NavLink>
                       </li>
                     ))}
                   </ul>

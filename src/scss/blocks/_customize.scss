@@ -18,6 +18,9 @@
     width: 500px;
     height: 500px;
     background: url(/images/Customize/cloud-left.png) no-repeat center/cover;
+    transform: translate(0, 0);
+    transform: translateX(-100px);
+    will-change: transform;
 
     @media (width <= 550px) {
       width: 300px;
@@ -33,6 +36,8 @@
     width: 500px;
     height: 500px;
     background: url(/images/Customize/cloud-right.png) no-repeat center/cover;
+    transform: translateY(0);
+    will-change: transform;
 
     @media (width <= 550px) {
       width: 300px;
@@ -48,6 +53,7 @@
     text-align: center;
     max-width: 400px;
     margin-bottom: fluid(60, 45);
+    visibility: hidden;
   }
 
   &__items {

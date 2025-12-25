@@ -1,10 +1,17 @@
 import '@/scss/blocks/_experience.scss';
 import MySlider from '@/components/MySlider/MySlider';
 import { motion } from 'motion/react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
+gsap.registerPlugin(ScrollTrigger)
 const Experience = () => {
   const [activeRegion, setActiveRegion] = useState('World');
+
+  const containerRef = useRef(null)
+  const titleRef = useRef(null)
 
   const regions = [
     'World',
@@ -129,11 +136,32 @@ const Experience = () => {
     },
   ];
 
+  useGSAP(() => {
+    gsap.fromTo(titleRef.current, 
+      {
+        opacity: 0,
+        filter: "blur(10px)",
+      },
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 1.5,
+        ease: 'power3.out',
+
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top 70%'
+        }
+      },
+      
+    )
+  }, {scope: containerRef})
+
   return (
     <section className="experience">
       <div className="experience__container container">
-        <div className='experience__title-wrapper'>
-          <h2 className="experience__title h2">Top Rated Experiences</h2>
+        <div className="experience__title-wrapper" ref={containerRef}>
+          <h2 className="experience__title h2" ref={titleRef}>Top Rated Experiences</h2>
           <svg
             width="112"
             height="212"
