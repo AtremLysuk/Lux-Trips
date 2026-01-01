@@ -14,7 +14,7 @@ const Homepage = () => {
 
 
   return (
-    <main>
+    <>
       <Hero />
       <Search />
       <Experience />
@@ -23,7 +23,7 @@ const Homepage = () => {
       <Trips />
       <Customize />
       <Customers />
-    </main>
+    </>
   );
 };
 

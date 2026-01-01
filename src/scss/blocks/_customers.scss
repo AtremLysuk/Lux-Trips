@@ -231,9 +231,10 @@
 
 .swiper-wrapper {
   .swiper-slide {
+    min-width: 0;
     height: auto;
   }
-}
+  }
 
 .swiper-pagination-bullets {
   gap: 5px;

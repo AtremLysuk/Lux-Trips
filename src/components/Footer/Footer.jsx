@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="footer__logo">
             <img
               src="/images/footer/footer-logo.svg"
-              alt=""
+              alt="Luxtrips – travel agency logo"
               width={215}
               height={113}
             />
@@ -17,7 +17,7 @@ const Footer = () => {
           <FooterMenu />
           <div className="footer__bottom">
             <div className="footer__bottom-copy">
-              <p>© 2021 All Rights Reserved | Luxtrips</p>
+              <p><small>© 2021 All Rights Reserved | Luxtrips</small></p>
             </div>
             <div className="footer__bottom-privacy">
               <p>Company Site | Privacy Policy</p>

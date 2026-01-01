@@ -8,6 +8,14 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
+  overflow-x: hidden;
+
+
+
+  &__slider {
+    width: 100%;
+    overflow: hidden;
+  }
 
   &__title {
     &-wrapper {
@@ -24,14 +32,15 @@
         z-index: 10;
       }
 
-      svg{
+      svg {
         position: absolute;
 
         left: 50%;
         top: 31%;
 
         transform: translate(-50%, -50%);
-        path{
+
+        path {
           stroke: #fff;
         }
       }
@@ -39,6 +48,16 @@
   }
 
   &-next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 75px;
+    height: 75px;
+    z-index: 100;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
     svg {
       position: absolute;
       top: 50%;
@@ -93,6 +112,7 @@
     }
   }
 }
+
 .experience-slider {
   position: relative;
 }

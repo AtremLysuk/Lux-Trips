@@ -67,20 +67,6 @@ export function LenisScrollFix() {
 function App() {
   const lenisRef = useRef(null);
 
-  useEffect(() => {
-    const lenis = lenisRef.current?.lenis;
-    if (!lenis) return;
-
-    const update = ({scroll}) => {
-      document.body.style.setProperty('--scrollTop', `${scroll}px`);
-    };
-
-    lenis.on('scroll', update);
-    return () => {
-      lenis.off('scroll', update);
-    }
-
-  }, []);
 
   useEffect(() => {
     if ("scrollRestoration" in history) {

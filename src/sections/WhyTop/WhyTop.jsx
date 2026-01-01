@@ -1,9 +1,9 @@
 import '@/scss/blocks/_why-top.scss';
 
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { useRef } from 'react';
+import {gsap} from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {useGSAP} from '@gsap/react';
+import {useRef} from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,7 +58,7 @@ const WhyTop = () => {
           opacity: 0,
           filter: 'blur(12px)',
           duration: 0.5,
-          delay:  i * 0.2,
+          delay: i * 0.2,
 
           scrollTrigger: {
             trigger: item,
@@ -67,7 +67,7 @@ const WhyTop = () => {
         });
       });
     },
-    { scope: containerRef }
+    {scope: containerRef}
   );
 
   useGSAP(() => {
@@ -85,16 +85,27 @@ const WhyTop = () => {
   });
 
   return (
-    <section className="why" ref={containerRef}>
+    <section
+      className="why"
+      ref={containerRef}
+      aria-labelledby='why-title'
+    >
       <div className="why__container container">
-        <h1 className="why__title h1" ref={titleRef}>
+        <h1
+          className="why__title h1"
+          ref={titleRef}
+          id='why-title'
+        >
           Why <br />
           Lux Trps
         </h1>
         <div className="why__inner">
           <div className="why__mobile-images">
             {mobileImages.map((el, index) => (
-              <div className="why__mobile-image" key={index}>
+              <div
+                className="why__mobile-image"
+                key={index}
+              >
                 <img
                   src={el.imageSrc}
                   alt=""
@@ -106,19 +117,26 @@ const WhyTop = () => {
           </div>
           <div className="why__items">
             {whyCards.map((el) => (
-              <div className="why__item" key={el.title}>
-                <div className="why__item">
-                  <div className="why__item-image">
-                    <img src={el.imgUrl} alt="" width={156} height={365} />
-                  </div>
-                  <div className="why__item-content item-content">
-                    <h3 className="item-content__title">{el.title}</h3>
-                    <div className="item-content__descr">
-                      <p>{el.decription}</p>
-                    </div>
+              <article
+                className="why__item"
+                key={el.imgUrl}
+              >
+                <div className="why__item-image">
+                  <img
+                    src={el.imgUrl}
+                    alt=""
+                    width={156}
+                    height={365}
+                    aria-hidden="true"
+                  />
+                </div>
+                <div className="why__item-content item-content">
+                  <h3 className="item-content__title">{el.title}</h3>
+                  <div className="item-content__descr">
+                    <p>{el.decription}</p>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>

@@ -1,14 +1,14 @@
 @use '../helpers/' as *;
 
 .luxury {
-  background-image: url(/public/images/client/client-bg.png);
+  background-image: url(/images/client/client-bg.png);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: contain;
 
   &__items {
     overflow: hidden;
-    
+
   }
 
 

@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import gsap from 'gsap';
-import { SplitText } from 'gsap/SplitText';
-import { useGSAP } from '@gsap/react';
-import { NavLink } from 'react-router-dom';
-import { useLenis } from 'lenis/react';
+import {SplitText} from 'gsap/SplitText';
+import {useGSAP} from '@gsap/react';
+import {NavLink, useNavigate} from 'react-router-dom';
+import {useLenis} from 'lenis/react';
 
 
 gsap.registerPlugin(SplitText);
@@ -11,12 +11,12 @@ gsap.registerPlugin(SplitText);
 const Header = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [ activeLinkIndex, setActiveLinkIndex ] = useState(0)
+  // const [ activeLinkIndex, setActiveLinkIndex ] = useState(0)
+  const navigate = useNavigate();
   const lenis = useLenis();
-
   const headerMenuRef = useRef(null);
   const burgerContainer = useRef(null);
-
+  const animationRef = useRef(null);
   const headerlinks = [
     {
       title: 'Home',
@@ -44,9 +44,16 @@ const Header = () => {
     },
   ];
 
+
   useGSAP(
     () => {
-      if (!isBurgerOpen) return;
+      if (!isBurgerOpen) {
+        if (animationRef.current) {
+          animationRef.current.kill();
+          animationRef.current = null
+        }
+        return
+      }
 
       document.fonts.ready.then(() => {
         const mySplitText = new SplitText('.burger-menu__link', {
@@ -54,19 +61,52 @@ const Header = () => {
         });
         const myLines = mySplitText.lines;
 
-        gsap.from(myLines, {
+        animationRef.current = gsap.from(myLines, {
           yPercent: -50,
           opacity: 0,
-          stagger: 0.2,
-          duration: 0.3,
+          stagger: 0.08,
+          duration: 0.2,
           ease: 'power2.out',
           mask: true,
           delay: 0.3,
         });
       });
     },
-    { dependencies: [isBurgerOpen], scope: burgerContainer }
+    {dependencies: [isBurgerOpen], scope: burgerContainer}
   );
+
+  const closeBurgerMenu = () => {
+    if (!isBurgerOpen) return;
+
+    // Останавливаем текущую анимацию
+    if (animationRef.current) {
+      animationRef.current.kill();
+    }
+
+
+    document.fonts.ready.then(() => {
+      const mySplitText = new SplitText('.burger-menu__link', {
+        type: 'lines',
+      });
+      const myLines = mySplitText.lines;
+
+      const closeAnimation = gsap.to(myLines, {
+        yPercent: -50,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: 'power2.in',
+        onComplete: () => {
+          setIsBurgerOpen(false);
+          gsap.set(myLines, {clearProps: "all"});
+          mySplitText.revert();
+        }
+      });
+
+      animationRef.current = closeAnimation;
+    });
+  }
+
 
   useEffect(() => {
     if (lenis) {
@@ -77,7 +117,7 @@ const Header = () => {
   useEffect(() => {
     if (!lenis) return;
 
-    const handleScroll = ({ scroll }) => {
+    const handleScroll = ({scroll}) => {
       setScrollY(scroll);
     };
 
@@ -87,6 +127,23 @@ const Header = () => {
       lenis.off('scroll', handleScroll);
     };
   }, [lenis]);
+
+  const handleBurgerLinkClick = (e, path) => {
+    e.preventDefault();
+
+    closeBurgerMenu();
+    navigate(path);
+  };
+
+  const handleBurgerClick = () => {
+    if (isBurgerOpen) {
+      // Если меню открыто - закрываем
+      closeBurgerMenu();
+    } else {
+      // Если меню закрыто - открываем
+      setIsBurgerOpen(true);
+    }
+  };
 
   return (
     <header className="header">
@@ -100,6 +157,8 @@ const Header = () => {
           <div className="header-top__inner">
             <div className="header-top__inner-logo">
               <svg
+                role="img"
+                aria-label="Lux Trips Logo"
                 width="121"
                 height="64"
                 viewBox="0 0 121 64"
@@ -330,9 +389,15 @@ const Header = () => {
             </div>
             <nav className="header-top__inner-menu header-menu">
               <ul className="header-menu__list">
-                {headerlinks.map((el, index) => (
-                  <li className="header-menu__item" key={el.title}>
-                    <NavLink className="header-menu__link" to={el.path}>
+                {headerlinks.map((el) => (
+                  <li
+                    className="header-menu__item"
+                    key={el.title}
+                  >
+                    <NavLink
+                      className="header-menu__link"
+                      to={el.path}
+                    >
                       {el.title}
                     </NavLink>
                   </li>
@@ -340,7 +405,10 @@ const Header = () => {
               </ul>
             </nav>
             <div className="header-top__inner-button">
-              <a href="tel: 8888888">
+              <a
+                href="tel: 8888888"
+                aria-label="Call Me Back"
+              >
                 Call Me Back
                 <svg
                   width="156"
@@ -406,11 +474,9 @@ const Header = () => {
                     : 'burger-menu__button'
                 }
                 type="button"
-                onClick={() => {
-                  setIsBurgerOpen((prev) => !prev);
-                }}
+                onClick={handleBurgerClick}
                 aria-label={
-                  !isBurgerOpen ? 'открыть бургер-меню' : 'закрыть бургер-меню'
+                  !isBurgerOpen ? 'open menu-burger' : 'close menu-burger'
                 }
                 aria-expanded={isBurgerOpen}
               >
@@ -656,8 +722,15 @@ const Header = () => {
                 <nav className="burger-menu__nav">
                   <ul className="burger-menu__list">
                     {headerlinks.map((el) => (
-                      <li className="burger-menu__item" key={el.title}>
-                        <NavLink className="burger-menu__link" href={el.path}>
+                      <li
+                        className="burger-menu__item"
+                        key={el.title}
+                      >
+                        <NavLink
+                          className="burger-menu__link"
+                          to={el.path}
+                          onClick={(e) => handleBurgerLinkClick(e, el.path)}
+                        >
                           {el.title}
                         </NavLink>
                       </li>
@@ -672,5 +745,6 @@ const Header = () => {
     </header>
   );
 };
+
 
 export default Header;

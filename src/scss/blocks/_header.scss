@@ -74,6 +74,7 @@
       text-transform: uppercase;
       text-align: center;
       color: #fcfcfc;
+
       will-change: transform;
       transform: translate3d(0, calc(var(--scrollTop) * 0.5), 0);
 
@@ -82,22 +83,18 @@
       }
     }
 
-    span {
+    h1 {
       position: relative;
-      margin-top: 15px;
+      margin-top: 125px;
       font-size: fluid(160, 70);
-      transform: translate3d(0, calc(var(--scrollTop) * 0.35), 0);
+      will-change: transform;
+      transform: translate3d(0, calc(var(--scrollTop) * -0.5), 0);
 
       @media (width <= 380px) {
         font-size: 62px;
       }
     }
 
-    &-places {
-      position: relative;
-      margin-top: 15px;
-      transform: translate3d(0, calc(var(--scrollTop) * 0.3), 0);
-    }
   }
 
   &__middle {
@@ -110,6 +107,7 @@
     z-index: 5;
   }
 }
+
 .layer {
   height: 100%;
   width: 100%;
@@ -125,21 +123,20 @@
   display: block;
   position: relative;
   margin-top: 15px;
-  transform: translate3d(0, calc(var(--scrollTop) * 0.5), 0);
+  transform: translate3d(0, calc(var(--scrollTop) * -0.05), 0);
 
-  &::after {
-    position: absolute;
-
-    content: '';
-    width: fluid(112, 72);
-    height: fluid(213, 138);
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    backdrop-filter: blur(5px);
-
-    top: -100%;
-    left: 37%;
-    z-index: 15;
-  }
+//  &::after {
+//    position: absolute;
+//    content: '';
+//    width: fluid(112, 72);
+//    height: fluid(213, 138);
+//    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+//    backdrop-filter: blur(4px);
+//
+//    top: -100%;
+//    left: 45%;
+//    z-index: 15;
+//  }
 }
 
 .header-top {
@@ -293,7 +290,7 @@
 
 .burger-menu {
   opacity: 0;
-  visibility: 0;
+  visibility: hidden;
 
   min-height: 100vh;
   width: 100%;
@@ -309,9 +306,10 @@
   overflow: auto;
   transform-origin: right top;
   transform: scale(0) translate(0, 0) rotate(0.001deg);
-  transition: all 0.7s ease;
+  transition: all 0.5s ease;
 
   &__wrapper {
+    padding: 50px;
     width: 100%;
     height: 100%;
     display: flex;
@@ -319,10 +317,6 @@
     align-items: center;
     justify-content: center;
     transform-origin: right top;
-  }
-
-  &__wrapper {
-    padding: 50px;
   }
 
   &__nav {
@@ -338,6 +332,7 @@
 
   &__logo {
     margin-bottom: 20px;
+
     path {
       fill: #fff;
     }
@@ -401,6 +396,7 @@
         will-change: transform;
         transition: width 0.9s ease;
       }
+
       &::before {
         content: '';
 
@@ -416,6 +412,7 @@
         top: -9px;
         left: 0;
       }
+
       &::before {
         top: 9px;
         left: 0;

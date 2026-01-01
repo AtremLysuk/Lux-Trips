@@ -1,6 +1,5 @@
-
-import { Link } from 'react-router-dom';
-import '@/scss/blocks/_book-card.scss'; 
+import {Link} from 'react-router-dom';
+import '@/scss/blocks/_book-card.scss';
 
 const BookCard = (props) => {
 
@@ -12,11 +11,20 @@ const BookCard = (props) => {
   } = props.el;
 
 
-  
-
   return (
-    <Link className='book__item' to={path} state={id} >
-      <img className='book__item-image' src={imgUrl} alt="" width={540} height={191} />
+    <Link
+      className='book__item'
+      to={path}
+      state={id}
+      aria-labelledby={`book-${id}-title`}
+    >
+      <img
+        className='book__item-image'
+        src={imgUrl}
+        alt={title}
+        width={540}
+        height={191}
+      />
       <h3 className='book__item-title'>{title}</h3>
     </Link>
   )

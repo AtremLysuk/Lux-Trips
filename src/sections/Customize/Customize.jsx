@@ -26,7 +26,7 @@ const Customize = () => {
         'Our team will create perfect travel itinerary for you, based on your personalized needs and wishes.',
     },
     {
-      number: 1,
+      number: 3,
       title: 'Book your vacation',
       descrription:
         'Confirm your trip only when you are completely satisfied with the proposed travel plan. ',
@@ -37,7 +37,7 @@ const Customize = () => {
     () => {
       if (titleRef.current) {
         document.fonts.ready.then(() => {
-          gsap.set(titleRef.current, { visibility: 'visible' });
+          gsap.set(titleRef.current, { opacity: 1});
           gsap.fromTo(
             titleRef.current,
             { opacity: 0, filter: 'blur(10px)' },
@@ -95,14 +95,14 @@ const Customize = () => {
   );
 
   return (
-    <section className="customize" ref={containerRef}>
+    <section className="customize" ref={containerRef} aria-labelledby='customize-title'>
       <div className="customize__container container" ref={triggerRef}>
-        <h2 className="customize__title h2" ref={titleRef}>
+        <h2 className="customize__title h2" ref={titleRef} id='customize-title'>
           Customise <br /> your trip with us
         </h2>
-        <div className="customize__items">
+        <ul className="customize__items">
           {blocksData.map((el) => (
-            <div className="customize__item" key={el.title}>
+            <li className="customize__item" key={el.number}>
               <div className="customize__item-number">{el.number}</div>
               <div className="customize__item-content">
                 <h4 className="customize__item-title">{el.title}</h4>
@@ -110,11 +110,11 @@ const Customize = () => {
                   <p>{el.descrription}</p>
                 </div>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
         <div className="customize__button">
-          <Link className="customize__link" to="/">
+          <Link className="customize__link" to="/" aria-label="Start a luxury trip request">
             Start a trip request
           </Link>
         </div>

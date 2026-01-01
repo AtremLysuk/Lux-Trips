@@ -42,7 +42,7 @@
     margin-inline: auto;
     text-align: center;
     max-width: 185px;
-    visibility: hidden;
+    opacity: 0;
     will-change: opacity;
 
     &::after{

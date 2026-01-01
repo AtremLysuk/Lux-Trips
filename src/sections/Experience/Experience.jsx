@@ -158,11 +158,13 @@ const Experience = () => {
   }, {scope: containerRef})
 
   return (
-    <section className="experience">
+    <section className="experience" aria-labelledby="experience-title">
       <div className="experience__container container">
         <div className="experience__title-wrapper" ref={containerRef}>
-          <h2 className="experience__title h2" ref={titleRef}>Top Rated Experiences</h2>
+          <h2 className="experience__title h2" id="experience-title" ref={titleRef}>Top Rated Experiences</h2>
           <svg
+            aria-hidden="true"
+            focusable="false"
             width="112"
             height="212"
             viewBox="0 0 112 212"
@@ -180,10 +182,11 @@ const Experience = () => {
           </svg>
         </div>
 
-        <ul className="experience-header__items">
+        <ul className="experience-header__items" role="tablist">
           {regions.map((el) => (
             <li className="experience-header__item" key={el}>
               <motion.button
+                role="tab"
                 className={
                   activeRegion === el
                     ? 'experience-header__btn active'

@@ -215,7 +215,7 @@ const RequestPage = () => {
   );
 
   return (
-    <main>
+    <>
       <section className="request" ref={animationContainerRef}>
         {currentItem !== undefined && (
           <div className="request__container container">
@@ -255,7 +255,7 @@ const RequestPage = () => {
           </div>
         )}
       </section>
-    </main>
+    </>
   );
 };
 

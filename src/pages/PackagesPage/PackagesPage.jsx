@@ -9,10 +9,10 @@ const PackagesPage = () => {
 
 
   return (
-    <main>
+    <>
       <Luxury />
       <Subscribe />
-    </main>
+    </>
   );
 };
 

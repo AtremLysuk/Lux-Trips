@@ -4,20 +4,16 @@ import WhyCenter from '@/sections/WhyCenter/WhyCenter';
 import WhyTop from '@/sections/WhyTop/WhyTop';
 
 
-
-
-
 const WhyPage = () => {
 
 
-
   return (
-    <main>
+    <>
       <WhyTop />
       <WhyCenter />
       <WhyBottom />
       <Subscribe className="why" />
-    </main>
+    </>
   );
 };
 

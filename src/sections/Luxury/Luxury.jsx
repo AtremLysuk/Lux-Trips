@@ -1,13 +1,13 @@
 import LuxyryCard from '@/components/LuxyryCard/LuxyryCard';
 import '@/scss/blocks/_luxury-card.scss';
-import { useItemsStore } from './../../zustand/itemsStore';
+import {useItemsStore} from './../../zustand/itemsStore';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import {useGSAP} from '@gsap/react';
+import {useEffect, useState, useRef} from 'react';
+import {Link} from 'react-router-dom';
 
 
-import { useLenis } from 'lenis/react';
+import {useLenis} from 'lenis/react';
 
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
@@ -92,7 +92,7 @@ const Luxury = () => {
 
         gsap.fromTo(
           items,
-          { autoAlpha: 0, y: 50 },
+          {autoAlpha: 0, y: 50},
           {
             autoAlpha: 1,
             immediateRender: false,
@@ -100,7 +100,7 @@ const Luxury = () => {
             y: 0,
             stagger: 0.3,
             onStart: () =>
-              items.forEach((el) => gsap.set(el, { visibility: 'visible' })),
+              items.forEach((el) => gsap.set(el, {visibility: 'visible'})),
             onComplete: () => {
               items.forEach((el) => el.classList.add('is-animated'));
             },
@@ -109,7 +109,7 @@ const Luxury = () => {
       }
     },
 
-    { scope: itemsRef, dependencies: [packagesItems, currentItemsCount] }
+    {scope: itemsRef, dependencies: [packagesItems, currentItemsCount]}
   );
 
   const handleLoadMore = () => {
@@ -122,39 +122,73 @@ const Luxury = () => {
   };
 
   return (
-    <section className="luxury">
+    <section
+      className="luxury"
+      aria-labelledby='luxury-title'
+    >
       <div className="luxury__container container">
         <div className="luxury__inner">
-          <h2 className="luxury__title h2">Luxury packages</h2>
+          <h2
+            className="luxury__title h2"
+            id='luxury-title'
+          >Luxury packages
+          </h2>
           {isLoading &&
             skeletonItems.map((el, index) => (
-              <div className="luxury__items" key={index}>
-                <div className="luxury__item-sceleton"></div>
+              <div
+                className="luxury__items"
+                key={index}
+              >
+                <div
+                  className="luxury__item-sceleton"
+                  aria-hidden={true}
+                ></div>
               </div>
             ))}
           {!isError && !isLoading && packagesItems.length > 0 && (
-            <div className="luxury__items" ref={itemsRef}>
+            <ul
+              className="luxury__items"
+              ref={itemsRef}
+            >
               {packagesItems
                 .filter((el) => el.id <= currentItemsCount)
-                .map((el, index) => (
-                  <Link className="luxury__item" to="/" key={index}>
-                    <div className="luxury__image">
-                      <img src={el.imgUrl} alt="" width={350} height={570} />
-                    </div>
-
-                    <div className="luxury__content">
-                      <div className="luxury__content-location">
-                        {el.location}
+                .map((el) => (
+                  <li key={el.id}>
+                    <Link
+                      className="luxury__item"
+                      to="/"
+                      aria-labelledby={`pkg-${el.id}-title`}
+                    >
+                      <div className="luxury__image">
+                        <img
+                          src={el.imgUrl}
+                          alt={`${el.title} in ${el.location}`}
+                          width={350}
+                          height={570}
+                        />
                       </div>
-                      <h4 className="luxury__content-title h4">{el.title}</h4>
-                      <p>From</p>
-                      <p className="luxury__content-price">${el.price}</p>
-                    </div>
-                    <div className="luxury__rating">{el.rating}</div>
-                  </Link>
+                      <div className="luxury__content">
+                        <div className="luxury__content-location">
+                          {el.location}
+                        </div>
+                        <h4
+                          className="luxury__content-title h4"
+                          id={`pkg-${el.id}-title`}
+                        >{el.title}</h4>
+                        <p>From</p>
+                        <p className="luxury__content-price">${el.price}</p>
+                      </div>
+                      <div className="luxury__rating">{el.rating}</div>
+                    </Link>
+                  </li>
                 ))}
               <div className="luxury-btn__wrapper">
-                <button className="luxury-btn" onClick={handleLoadMore}>
+                <button
+                  className="luxury-btn"
+                  onClick={handleLoadMore}
+                  aria-busy={isLoading}
+                  aria-controls="luxury-list"
+                >
                   <svg
                     width="330"
                     height="100"
@@ -219,9 +253,12 @@ const Luxury = () => {
                   {!isLoading ? 'Load more' : '...Loading'}
                 </button>
               </div>
-            </div>
+            </ul>
           )}
-          {isError && <h2 className="error-message">Someting wrong!!!</h2>}
+          {isError && <div
+            className="error-message"
+            role='alert'
+          >Someting wrong!!!</div>}
         </div>
       </div>
     </section>

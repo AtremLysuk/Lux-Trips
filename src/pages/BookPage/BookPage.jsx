@@ -6,10 +6,10 @@ const BookPage = () => {
 
 
   return (
-    <main>
+    <>
       <Products />
       <Subscribe />
-    </main>
+    </>
   );
 };
 
