@@ -1,4 +1,4 @@
-import '@/scss/blocks/_header.scss';
+import '@/scss/blocks/_Header.scss';
 
 
 const Hero = () => {
