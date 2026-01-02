@@ -9,7 +9,7 @@ export const useItemsStore = create((set, get) => ({
     set({ isLoading: true });
 
     try {
-      const res = await fetch('../data.json');
+      const res = await fetch('/data.json');
       const data = await res.json();
 
       set({
