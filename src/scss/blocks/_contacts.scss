@@ -69,6 +69,7 @@
       text-align: center;
       color: #0c0b10;
     }
+
     &-button {
       padding: 14px 58px;
       background: #0c0b10;
@@ -169,4 +170,9 @@
       transform: translate3d(calc(-50% - 20px), -50%, 0);
     }
   }
+}
+
+.contacts__phone,
+.contacts__address {
+  will-change: transform, opacity, filter;
 }

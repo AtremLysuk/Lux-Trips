@@ -14,10 +14,10 @@ const NotFoundPage = () => {
   }
 
   return (
-    <section className="notfound">
+    <section className="notfound" aria-labelledby='notFound-title' >
       <div className="notfound__container container">
         <div className="notfound__inner">
-          <h2 className="notfound__title h2">Page Not Found</h2>
+          <h2 className="notfound__title h2" id='notFound-title'>Page Not Found</h2>
           <div className="notfound__inner__link">
             <Link  to='/' onClick={goBack} >
               Go back
@@ -25,7 +25,7 @@ const NotFoundPage = () => {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

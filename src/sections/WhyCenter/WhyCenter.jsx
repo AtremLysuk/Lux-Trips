@@ -1,5 +1,4 @@
 import '@/scss/blocks/_why-center.scss';
-
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Link} from 'react-router-dom';
 import gsap from 'gsap';
@@ -9,7 +8,6 @@ import 'swiper/css';
 import {useRef} from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
-
 const WhyCenter = () => {
   const cloudLeftRef = useRef(null);
   const cloudRightRef = useRef(null);
@@ -95,34 +93,26 @@ const WhyCenter = () => {
   }, {
     imgUrl: '/images/book-cards/jet.png', title: 'Private Jet',
   },];
-
   useGSAP(() => {
     const rombItems = gsap.utils.toArray('.experiencee-center__item');
-
     rombItems.forEach((item) => {
       gsap.from(item, {
-        opacity: 0, scale: 0, duration: 1,
-
-        scrollTrigger: {
+        opacity: 0, scale: 0, duration: 1, scrollTrigger: {
           trigger: item, start: 'bottom 80%',
         },
       });
     });
-
     gsap.from(cloudLeftRef.current, {
       opacity: 0.1, x: -100, duration: 1.5, scrollTrigger: {
         trigger: cloudLeftRef.current, start: 'top 80%',
       },
     });
-
     gsap.from(cloudRightRef.current, {
       opacity: 0.1, x: 100, duration: 1.5, scrollTrigger: {
         trigger: cloudLeftRef.current, start: 'center 60%',
       },
     });
   }, {scope: containerRef});
-
-
   return (<section
     className="experiencee"
     ref={containerRef}
@@ -351,5 +341,4 @@ const WhyCenter = () => {
     </div>
   </section>);
 };
-
 export default WhyCenter;
