@@ -125,6 +125,7 @@
   margin-top: 15px;
   transform: translate3d(0, calc(var(--scrollTop) * -0.05), 0);
 
+
 }
 
 .header-top {
@@ -277,8 +278,7 @@
 }
 
 .burger-menu {
-  opacity: 0;
-  visibility: hidden;
+  display: none;
 
   min-height: 100vh;
   width: 100%;
@@ -288,13 +288,14 @@
   bottom: 0;
   background-color: rgba(121, 101, 94, 1);
   backdrop-filter: blur(15px);
-  display: flex;
+
   justify-content: center;
   align-items: center;
   overflow: auto;
-  transform-origin: right top;
-  transform: scale(0) translate(0, 0) rotate(0.001deg);
-  transition: all 0.5s ease;
+
+  &.active {
+    display: flex;
+  }
 
   &__wrapper {
     padding: 50px;
@@ -343,11 +344,6 @@
   }
 }
 
-.burger-menu.active {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1) translate(0, 0) rotate(0.001deg);
-}
 
 .burger-menu__button {
   display: none;
