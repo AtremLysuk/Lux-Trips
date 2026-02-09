@@ -74,8 +74,8 @@ const WhyTop = () => {
     gsap.from(titleRef.current, {
       opacity: 0,
       filter: 'blur(12px)',
-      duration: 1.5,
-      delay: 1,
+      duration: 1,
+      delay: 0.5,
 
       scrollTrigger: {
         trigger: titleRef.current,
