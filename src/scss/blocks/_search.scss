@@ -40,6 +40,11 @@
         display: none;
       }
     }
+
+    @media(width <= 800px) {
+      max-width: 620px;
+      width: auto;
+    }
   }
 
   &__title {
@@ -74,14 +79,31 @@
     width: 100%;
     display: flex;
     align-items: center;
+
   }
 }
 
 .form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  @media(width <= 1000px) {
+    flex-direction: column;
+  }
+
+  @media(width <= 800px) {
+    flex-direction: row;
+  }
+
+  @media(width <= 600px) {
+    flex-direction: column;
+  }
+
   fieldset {
-    width: 100%;
     display: grid;
-    grid-template-columns: 25% 20% 15% 15% 126px;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
@@ -89,28 +111,27 @@
 
     @media (width <= 1100px) {
       grid-template-columns: repeat(4, 1fr);
-      justify-content: center;
-      place-items: start;
+
     }
 
-    @media (width <= 900px) {
-      padding: fluid(35, 20);
+    @media(width <= 900px) {
+      display: flex;
+      gap: 5px;
+    }
 
+    @media(width <= 800px) {
+      margin-inline: auto;
+      display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      place-content: center;
-      gap: 20px;
+      grid-template-rows: repeat(2, 1fr);
+
     }
 
-    @media (width <= 600px) {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(4, 1fr);
-    }
 
-    @media (width <= 450px) {
+    @media (width <= 500px) {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
     }
   }
@@ -120,7 +141,11 @@
     margin-left: auto;
     padding-block: 23px;
     justify-self: end;
-    width: 126px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 146px;
     font-weight: 400;
     font-size: 24px;
     letter-spacing: 0.04em;
@@ -130,20 +155,23 @@
     border-radius: 121px;
     color: var(--color-white);
 
+    & > svg {
+      &:hover {
+        color: red;
+      }
+    }
+
+    &:hover {
+      color: red;
+    }
+
     @media (width <= 1100px) {
-      width: 100%;
-      grid-column: -4/-2;
+      margin-inline: auto;
       padding-block: 16px;
     }
 
-    @media (width <= 900px) {
-      grid-column: 1/-1;
-      grid-row: 3/-1;
-    }
-
-    @media (width <= 600px) {
-      grid-column: 1/-1;
-      grid-row: 4/-1;
+    @media(width <= 500px) {
+      width: 100%;
     }
   }
 
@@ -158,12 +186,26 @@
     font-size: 18px;
     color: var(--color-text-rose);
     cursor: pointer;
+
+    @media(width <= 800px) {
+      max-width: 200px;
+    }
+
+    @media(width <= 500px) {
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+    }
   }
 
   input {
-    padding-block: 5px;
+    padding: 5px;
     border: none;
     overflow: hidden;
+
+    @media(width <= 800px) {
+      max-width: 200px;
+    }
 
     &::placeholder {
       font-weight: 500;
@@ -172,15 +214,12 @@
     }
 
     &:focus-visible {
-      outline: none;
+      outline-color: var(--color-bg--rose);
+      border-radius: 10px;
     }
   }
 
   &__destination-label {
-    @media (width <= 600px) {
-      grid-column: 1/3;
-      grid-row: 1/2;
-    }
 
     &::before {
       position: absolute;
@@ -195,20 +234,6 @@
   }
 
   &__travel-label {
-    @media (width <= 1100px) {
-      width: 100%;
-      grid-column: 4/-1;
-    }
-
-    @media (width <= 900px) {
-      grid-column: 1/2;
-    }
-
-    @media (width <= 600px) {
-      grid-column: 1/3;
-      grid-row: 2/3;
-    }
-
     &::before {
       position: absolute;
       content: '';
@@ -222,22 +247,6 @@
   }
 
   &__date-label {
-    @media (width <= 1100px) {
-      width: 126px;
-      grid-column: 2/3;
-      grid-row: 1/2;
-    }
-
-    @media (width <= 900px) {
-      grid-column: 2/3;
-      grid-row: 2/3;
-    }
-
-    @media (width <= 600px) {
-      grid-column: 1/2;
-      grid-row: 3/4;
-    }
-
     &::before {
       position: absolute;
       content: '';
@@ -255,21 +264,6 @@
   }
 
   &__travellers-label {
-    @media (width <= 1100px) {
-      width: 100%;
-      grid-column: 3/4;
-      grid-row: 1/2;
-    }
-
-    @media (width <= 900px) {
-      grid-column: 2/3;
-      grid-row: 1/2;
-    }
-
-    @media (width <= 600px) {
-      grid-column: 2/3;
-      grid-row: 3/4;
-    }
 
     &::before {
       position: absolute;
