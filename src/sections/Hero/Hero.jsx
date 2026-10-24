@@ -27,7 +27,7 @@ const Hero = () => {
       >
         <div
           className="layer layers__base"
-          style={{ backgroundImage: 'url(./bgtop/bg_top-3.png)' }}
+          style={{ backgroundImage: 'url(/bgtop/bg_top-3.webp)' }}
           aria-hidden="true"
         ></div>
 
@@ -40,13 +40,13 @@ const Hero = () => {
 
         <div
           className="layer layers__middle"
-          style={{ backgroundImage: 'url(/bgtop/bg_top-2.png)' }}
+          style={{ backgroundImage: 'url(/bgtop/bg_top-2.webp)' }}
           aria-hidden="true"
         ></div>
 
         <div
           className="layer layers__front"
-          style={{ backgroundImage: 'url(./bgtop/bg_top-1.png)', zIndex: '100' }}
+          style={{ backgroundImage: 'url(/bgtop/bg_top-1.webp)', zIndex: '100' }}
           aria-hidden="true"
         ></div>
       </div>
