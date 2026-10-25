@@ -82,7 +82,7 @@ const Contacts = () => {
       </div>
       <div className="contacts__map">
         <img
-          src="/images/contacts/map.png"
+          src="/images/contacts/map.webp"
           alt="Map showing Via Peri 17, Lugano, Switzerland"
           width={1110}
           height={565}

@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "imgUrl": "/images/slides/1.png",
+    "imgUrl": "/images/slides/1.webp",
     "location": "Austria",
     "title": "Winter Park Ski Holiday",
     "rating": 4,
@@ -10,7 +10,7 @@
   },
   {
     "id": 2,
-    "imgUrl": "/images/slides/2.png",
+    "imgUrl": "/images/slides/2.webp",
     "location": "Peru",
     "title": "Machu Picchu",
     "rating": 5,
@@ -19,7 +19,7 @@
   },
   {
     "id": 3,
-    "imgUrl": "/images/slides/3.png",
+    "imgUrl": "/images/slides/3.webp",
     "location": "Croatia",
     "title": "Hvar",
     "rating": 4,
@@ -28,7 +28,7 @@
   },
   {
     "id": 4,
-    "imgUrl": "/images/slides/4.png",
+    "imgUrl": "/images/slides/4.webp",
     "location": "Jordan",
     "title": "Wadi Musa",
     "rating": 4,
@@ -37,7 +37,7 @@
   },
   {
     "id": 5,
-    "imgUrl": "/images/slides/5.png",
+    "imgUrl": "/images/slides/5.webp",
     "location": "Europe",
     "title": "Winter Park Ski Holiday",
     "rating": 5,
@@ -46,7 +46,7 @@
   },
   {
     "id": 6,
-    "imgUrl": "/images/slides/6.png",
+    "imgUrl": "/images/slides/6.webp",
     "location": "Jordan",
     "title": "Wadi Musa",
     "rating": 4,
@@ -55,7 +55,7 @@
   },
   {
     "id": 7,
-    "imgUrl": "/images/slides/7.png",
+    "imgUrl": "/images/slides/7.webp",
     "location": "Jordan",
     "title": "Wadi Musa",
     "rating": 4,
@@ -64,7 +64,7 @@
   },
   {
     "id": 8,
-    "imgUrl": "/images/slides/8.png",
+    "imgUrl": "/images/slides/8.webp",
     "location": "Jordan",
     "title": "Wadi Musa",
     "rating": 4,
@@ -73,7 +73,7 @@
   },
   {
     "id": 9,
-    "imgUrl": "/images/slides/9.png",
+    "imgUrl": "/images/slides/9.webp",
     "location": "Jordan",
     "title": "Wadi Musa",
     "rating": 4,
@@ -82,7 +82,7 @@
   },
   {
     "id": 10,
-    "imgUrl": "/images/slides/10.png",
+    "imgUrl": "/images/slides/10.webp",
     "location": "Jordan",
     "title": "Wadi Musa",
     "rating": 4,
@@ -91,7 +91,7 @@
   },
   {
     "id": 11,
-    "imgUrl": "/images/slides/11.png",
+    "imgUrl": "/images/slides/11.webp",
     "location": "Jordan",
     "title": "Wadi Musa",
     "rating": 4,
@@ -100,7 +100,7 @@
   },
   {
     "id": 12,
-    "imgUrl": "/images/slides/12.png",
+    "imgUrl": "/images/slides/12.webp",
     "location": "Jordan",
     "title": "Wadi Musa",
     "rating": 4,
@@ -109,7 +109,7 @@
   },
   {
     "id": 13,
-    "imgUrl": "/images/slides/1.png",
+    "imgUrl": "/images/slides/1.webp",
     "location": "Italy",
     "title": "Venice Canals",
     "rating": 5,
@@ -118,7 +118,7 @@
   },
   {
     "id": 14,
-    "imgUrl": "/images/slides/2.png",
+    "imgUrl": "/images/slides/2.webp",
     "location": "Brazil",
     "title": "Rio de Janeiro",
     "rating": 4,
@@ -127,7 +127,7 @@
   },
   {
     "id": 15,
-    "imgUrl": "/images/slides/3.png",
+    "imgUrl": "/images/slides/3.webp",
     "location": "Egypt",
     "title": "Pyramids of Giza",
     "rating": 5,
@@ -136,7 +136,7 @@
   },
   {
     "id": 16,
-    "imgUrl": "/images/slides/4.png",
+    "imgUrl": "/images/slides/4.webp",
     "location": "Japan",
     "title": "Kyoto Temples",
     "rating": 4,
@@ -145,7 +145,7 @@
   },
   {
     "id": 17,
-    "imgUrl": "/images/slides/5.png",
+    "imgUrl": "/images/slides/5.webp",
     "location": "Australia",
     "title": "Great Barrier Reef",
     "rating": 5,
@@ -154,7 +154,7 @@
   },
   {
     "id": 18,
-    "imgUrl": "/images/slides/6.png",
+    "imgUrl": "/images/slides/6.webp",
     "location": "Mexico",
     "title": "Chichen Itza",
     "rating": 4,
@@ -163,7 +163,7 @@
   },
   {
     "id": 19,
-    "imgUrl": "/images/slides/7.png",
+    "imgUrl": "/images/slides/7.webp",
     "location": "Iceland",
     "title": "Blue Lagoon",
     "rating": 5,
@@ -172,7 +172,7 @@
   },
   {
     "id": 20,
-    "imgUrl": "/images/slides/8.png",
+    "imgUrl": "/images/slides/8.webp",
     "location": "South Africa",
     "title": "Table Mountain",
     "rating": 4,
@@ -181,7 +181,7 @@
   },
   {
     "id": 21,
-    "imgUrl": "/images/slides/9.png",
+    "imgUrl": "/images/slides/9.webp",
     "location": "New Zealand",
     "title": "Milford Sound",
     "rating": 5,
@@ -190,7 +190,7 @@
   },
   {
     "id": 22,
-    "imgUrl": "/images/slides/10.png",
+    "imgUrl": "/images/slides/10.webp",
     "location": "India",
     "title": "Taj Mahal",
     "rating": 4,
@@ -199,7 +199,7 @@
   },
   {
     "id": 23,
-    "imgUrl": "/images/slides/11.png",
+    "imgUrl": "/images/slides/11.webp",
     "location": "Canada",
     "title": "Banff National Park",
     "rating": 5,
@@ -208,7 +208,7 @@
   },
   {
     "id": 24,
-    "imgUrl": "/images/slides/12.png",
+    "imgUrl": "/images/slides/12.webp",
     "location": "Greece",
     "title": "Santorini",
     "rating": 5,
@@ -217,7 +217,7 @@
   },
   {
     "id": 25,
-    "imgUrl": "/images/slides/1.png",
+    "imgUrl": "/images/slides/1.webp",
     "location": "Chile",
     "title": "Torres del Paine",
     "rating": 4,
@@ -226,7 +226,7 @@
   },
   {
     "id": 26,
-    "imgUrl": "/images/slides/2.png",
+    "imgUrl": "/images/slides/2.webp",
     "location": "Norway",
     "title": "Northern Lights",
     "rating": 5,
@@ -235,7 +235,7 @@
   },
   {
     "id": 27,
-    "imgUrl": "/images/slides/3.png",
+    "imgUrl": "/images/slides/3.webp",
     "location": "Vietnam",
     "title": "Ha Long Bay",
     "rating": 4,
@@ -244,7 +244,7 @@
   },
   {
     "id": 28,
-    "imgUrl": "/images/slides/4.png",
+    "imgUrl": "/images/slides/4.webp",
     "location": "Kenya",
     "title": "Masai Mara Safari",
     "rating": 5,
@@ -253,7 +253,7 @@
   },
   {
     "id": 29,
-    "imgUrl": "/images/slides/5.png",
+    "imgUrl": "/images/slides/5.webp",
     "location": "USA",
     "title": "Grand Canyon",
     "rating": 4,
@@ -262,7 +262,7 @@
   },
   {
     "id": 30,
-    "imgUrl": "/images/slides/6.png",
+    "imgUrl": "/images/slides/6.webp",
     "location": "China",
     "title": "Great Wall of China",
     "rating": 5,
@@ -271,7 +271,7 @@
   },
   {
     "id": 31,
-    "imgUrl": "/images/slides/7.png",
+    "imgUrl": "/images/slides/7.webp",
     "location": "Peru",
     "title": "Amazon Rainforest",
     "rating": 4,
@@ -280,7 +280,7 @@
   },
   {
     "id": 32,
-    "imgUrl": "/images/slides/8.png",
+    "imgUrl": "/images/slides/8.webp",
     "location": "Thailand",
     "title": "Phuket Beaches",
     "rating": 4,

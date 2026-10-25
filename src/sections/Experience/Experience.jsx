@@ -26,7 +26,7 @@ const Experience = () => {
   const productItems = [
     {
       id: 1,
-      imgUrl: '/images/slides/1.png',
+      imgUrl: '/images/slides/1.webp',
       location: 'Austria       ',
       title: 'Winter Park Ski Holiday',
       rating: '4.0',
@@ -35,7 +35,7 @@ const Experience = () => {
     },
     {
       id: 2,
-      imgUrl: '/images/slides/2.png',
+      imgUrl: '/images/slides/2.webp',
       location: 'Peru',
       title: 'Machu Picchu',
       rating: '5.0',
@@ -44,7 +44,7 @@ const Experience = () => {
     },
     {
       id: 3,
-      imgUrl: '/images/slides/3.png',
+      imgUrl: '/images/slides/3.webp',
       location: 'Croatia ',
       title: 'Hvar',
       rating: '4.0',
@@ -53,7 +53,7 @@ const Experience = () => {
     },
     {
       id: 4,
-      imgUrl: '/images/slides/4.png',
+      imgUrl: '/images/slides/4.webp',
       location: 'Jordan',
       title: 'Wadi Musa',
       rating: '4.0',
@@ -62,7 +62,7 @@ const Experience = () => {
     },
     {
       id: 5,
-      imgUrl: '/images/slides/5.png',
+      imgUrl: '/images/slides/5.webp',
       location: 'Europe',
       title: 'Winter Park Ski Holiday',
       rating: '5.0',
@@ -71,7 +71,7 @@ const Experience = () => {
     },
     {
       id: 6,
-      imgUrl: '/images/slides/6.png',
+      imgUrl: '/images/slides/6.webp',
       location: 'Jordan',
       title: 'Wadi Musa',
       rating: '4.0',
@@ -81,7 +81,7 @@ const Experience = () => {
 
     {
       id: 7,
-      imgUrl: '/images/slides/7.png',
+      imgUrl: '/images/slides/7.webp',
       location: 'Jordan',
       title: 'Wadi Musa',
       rating: '4.0',
@@ -91,7 +91,7 @@ const Experience = () => {
 
     {
       id: 8,
-      imgUrl: '/images/slides/8.png',
+      imgUrl: '/images/slides/8.webp',
       location: 'Jordan',
       title: 'Wadi Musa',
       rating: '4.0',
@@ -100,7 +100,7 @@ const Experience = () => {
     },
     {
       id: 9,
-      imgUrl: '/images/slides/9.png',
+      imgUrl: '/images/slides/9.webp',
       location: 'Jordan',
       title: 'Wadi Musa',
       rating: '5.0',
@@ -109,7 +109,7 @@ const Experience = () => {
     },
     {
       id: 10,
-      imgUrl: '/images/slides/10.png',
+      imgUrl: '/images/slides/10.webp',
       location: 'Jordan',
       title: 'Wadi Musa',
       rating: '4.0',
@@ -118,7 +118,7 @@ const Experience = () => {
     },
     {
       id: 11,
-      imgUrl: '/images/slides/11.png',
+      imgUrl: '/images/slides/11.webp',
       location: 'Jordan',
       title: 'Wadi Musa',
       rating: '4.0',
@@ -127,7 +127,7 @@ const Experience = () => {
     },
     {
       id: 12,
-      imgUrl: '/images/slides/12.png',
+      imgUrl: '/images/slides/12.webp',
       location: 'Jordan',
       title: 'Wadi Musa',
       rating: '4.0',

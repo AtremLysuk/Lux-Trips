@@ -2,7 +2,7 @@
 
 .customers {
   position: relative;
-  background-image: url(/images/customers/bg_contact.png);
+  background-image: url(/images/customers/bg_contact.webp);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center 58%;
@@ -36,7 +36,7 @@
   }
 
   @media (width <= 600px) {
-    background-image: url(/images/customers/bg_contact-mobile.png);
+    background-image: url(/images/customers/bg_contact-mobile.webp);
     background-repeat: no-repeat;
     background-position: right 60%;
     background-size: contain;
@@ -216,7 +216,7 @@
       left: 50%;
       top: 42%;
       transform: translate3d(-50%, -50%, 0);
-      background-image: url(/images/customers/btn-decor.png);
+      background-image: url(/images/customers/btn-decor.webp);
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;

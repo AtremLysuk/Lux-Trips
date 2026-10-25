@@ -16,7 +16,7 @@
     left: 50%;
     top: 42%;
     transform: translate3d(-50%, -50%, 0);
-    background-image: url(/images/Customize/button-decor2.png);
+    background-image: url(/images/Customize/button-decor2.webp);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -36,7 +36,7 @@
     left: 50%;
     top: 42%;
     transform: translate3d(-50%, -50%, 0);
-    background-image: url(/images/Customize/decor-2.png);
+    background-image: url(/images/Customize/decor-2.webp);
     background-repeat: no-repeat;
     background-position: center;
     z-index: 40;
@@ -70,6 +70,7 @@
     z-index: 60;
     cursor: pointer;
     transition: color 0.3s ease;
+    text-decoration: none;
 
     @media (width <= 650px) {
       font-size: 20px;

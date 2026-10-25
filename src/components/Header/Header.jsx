@@ -4,11 +4,14 @@ import {SplitText} from 'gsap/SplitText';
 import {useGSAP} from '@gsap/react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import {useLenis} from 'lenis/react';
+import classNames from 'classnames';
 
 gsap.registerPlugin(SplitText);
 const Header = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  // Только факт «прокрутили ниже 50px»: React перерисует шапку,
+  // лишь когда значение меняется, а не на каждом кадре скролла
+  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const lenis = useLenis();
   const headerMenuRef = useRef(null);
@@ -104,7 +107,7 @@ const Header = () => {
   useEffect(() => {
     if (!lenis) return;
     const handleScroll = ({scroll}) => {
-      setScrollY(scroll);
+      setIsScrolled(scroll > 50);
     };
     lenis.on('scroll', handleScroll);
     return () => {
@@ -126,7 +129,7 @@ const Header = () => {
   return (<header className="header">
     <div className="header__container container">
       <div
-        className={`${scrollY > 50 ? 'header-top header-top--scrolled' : 'header-top'} `}
+        className={classNames('header-top', isScrolled && 'header-top--scrolled')}
         ref={headerMenuRef}
       >
         <div className="header-top__inner">

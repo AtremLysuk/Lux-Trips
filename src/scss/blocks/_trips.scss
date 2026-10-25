@@ -20,7 +20,7 @@
         rgba(226, 211, 206, 0) calc(100% - 300px),
         rgba(226, 211, 206, 1) 100%
       ),
-      url(/images/trips/trips-bg2.png);
+      url(/images/trips/trips-bg2.webp);
     background-repeat: no-repeat;
     background-size: 100% 100%, cover;
     background-position: center, top;
@@ -115,7 +115,7 @@
       top: 0;
       left: 5%;
       height: 348px;
-      background-image: url(/images/trips/image-left.png);
+      background-image: url(/images/trips/image-left.webp);
 
       @media (width <= 600px) {
         left: 0;
@@ -126,7 +126,7 @@
       right: 0;
       bottom: 0;
       height: 365px;
-      background-image: url(/images/trips/image-right.png);
+      background-image: url(/images/trips/image-right.webp);
 
       @media (width <= 900px) {
         bottom: 15%;

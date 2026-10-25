@@ -5,7 +5,7 @@
 
   position: relative;
   padding-bottom: fluid(158, 110);
-  background-image: url(/images/book/luxury-bg.png);
+  background-image: url(/images/book/luxury-bg.webp);
   background-position: center;
   background-size: cover;
 
@@ -23,7 +23,7 @@
         rgba(226, 211, 206, 1) 0,
         rgba(226, 211, 206, 0) 250px
       ),
-      url(/images/book-bg.png) no-repeat;
+      url(/images/book-bg.webp) no-repeat;
     background-size: 100% 100%, cover;
     background-position: center, center 20px;
     z-index: 0;

@@ -12,19 +12,19 @@ const WhyTop = () => {
   const containerRef = useRef(null);
   const whyCards = [
     {
-      imgUrl: '/images/why/image-left.png',
+      imgUrl: '/images/why/image-left.webp',
       title: 'Bespoke experience of travelling',
       decription:
         'Being expert Luxury Travel Designers, Lux Trips offers bespoke experience of travelling. ',
     },
     {
-      imgUrl: '/images/why/image-center.png',
+      imgUrl: '/images/why/image-center.webp',
       title: 'Collecting precious moments is our utmost goal.',
       decription:
         'Our exclusive network of trusted local partners allows us to carefully curate every detail.',
     },
     {
-      imgUrl: '/images/why/image-right.png',
+      imgUrl: '/images/why/image-right.webp',
       title: 'We personalize each trip',
       decription:
         'Thanks to our extensive knowledge and operation in the industry, we personalize each trip according to the needs and wishes of our clients. ',
@@ -33,17 +33,17 @@ const WhyTop = () => {
 
   const mobileImages = [
     {
-      imageSrc: '/images/why/mobile-image_left.png',
+      imageSrc: '/images/why/mobile-image_left.webp',
       imgWidth: 90,
       imgHeight: 212,
     },
     {
-      imageSrc: '/images/why/mobile-image_center.png',
+      imageSrc: '/images/why/mobile-image_center.webp',
       imgWidth: 150,
       imgHeight: 365,
     },
     {
-      imageSrc: '/images/why/mobile-image_right.png',
+      imageSrc: '/images/why/mobile-image_right.webp',
       imgWidth: 90,
       imgHeight: 212,
     },

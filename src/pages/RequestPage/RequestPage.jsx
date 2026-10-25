@@ -28,7 +28,7 @@ const RequestPage = () => {
   const requestItems = [
     {
       id: 1,
-      imgSrc: '/images/book-cards/cars.png',
+      imgSrc: '/images/book-cards/cars.webp',
       title: 'Book Supercars',
       contentTitle:
         'Lux Trips gives you access to the most prestigious cars on the market.',
@@ -40,7 +40,7 @@ const RequestPage = () => {
     },
     {
       id: 2,
-      imgSrc: '/images/book-cards/hotels.png',
+      imgSrc: '/images/book-cards/hotels.webp',
       title: 'Book Hotels',
       contentTitle:
         'Do you need to organize an event, a leisure getaway or a business trip?',
@@ -51,7 +51,7 @@ const RequestPage = () => {
     },
     {
       id: 3,
-      imgSrc: '/images/book-cards/villas.png',
+      imgSrc: '/images/book-cards/villas.webp',
       title: 'Book Villas/Chalets',
       contentTitle:
         'Do you need to organize an event, a leisure getaway or a business trip?',
@@ -71,7 +71,7 @@ const RequestPage = () => {
     },
     {
       id: 4,
-      imgSrc: '/images/book-cards/yahts.png',
+      imgSrc: '/images/book-cards/yahts.webp',
       title: 'Book Yachts/Boats',
       contentTitle:
         'Our experts will select the best option for your sea adventure',
@@ -92,7 +92,7 @@ const RequestPage = () => {
     },
     {
       id: 5,
-      imgSrc: '/images/book-cards/helicopter.png',
+      imgSrc: '/images/book-cards/helicopter.webp',
       title: 'Book Private Helicopter',
       contentTitle:
         'When planes cannot land close enough to your final destination',
@@ -113,7 +113,7 @@ const RequestPage = () => {
     },
     {
       id: 6,
-      imgSrc: '/images/book-cards/jet.png',
+      imgSrc: '/images/book-cards/jet.webp',
       title: 'Book Private Jet',
       contentTitle: 'Highest level of safety and comfort on the flight',
       descriptions: [

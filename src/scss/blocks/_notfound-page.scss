@@ -1,7 +1,7 @@
 @use '../helpers/' as *;
 
 .notfound {
-  background-image: url(/images/client/client-bg.png);
+  background-image: url(/images/client/client-bg.webp);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -69,7 +69,7 @@
         left: 50%;
         top: 42%;
         transform: translate3d(-50%, -50%, 0);
-        background-image: url(/images/Customize/decor-2.png);
+        background-image: url(/images/Customize/decor-2.webp);
         background-repeat: no-repeat;
         background-position: center;
         z-index: 40;

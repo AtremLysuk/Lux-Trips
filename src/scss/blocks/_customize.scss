@@ -3,7 +3,7 @@
 .customize {
   position: relative;
   padding-top: 70px;
-  background-image: url(/images/trip-bg.png);
+  background-image: url(/images/trip-bg.webp);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left center;
@@ -35,7 +35,7 @@
       top: 14%;
       left: 0;
       aspect-ratio: 459 / 552;
-      background-image: url(/images/Customize/cloud-left.png);
+      background-image: url(/images/Customize/cloud-left.webp);
     }
 
     &--right {
@@ -44,7 +44,7 @@
       top: -190px;
       right: 0;
       aspect-ratio: 598 / 1055;
-      background-image: url(/images/Customize/cloud-right.png);
+      background-image: url(/images/Customize/cloud-right.webp);
 
       @media (width <= 550px) {
         top: -115px;
@@ -130,7 +130,7 @@
       width: 550px;
       height: 100px;
       transform: translate3d(-50%, -50%, 0);
-      background-image: url(/images/Customize/button-decor2.png);
+      background-image: url(/images/Customize/button-decor2.webp);
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -151,7 +151,7 @@
       height: 100px;
       display: none;
       transform: translate3d(-50%, -50%, 0);
-      background-image: url(/images/Customize/decor-2.png);
+      background-image: url(/images/Customize/decor-2.webp);
       background-repeat: no-repeat;
       background-position: center;
 

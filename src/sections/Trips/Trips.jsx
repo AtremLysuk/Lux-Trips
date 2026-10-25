@@ -110,7 +110,7 @@ const Trips = () => {
           <div className="trips__content-bottom content-bottom" ref={bottomRef}>
             <div className="content-bottom__image">
               <img
-                src="/images/trips/image-bottom.png"
+                src="/images/trips/image-bottom.webp"
                 alt="Couple relaxing in a wicker lounge on a terrace at sunset"
                 width={276}
                 height={640}
