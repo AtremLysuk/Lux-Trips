@@ -54,6 +54,11 @@ const Search = () => {
                   type="date"
                   id="date"
                   name="date"
+                  // Пока дата не выбрана, красим маску дд.мм.гггг как плейсхолдер
+                  data-empty="true"
+                  onChange={(e) => {
+                    e.target.dataset.empty = String(!e.target.value);
+                  }}
                 />
               </label>
               <label

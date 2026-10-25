@@ -17,29 +17,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Пишет текущую позицию скролла в CSS-переменную для параллакса hero
-// (оптимизируем на следующем шаге)
-export function LenisCssVar() {
-  const lenis = useLenis();
-
-  useEffect(() => {
-    if (!lenis) return;
-
-    const update = ({ scroll }) => {
-      document.body.style.setProperty('--scrollTop', `${scroll}px`);
-    };
-
-    update({ scroll: lenis.scroll });
-    lenis.on('scroll', update);
-
-    return () => lenis.off('scroll', update);
-  }, [lenis]);
-
-  return null;
-}
-
-// Пересчёт размеров после полной загрузки страницы
-// (разберём в задаче с переходами между страницами)
+ScrollTrigger.config({ ignoreMobileResize: true });
 export function LenisScrollFix() {
   const lenis = useLenis();
 
@@ -86,12 +64,7 @@ function App() {
   }, []);
 
   return (
-    <ReactLenis
-      root
-      ref={lenisRef}
-      options={{ autoRaf: false }}
-    >
-      <LenisCssVar />
+    <ReactLenis root ref={lenisRef} options={{ autoRaf: false }}>
       <LenisScrollFix />
       <ScrollToTop />
       <Routes>

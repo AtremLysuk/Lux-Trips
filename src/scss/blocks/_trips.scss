@@ -4,41 +4,46 @@
   position: relative;
   padding-block: 50px;
 
+  // Фон секции: облака + плавный переход в розовый фон страницы снизу.
+  // Заходит на 180px вверх, под предыдущую секцию, и тянется до самого низа —
+  // без жёсткой границы, где картинка обрывалась
   &::after {
-    position: absolute;
     content: '';
-    left: 0;
-    right: 0;
+    position: absolute;
     top: -180px;
-
-    width: 100%;
-    height: 100%;
-    background-image: url(/images/trips/trips-bg2.png);
-    background-position: top;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(226, 211, 206, 0) calc(100% - 300px),
+        rgba(226, 211, 206, 1) 100%
+      ),
+      url(/images/trips/trips-bg2.png);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%, cover;
+    background-position: center, top;
 
     @media (width <= 700px) {
       top: -140px;
-      background-position: center;
-      background-size: cover;
-
+      background-position: center, center;
     }
 
     @media (width <= 600px) {
       top: -90px;
-
     }
-    @media(width <= 400px) {
-     top: 0;
+
+    @media (width <= 400px) {
+      top: 0;
     }
   }
 
   &__header {
     position: relative;
+    z-index: 50;
     display: flex;
     justify-content: center;
-    z-index: 50;
 
     @media (width <= 600px) {
       flex-direction: column;
@@ -52,15 +57,16 @@
     margin-right: 50px;
 
     @media (width <= 600px) {
-      text-align: center;
       margin-inline: auto;
       margin-bottom: 23px;
+      text-align: center;
     }
   }
 
   &__header-text {
     margin-right: auto;
     margin-left: 10px;
+
     p {
       max-width: 254px;
       font-size: 16px;
@@ -69,91 +75,91 @@
 
       @media (width <= 600px) {
         max-width: 100%;
-        text-align: center;
         margin-inline: auto;
+        text-align: center;
       }
     }
   }
+
   &__content {
     display: grid;
   }
 }
+
 .content-center {
   position: relative;
-  padding-top: 432px;
+  z-index: 50;
   margin-bottom: fluid(58, 43);
+  padding-top: 432px;
   display: flex;
   justify-content: center;
   gap: 50px;
-  z-index: 50;
 
   @media (width <= 600px) {
-    text-align: center;
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    text-align: center;
   }
 
-  &::before {
+  // Декоративные картинки по бокам — отдельные элементы, а не ::before/::after:
+  // так GSAP анимирует их напрямую, без CSSRulePlugin
+  &__image {
     position: absolute;
-
-    content: '';
-
     width: 149px;
-    height: 365px;
-    right: 0;
-    bottom: 0;
-    background-image: url(/images/trips/image-right.png);
     background-repeat: no-repeat;
     background-size: contain;
+    pointer-events: none;
 
-    @media (width <= 900px) {
-      bottom: 15%;
+    &--left {
+      top: 0;
+      left: 5%;
+      height: 348px;
+      background-image: url(/images/trips/image-left.png);
+
+      @media (width <= 600px) {
+        left: 0;
+      }
     }
 
-    @media (width <= 600px) {
-      bottom: 30%;
+    &--right {
+      right: 0;
+      bottom: 0;
+      height: 365px;
+      background-image: url(/images/trips/image-right.png);
+
+      @media (width <= 900px) {
+        bottom: 15%;
+      }
+
+      @media (width <= 600px) {
+        bottom: 30%;
+      }
     }
   }
 
-  &::after {
-    position: absolute;
-
-    content: '';
-
-    width: 149px;
-    height: 348px;
-    left: 5%;
-    top: 0;
-    background-image: url(/images/trips/image-left.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-
-    @media (width <= 600px) {
-      left: 0;
-    }
-  }
-
+  // Крупная фраза-акцент — шрифт заголовков, тот же размер, что у фразы внизу секции
   &__subtitle {
     max-width: 256px;
+    font-family: var(--font-family-title);
     font-weight: 400;
-    font-size: 40px;
+    font-size: fluid(40, 26);
     line-height: 1.012;
     color: var(--color-title);
   }
 
+  // Мелкий текст — основным шрифтом, как текст в шапке секции
   &__text {
     p {
       max-width: 255px;
       margin-left: 10px;
-      font-family: var(--font-family-title);
       font-size: 16px;
       line-height: 1.798;
       color: var(--color-dark);
 
       @media (width <= 600px) {
-        text-align: center;
         max-width: 100%;
+        text-align: center;
       }
     }
   }
@@ -161,11 +167,11 @@
 
 .content-bottom {
   position: relative;
+  z-index: 50;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 50px;
-  z-index: 50;
 
   @media (width <= 600px) {
     display: grid;
@@ -174,10 +180,10 @@
   }
 
   @media (width <= 430px) {
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
 
   &__image {
@@ -196,19 +202,23 @@
       align-items: start;
     }
   }
+
+  // Крупная фраза-акцент — как «Exclusive knowledge…» выше
   &__text {
+    max-width: 352px;
     margin-bottom: 35px;
     margin-left: 70px;
-    max-width: 352px;
+    font-family: var(--font-family-title);
     font-weight: 400;
     font-size: fluid(40, 26);
     line-height: 1.012;
+    color: var(--color-title);
 
-    will-change: opacity transform;
     @media (width <= 600px) {
       margin-left: 5px;
     }
   }
+
   &__link {
     padding: 10px 30px;
     font-weight: 400;
@@ -216,20 +226,26 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     text-align: center;
+    text-decoration: none;
     color: var(--color-title);
-
     border: 0.62px solid var(--color-title);
     border-radius: 61px;
-    transition: border-color 0.3s ease, color 0.3s ease;
-    cursor: pointer;
+    transition:
+      border-color var(--transition-duration) ease,
+      color var(--transition-duration) ease;
 
-    @media (width <= 430px){
+    @media (width <= 430px) {
       margin-inline: auto;
     }
 
     @include hover {
       border-color: var(--color-accent);
       color: var(--color-accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-title);
+      outline-offset: 3px;
     }
   }
 }

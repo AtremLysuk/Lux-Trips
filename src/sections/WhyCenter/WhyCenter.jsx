@@ -12,7 +12,6 @@ const WhyCenter = () => {
   const cloudLeftRef = useRef(null);
   const cloudRightRef = useRef(null);
   const containerRef = useRef(null);
-  const rombItemsRef = useRef(null);
   const centerItems = [{
     dt: 'Luxury trips provided', dd: '985',
   }, {
@@ -20,79 +19,16 @@ const WhyCenter = () => {
   }, {
     dt: 'Happy Customers', dd: '812',
   },];
-  const sliderItems = [{
-    imgUrl: '/images/book-cards/cars.png', title: 'Supercars',
-  }, {
-    imgUrl: '/images/book-cards/hotels.png', title: 'Hotels',
-  }, {
-    imgUrl: '/images/book-cards/villas.png', title: 'Villas',
-  }, {
-    imgUrl: '/images/book-cards/yahts.png', title: 'Yachts',
-  }, {
-    imgUrl: '/images/book-cards/helicopter.png', title: 'Private Helicopter',
-  }, {
-    imgUrl: '/images/book-cards/jet.png', title: 'Private Jet',
-  }, {
-    imgUrl: '/images/book-cards/cars.png', title: 'Supercars',
-  }, {
-    imgUrl: '/images/book-cards/hotels.png', title: 'Hotels',
-  }, {
-    imgUrl: '/images/book-cards/villas.png', title: 'Villas',
-  }, {
-    imgUrl: '/images/book-cards/yahts.png', title: 'Yachts',
-  }, {
-    imgUrl: '/images/book-cards/helicopter.png', title: 'Private Helicopter',
-  }, {
-    imgUrl: '/images/book-cards/jet.png', title: 'Private Jet',
-  }, {
-    imgUrl: '/images/book-cards/cars.png', title: 'Supercars',
-  }, {
-    imgUrl: '/images/book-cards/hotels.png', title: 'Hotels',
-  }, {
-    imgUrl: '/images/book-cards/villas.png', title: 'Villas',
-  }, {
-    imgUrl: '/images/book-cards/yahts.png', title: 'Yachts',
-  }, {
-    imgUrl: '/images/book-cards/helicopter.png', title: 'Private Helicopter',
-  }, {
-    imgUrl: '/images/book-cards/jet.png', title: 'Private Jet',
-  }, {
-    imgUrl: '/images/book-cards/cars.png', title: 'Supercars',
-  }, {
-    imgUrl: '/images/book-cards/hotels.png', title: 'Hotels',
-  }, {
-    imgUrl: '/images/book-cards/villas.png', title: 'Villas',
-  }, {
-    imgUrl: '/images/book-cards/yahts.png', title: 'Yachts',
-  }, {
-    imgUrl: '/images/book-cards/helicopter.png', title: 'Private Helicopter',
-  }, {
-    imgUrl: '/images/book-cards/jet.png', title: 'Private Jet',
-  }, {
-    imgUrl: '/images/book-cards/cars.png', title: 'Supercars',
-  }, {
-    imgUrl: '/images/book-cards/hotels.png', title: 'Hotels',
-  }, {
-    imgUrl: '/images/book-cards/villas.png', title: 'Villas',
-  }, {
-    imgUrl: '/images/book-cards/yahts.png', title: 'Yachts',
-  }, {
-    imgUrl: '/images/book-cards/helicopter.png', title: 'Private Helicopter',
-  }, {
-    imgUrl: '/images/book-cards/jet.png', title: 'Private Jet',
-  }, {
-    imgUrl: '/images/book-cards/cars.png', title: 'Supercars',
-  }, {
-    imgUrl: '/images/book-cards/hotels.png', title: 'Hotels',
-  }, {
-    imgUrl: '/images/book-cards/villas.png', title: 'Villas',
-  }, {
-    imgUrl: '/images/book-cards/yahts.png', title: 'Yachts',
-  }, {
-    imgUrl: '/images/book-cards/helicopter.png', title: 'Private Helicopter',
-  }, {
-    imgUrl: '/images/book-cards/jet.png', title: 'Private Jet',
-  },];
+  // Карточки слайдера. Повторяем набор 6 раз, чтобы лента была длинной
+  const baseSlides = [
+    { imgUrl: '/images/book-cards/cars.png', title: 'Supercars' },
+    { imgUrl: '/images/book-cards/hotels.png', title: 'Hotels' },
+    { imgUrl: '/images/book-cards/villas.png', title: 'Villas' },
+    { imgUrl: '/images/book-cards/yahts.png', title: 'Yachts' },
+    { imgUrl: '/images/book-cards/helicopter.png', title: 'Private Helicopter' },
+    { imgUrl: '/images/book-cards/jet.png', title: 'Private Jet' },
+  ];
+  const sliderItems = Array.from({ length: 6 }, () => baseSlides).flat();
   useGSAP(() => {
     const rombItems = gsap.utils.toArray('.experiencee-center__item');
     rombItems.forEach((item) => {
@@ -125,8 +61,6 @@ const WhyCenter = () => {
       <img
         src="/images/why/cloud-left.png"
         alt=""
-        aria-hidden={true}
-        role='presentation'
       />
     </div>
     <div
@@ -136,8 +70,6 @@ const WhyCenter = () => {
       <img
         src="/images/why/cloud-center.png"
         alt=""
-        role='presentation'
-        aria-hidden="true"
       />
     </div>
     <div className="experiencee__container container">
@@ -147,7 +79,7 @@ const WhyCenter = () => {
             className="experiencee-top__title h3"
             id='experiencee-title'
           >
-            Creating a unique experiencee for each client
+            Creating a unique experience for each client
           </h3>
           <div className="experiencee-top__text">
             <p>
@@ -162,12 +94,10 @@ const WhyCenter = () => {
             {centerItems.map((el) => (<dl
               className="experiencee-center__item"
               key={el.dt}
-              ref={rombItemsRef}
             >
               <dt>{el.dt}</dt>
               <dd>{el.dd}</dd>
               <svg
-
                 width="192"
                 height="366"
                 viewBox="0 0 192 366"
@@ -198,14 +128,12 @@ const WhyCenter = () => {
                 alt=""
                 width={275}
                 height={640}
-                aria-hidden={true}
-                role='presentation'
               />
             </div>
             <div className="content__center-text">
               <p>
                 We provide our clients with access to exclusive events and
-                experiencees, such as glamping or fishing on private islands,
+                experiences, such as glamping or fishing on private islands,
                 private vineyard wine-tasting and tours, or cruising a sea
                 with a flock of dolphins, to name just a few.
               </p>
@@ -317,8 +245,9 @@ const WhyCenter = () => {
             },
           }}
         >
-          {sliderItems.map((el) => (<SwiperSlide
-            key={el.imgUrl}
+          {sliderItems.map((el, index) => (<SwiperSlide
+            // Картинки повторяются, поэтому одного imgUrl для ключа мало
+            key={`${el.title}-${index}`}
             role="group"
             aria-roledescription="slide"
           >

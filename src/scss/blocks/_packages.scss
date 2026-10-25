@@ -1,47 +1,32 @@
 @use '../helpers/' as *;
 
 .packages {
-  position: relative;
-
   --margin-top: 120px;
+
+  position: relative;
   padding-bottom: fluid(158, 110);
   background-image: url(/images/book/luxury-bg.png);
   background-position: center;
   background-size: cover;
 
+  // Декоративный фон секции. Картинка непрозрачная и закрывает
+  // фон .packages целиком, поэтому градиент перехода кладём сюда же
   &::after {
     position: absolute;
-
     content: '';
-    width: 100%;
-    height: 100%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url(/images/book-bg.png) no-repeat;
-    background-size: cover;
-    background-position: center 20px;
+    inset: 0;
+    // Два слоя: сверху градиент, под ним картинка.
+    // Верх секции выходит из того же пудрового, в который ушёл низ Experience
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(226, 211, 206, 1) 0,
+        rgba(226, 211, 206, 0) 250px
+      ),
+      url(/images/book-bg.png) no-repeat;
+    background-size: 100% 100%, cover;
+    background-position: center, center 20px;
     z-index: 0;
-  }
-
-  &::before {
-    position: absolute;
-
-    content: '';
-    width: 100%;
-    height: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    background: url(/images/book-bg.png) no-repeat;
-    background-size: cover;
-    background-position: center 0px;
-    z-index: 0;
-  }
-
-  // .packages__container
-
-  &__container {
   }
 
   &-next {
@@ -65,30 +50,12 @@
     }
   }
 
-  // .packages__inner
-
   &__inner {
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    // grid-template-columns: repeat(3, minmax(250px, 350px));
     column-gap: fluid(30, 10);
     z-index: 100;
-  }
-
-  // .packages__inner-left
-
-  &__inner-left {
-  }
-
-  // .packages__inner-center
-
-  &__inner-center {
-  }
-
-  // .packages__inner-right
-
-  &__inner-right {
   }
 }
 
@@ -96,8 +63,6 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-
-
 
   &__item {
     &:first-child {
@@ -114,14 +79,11 @@
     margin-top: var(--margin-top);
     margin-bottom: fluid(30, 10);
     max-width: 214px;
-    
 
     @media (width <= 1100px) {
       margin-block: 0;
     }
   }
-
-  // .inner-left__item-link
 
   &__item-link {
     padding: 9px 36px;
@@ -133,15 +95,15 @@
     text-transform: uppercase;
     text-align: center;
     color: var(--color-title);
-    transition: border-color 0.3s ease color 0.3s ease;
+    transition:
+      border-color 0.3s ease,
+      color 0.3s ease;
 
     @include hover {
       color: var(--color-accent);
       border-color: var(--color-accent);
     }
   }
-
-  // .inner-left__item-card
 
   &__item-card {
     justify-self: flex-end;
@@ -151,7 +113,6 @@
 }
 
 .inner-center {
-  // .inner-center__items
   &__items {
     margin-top: var(--margin-top);
     display: flex;
@@ -159,9 +120,8 @@
     gap: fluid(30, 10);
   }
 }
-.inner-right {
-  // .inner-right__items
 
+.inner-right {
   &__items {
     margin-bottom: var(--margin-top);
     display: flex;
@@ -172,9 +132,6 @@
 
 .packages-slider {
   position: relative;
-
-  &__wrapper {
-  }
 
   &__header {
     position: relative;

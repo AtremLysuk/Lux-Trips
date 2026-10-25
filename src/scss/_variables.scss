@@ -10,6 +10,9 @@
   --color-text-rose:  #79655e;
   --color-accent: red;
 
+  // Цвет подсказок в пустых полях всех форм
+  --color-placeholder: rgba(0, 0, 0, 0.3);
+
   --border-white:  1px solid var(--color-white);
   --border-rose: 1.61px solid var(--color-bg--rose);
   --border-dark : 1.61px solid var(--color-dark);

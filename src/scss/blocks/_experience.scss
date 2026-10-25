@@ -4,11 +4,19 @@
   position: relative;
   padding-top: fluid(120, 100);
   padding-bottom: fluid(120, 100);
-  background-image: url(/images/book/pacakges-bg.png);
+  // Два слоя: сверху градиент, под ним картинка.
+  // Низ секции плавно уходит в пудровый — на этом же цвете начинается Packages
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(226, 211, 206, 0) calc(100% - 200px),
+      rgba(226, 211, 206, 1) 100%
+    ),
+    url(/images/book/pacakges-bg.png);
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
-  overflow-x: hidden;
+  // Для каждого слоя своё значение, через запятую: градиент на всю секцию, картинка cover
+  background-size: 100% 100%, cover;
+  background-position: center, center top;
 
 
   &__slider {

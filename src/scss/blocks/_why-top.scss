@@ -1,11 +1,18 @@
 @use '../helpers' as *;
 
 .why {
-
-  background-image: url(/images/why/mountains.png);
+  // Два слоя: сверху градиент, под ним картинка.
+  // Низ секции плавно уходит в пудровый — на этом же цвете начинается следующая секция
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(226, 211, 206, 0) calc(100% - 250px),
+      rgba(226, 211, 206, 1) 100%
+    ),
+    url(/images/why/mountains.png);
   background-repeat: no-repeat;
-  background-position: center top;
-  background-size: cover;
+  background-size: 100% 100%, cover;
+  background-position: center, center top;
 
   &__title {
     max-height: 790px;
