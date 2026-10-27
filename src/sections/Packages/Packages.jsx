@@ -17,27 +17,27 @@ const Packages = () => {
 
   const packagesItems = [{
     id: 1,
-    imgUrl: '/images/book/1.png',
+    imgUrl: '/images/book/1.webp',
     title: 'New destinations for 2022',
     palacesCount: 47,
   }, {
     id: 2,
-    imgUrl: '/images/book/2.png',
+    imgUrl: '/images/book/2.webp',
     title: 'Best Winter Destinations',
     palacesCount: 34,
   }, {
     id: 3,
-    imgUrl: '/images/book/3.png',
+    imgUrl: '/images/book/3.webp',
     title: 'Your health is matter',
     palacesCount: 29,
   }, {
     id: 4,
-    imgUrl: '/images/book/4.png',
+    imgUrl: '/images/book/4.webp',
     title: "The world's most extraordinary places",
     palacesCount: 29,
   }, {
     id: 5,
-    imgUrl: '/images/book/5.png',
+    imgUrl: '/images/book/5.webp',
     title: 'Experiences Away From Crowd',
     palacesCount: 168,
   },];

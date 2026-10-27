@@ -1,7 +1,7 @@
 @use '../helpers/' as *;
 
 .luxury {
-  background-image: url(/images/client/client-bg.png);
+  background-image: url(/images/client/client-bg.webp);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: contain;
@@ -21,7 +21,6 @@
     opacity: 0;
     transform: translateY(50px);
     visibility: hidden;
-    will-change: transform, opacity;
 
     &-sceleton {
       min-height: 550px;

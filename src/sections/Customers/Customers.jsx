@@ -19,28 +19,28 @@ const Customers = () => {
   const customersCards = [
     {
       id: 1,
-      imgUrl: '/images/customers/author-1.png',
+      imgUrl: '/images/customers/author-1.webp',
       text: '“Well organized trip, All arranged well by Arooz. Special thanks to Aijaz Bhai for the service and support given to us, all explained well and take us to all places as per our wish. It was a wonderful experience .... Thank you team”',
       author: 'Eduard Hand',
       coauthor: 'Müller-Egerer',
     },
     {
       id: 2,
-      imgUrl: '/images/customers/author-2.png',
+      imgUrl: '/images/customers/author-2.webp',
       text: '“We want to visit Manali from long time. Abhishek from ideal tour give us the best quote for Manali tour. He was very supportive and approachable at any time. He made our trip hassle-free. Thanks for your great help Abhishek...Ideal Tour..!!!”',
       author: 'Marie Kähler',
       coauthor: 'Lekkerland',
     },
     {
       id: 3,
-      imgUrl: '/images/customers/author-1.png',
+      imgUrl: '/images/customers/author-1.webp',
       text: '“Well organized trip, All arranged well by Arooz. Special thanks to Aijaz Bhai for the service and support given to us, all explained well and take us to all places as per our wish. It was a wonderful experience .... Thank you team”',
       author: 'Eduard Hand',
       coauthor: 'Müller-Egerer',
     },
     {
       id: 4,
-      imgUrl: '/images/customers/author-2.png',
+      imgUrl: '/images/customers/author-2.webp',
       text: '“We want to visit Manali from long time. Abhishek from ideal tour give us the best quote for Manali tour. He was very supportive and approachable at any time. He made our trip hassle-free. Thanks for your great help Abhishek...Ideal Tour..!!!”',
       author: 'Marie Kähler',
       coauthor: 'Lekkerland',

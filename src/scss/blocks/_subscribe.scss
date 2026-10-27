@@ -1,25 +1,29 @@
-@use '../helpers/' as * ;
-
+@use '../helpers/' as *;
 
 .subscribe {
+  // Цвет ошибки — тот же красный, что в форме заявки.
+  // На фото читается за счёт своей подложки, а не цвета текста
+  --color-error: #d93025;
+
   padding-bottom: fluid(112, 80);
 
   @media (width <= 500px) {
     padding-bottom: 30px;
   }
 
+  // Вариант для страницы Why: блок заезжает на предыдущую секцию
   &--why {
     margin-bottom: -250px;
     transform: translateY(-200px);
   }
 
   &__inner {
-    background-image: url(/images/subscribe-bg2.png);
+    padding-block: 94px;
+    padding-inline: fluid(185, 30);
+    background-image: url(/images/subscribe-bg2.webp);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    padding-block: 94px;
-    padding-inline: fluid(185, 30);
 
     @media (width <= 550px) {
       padding-top: 100px;
@@ -31,12 +35,12 @@
     margin-bottom: 30px;
     max-width: 370px;
     font-weight: 400;
-    color: var(--color-white);
     line-height: 0.96;
+    color: var(--color-white);
 
     @media (width <= 550px) {
-      text-align: center;
       margin-inline: auto;
+      text-align: center;
     }
   }
 
@@ -45,12 +49,10 @@
 
     @media (width <= 550px) {
       margin-bottom: 40px;
+      margin-inline: auto;
+      text-align: center;
     }
 
-    @media (width <= 550px) {
-      text-align: center;
-      margin-inline: auto;
-    }
     p {
       font-weight: 400;
       font-size: 16px;
@@ -59,12 +61,28 @@
     }
   }
 
+  // Форма и плашка успеха — в одной ячейке, друг на друге.
+  // Высота блока = высоте формы и не меняется при смене
+  &__body {
+    display: grid;
+  }
+
   &__form {
+    grid-area: 1 / 1;
     width: 100%;
     padding-bottom: fluid(134, 80);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    // После подписки: форма гаснет, но остаётся на месте и держит высоту блока
+    &.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
 
     @media (width <= 767.98px) {
       flex-direction: column;
@@ -73,36 +91,75 @@
     }
   }
 
+  // Обёртка поля: размер в строке формы и точка отсчёта для текста ошибки
+  &__field {
+    position: relative;
+    flex-basis: 67%;
+
+    @media (width <= 767.98px) {
+      width: 100%;
+      flex-basis: 100%;
+    }
+  }
+
+  // Полупрозрачное «стеклянное» поле поверх фотографии
   &__form-input {
     width: 100%;
     height: 55px;
-    flex-basis: 67%;
     padding-left: 30px;
+    font-size: 16px;
+    color: var(--color-white);
     border: 1px solid var(--color-white);
     border-radius: 95px;
-    backdrop-filter: blur(20px);
     background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(20px);
 
     @media (width <= 767.98px) {
-      height: 55px;
       padding-block: 13px;
-      flex-basis: 100%;
     }
 
     &::placeholder {
       font-weight: 400;
       font-size: 16px;
       line-height: 1.798;
-      color: var(--color-title);
+      // Белый, но приглушённый: светлее введённого текста и читается на фото
+      color: rgba(255, 255, 255, 0.7);
     }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-white);
+      outline-offset: 3px;
+    }
+
+    // Ошибка: красная рамка визуально в 2px.
+    // box-shadow вместо толстого border — размер поля не меняется, вёрстка не дёргается
+    &[aria-invalid='true'] {
+      border-color: var(--color-error);
+      box-shadow: 0 0 0 1px var(--color-error);
+    }
+  }
+
+  // Текст ошибки под полем — на своей красной подложке,
+  // чтобы читался на любом участке фотографии (вода, песок, деревья).
+  // Абсолютно — чтобы не сдвигать вёрстку
+  &__form-error {
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    margin-top: 8px;
+    padding: 4px 14px;
+    font-size: 14px;
+    line-height: 1.3;
+    color: var(--color-white);
+    background-color: var(--color-error);
+    border-radius: 74px;
+    // Подложка по размеру текста, без переноса на вторую строку
+    white-space: nowrap;
   }
 
   &__form-button {
     height: 55px;
     width: 330px;
-    border-radius: 74px;
-    border: none;
-    background-color: var(--color-white);
     font-family: var(--font-family-title);
     font-weight: 400;
     font-size: 24px;
@@ -110,11 +167,68 @@
     text-transform: uppercase;
     text-align: center;
     color: var(--color-title);
+    background-color: var(--color-white);
+    border: none;
+    border-radius: 74px;
+    // Кнопка слегка наезжает на поле справа
     transform: translate3d(-5%, 0, 0);
+    cursor: pointer;
+    transition: color var(--transition-duration) ease;
+
+    // Как у остальных кнопок сайта: текст краснеет при наведении
+    @include hover {
+      color: var(--color-accent);
+    }
+
+    // Видимая рамка при переходе на кнопку с клавиатуры (Tab)
+    &:focus-visible {
+      outline: 2px solid var(--color-white);
+      outline-offset: 3px;
+    }
 
     @media (width <= 767.98px) {
       width: 100%;
-      transform: translate3d(0, 0, 0);
+      transform: none;
     }
+  }
+
+  // Сообщение после успешной подписки — на месте формы.
+  // Тёмный текст на светлом «стекле»: читается на любом участке фотографии
+  &__success {
+    // В той же ячейке, что и форма, прижата к её верху
+    grid-area: 1 / 1;
+    align-self: start;
+    max-width: 540px;
+    padding: 20px 30px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-title);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radii-10);
+    animation: subscribe-success-in 0.4s ease-out;
+
+    strong {
+      font-weight: 600;
+      // Адрес не вылезет за плашку, даже если он очень длинный
+      overflow-wrap: anywhere;
+    }
+
+    @media (width <= 550px) {
+      margin-inline: auto;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes subscribe-success-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
