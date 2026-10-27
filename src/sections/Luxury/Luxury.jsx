@@ -16,8 +16,6 @@ const PAGE_SIZE = 6;
 const Luxury = () => {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const listRef = useRef(null);
-  // Сколько карточек уже показано анимацией — чтобы анимировать только новые
-  const animatedCountRef = useRef(0);
 
   const packagesItems = useItemsStore((state) => state.packagesItems);
   const isLoading = useItemsStore((state) => state.isLoading);
@@ -32,19 +30,19 @@ const Luxury = () => {
   const visibleItems = packagesItems.slice(0, visibleCount);
   const hasMore = visibleCount < packagesItems.length;
 
-  // Карточки скрыты в CSS (opacity: 0, сдвиг вниз). Здесь проявляем только те,
-  // что добавились с последнего раза: старые не трогаем — они не мигают и не прыгают.
-  // useGSAP срабатывает до отрисовки кадра, поэтому новые карточки
-  // не успевают «мелькнуть» в неправильном положении
+  // Карточки скрыты в CSS (opacity: 0, сдвиг вниз). Здесь проявляем только новые —
+  // те, что ещё без метки data-shown. Метка живёт на самом DOM-элементе:
+  // если список перерисуется заново (например, после повторной загрузки данных),
+  // у новых элементов метки нет, и они тоже проявятся.
+  // useGSAP срабатывает до отрисовки кадра, поэтому карточки не «мелькают»
   useGSAP(
     () => {
       if (isLoading || visibleItems.length === 0) return;
 
-      const items = gsap.utils.toArray('.luxury__item');
-      const newItems = items.slice(animatedCountRef.current);
+      const newItems = gsap.utils.toArray('.luxury__item:not([data-shown])');
       if (newItems.length === 0) return;
 
-      animatedCountRef.current = items.length;
+      newItems.forEach((item) => item.setAttribute('data-shown', ''));
 
       gsap.to(newItems, {
         autoAlpha: 1,
@@ -58,9 +56,10 @@ const Luxury = () => {
       // Lenis замечает новую высоту сам
       ScrollTrigger.refresh();
 
-      // При уходе со страницы счётчик сбрасываем: при возвращении карточки снова проявятся
+      // Когда useGSAP откатывает анимации (уход со страницы), снимаем метки,
+      // иначе при повторном запуске карточки остались бы скрытыми
       return () => {
-        animatedCountRef.current = 0;
+        newItems.forEach((item) => item.removeAttribute('data-shown'));
       };
     },
     { scope: listRef, dependencies: [isLoading, visibleItems.length] },
