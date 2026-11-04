@@ -30,10 +30,6 @@ const MySlider = (props) => {
       spaceBetween={spaceBetween}
       slidesPerView={slidesPerView}
       slidesPerGroup={slidesPerGroup}
-      watchSlidesProgress={true}
-      watchSlidesVisibility={true}
-      observer={true}
-      observeParents={true}
       roundLengths={true}
       resizeObserver={true}
       loop={false}
