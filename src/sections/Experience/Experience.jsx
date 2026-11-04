@@ -1,167 +1,173 @@
 import '@/scss/blocks/_experience.scss';
-import MySlider from '@/components/MySlider/MySlider';
-import { motion } from 'motion/react';
-import { useState, useRef } from 'react';
+
+import { useRef, useState } from 'react';
+import { LazyMotion, m } from 'motion/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import MySlider from '@/components/MySlider/MySlider';
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+// Движок анимаций Motion грузится отдельным файлом, когда понадобится,
+// а не в основном бандле до первой отрисовки страницы
+const loadMotionFeatures = () => import('@/utils/motionFeatures').then((mod) => mod.default);
+
+const REGIONS = [
+  'World',
+  'Africa',
+  'Asia',
+  'North America',
+  'South America',
+  'Antarctica',
+  'Australia',
+];
+
+const PRODUCT_ITEMS = [
+  {
+    id: 1,
+    imgUrl: '/images/slides/1.webp',
+    location: 'Austria',
+    title: 'Winter Park Ski Holiday',
+    rating: '4.0',
+    price: 1490,
+    region: 'Antarctica',
+  },
+  {
+    id: 2,
+    imgUrl: '/images/slides/2.webp',
+    location: 'Peru',
+    title: 'Machu Picchu',
+    rating: '5.0',
+    price: 2300,
+    region: 'North America',
+  },
+  {
+    id: 3,
+    imgUrl: '/images/slides/3.webp',
+    location: 'Croatia',
+    title: 'Hvar',
+    rating: '4.0',
+    price: 4500,
+    region: 'Europe',
+  },
+  {
+    id: 4,
+    imgUrl: '/images/slides/4.webp',
+    location: 'Jordan',
+    title: 'Wadi Musa',
+    rating: '4.0',
+    price: 4500,
+    region: 'Asia',
+  },
+  {
+    id: 5,
+    imgUrl: '/images/slides/5.webp',
+    location: 'Europe',
+    title: 'Winter Park Ski Holiday',
+    rating: '5.0',
+    price: 4900,
+    region: 'Antarctica',
+  },
+  {
+    id: 6,
+    imgUrl: '/images/slides/6.webp',
+    location: 'Jordan',
+    title: 'Wadi Musa',
+    rating: '4.0',
+    price: 4500,
+    region: 'Asia',
+  },
+  {
+    id: 7,
+    imgUrl: '/images/slides/7.webp',
+    location: 'Jordan',
+    title: 'Wadi Musa',
+    rating: '4.0',
+    price: 4500,
+    region: 'Asia',
+  },
+  {
+    id: 8,
+    imgUrl: '/images/slides/8.webp',
+    location: 'Jordan',
+    title: 'Wadi Musa',
+    rating: '4.0',
+    price: 4500,
+    region: 'Asia',
+  },
+  {
+    id: 9,
+    imgUrl: '/images/slides/9.webp',
+    location: 'Jordan',
+    title: 'Wadi Musa',
+    rating: '5.0',
+    price: 4500,
+    region: 'Asia',
+  },
+  {
+    id: 10,
+    imgUrl: '/images/slides/10.webp',
+    location: 'Jordan',
+    title: 'Wadi Musa',
+    rating: '4.0',
+    price: 4500,
+    region: 'Asia',
+  },
+  {
+    id: 11,
+    imgUrl: '/images/slides/11.webp',
+    location: 'Jordan',
+    title: 'Wadi Musa',
+    rating: '4.0',
+    price: 4500,
+    region: 'Asia',
+  },
+  {
+    id: 12,
+    imgUrl: '/images/slides/12.webp',
+    location: 'Jordan',
+    title: 'Wadi Musa',
+    rating: '4.0',
+    price: 4500,
+    region: 'Asia',
+  },
+];
+
 const Experience = () => {
   const [activeRegion, setActiveRegion] = useState('World');
 
-  const containerRef = useRef(null)
-  const titleRef = useRef(null)
+  const containerRef = useRef(null);
+  const titleRef = useRef(null);
 
-  const regions = [
-    'World',
-    'Africa',
-    'Asia',
-    'North America',
-    'South America',
-    'Antarctica',
-    'Australia',
-  ];
-
-  const productItems = [
-    {
-      id: 1,
-      imgUrl: '/images/slides/1.webp',
-      location: 'Austria       ',
-      title: 'Winter Park Ski Holiday',
-      rating: '4.0',
-      price: 1490,
-      region: 'Antarctica',
+  // Заголовок проявляется из размытия, когда доходит до 70% экрана
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, filter: 'blur(10px)' },
+        {
+          opacity: 1,
+          filter: 'blur(0px)',
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: 'top 70%',
+          },
+        },
+      );
     },
-    {
-      id: 2,
-      imgUrl: '/images/slides/2.webp',
-      location: 'Peru',
-      title: 'Machu Picchu',
-      rating: '5.0',
-      price: 2300,
-      region: 'North America',
-    },
-    {
-      id: 3,
-      imgUrl: '/images/slides/3.webp',
-      location: 'Croatia ',
-      title: 'Hvar',
-      rating: '4.0',
-      price: 4500,
-      region: 'Europe',
-    },
-    {
-      id: 4,
-      imgUrl: '/images/slides/4.webp',
-      location: 'Jordan',
-      title: 'Wadi Musa',
-      rating: '4.0',
-      price: 4500,
-      region: 'Asia',
-    },
-    {
-      id: 5,
-      imgUrl: '/images/slides/5.webp',
-      location: 'Europe',
-      title: 'Winter Park Ski Holiday',
-      rating: '5.0',
-      price: 4900,
-      region: 'Antarctica',
-    },
-    {
-      id: 6,
-      imgUrl: '/images/slides/6.webp',
-      location: 'Jordan',
-      title: 'Wadi Musa',
-      rating: '4.0',
-      price: 4500,
-      region: 'Asia',
-    },
-
-    {
-      id: 7,
-      imgUrl: '/images/slides/7.webp',
-      location: 'Jordan',
-      title: 'Wadi Musa',
-      rating: '4.0',
-      price: 4500,
-      region: 'Asia',
-    },
-
-    {
-      id: 8,
-      imgUrl: '/images/slides/8.webp',
-      location: 'Jordan',
-      title: 'Wadi Musa',
-      rating: '4.0',
-      price: 4500,
-      region: 'Asia',
-    },
-    {
-      id: 9,
-      imgUrl: '/images/slides/9.webp',
-      location: 'Jordan',
-      title: 'Wadi Musa',
-      rating: '5.0',
-      price: 4500,
-      region: 'Asia',
-    },
-    {
-      id: 10,
-      imgUrl: '/images/slides/10.webp',
-      location: 'Jordan',
-      title: 'Wadi Musa',
-      rating: '4.0',
-      price: 4500,
-      region: 'Asia',
-    },
-    {
-      id: 11,
-      imgUrl: '/images/slides/11.webp',
-      location: 'Jordan',
-      title: 'Wadi Musa',
-      rating: '4.0',
-      price: 4500,
-      region: 'Asia',
-    },
-    {
-      id: 12,
-      imgUrl: '/images/slides/12.webp',
-      location: 'Jordan',
-      title: 'Wadi Musa',
-      rating: '4.0',
-      price: 4500,
-      region: 'Asia',
-    },
-  ];
-
-  useGSAP(() => {
-    gsap.fromTo(titleRef.current, 
-      {
-        opacity: 0,
-        filter: "blur(10px)",
-      },
-      {
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.5,
-        ease: 'power3.out',
-
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: 'top 70%'
-        }
-      },
-      
-    )
-  }, {scope: containerRef})
+    { scope: containerRef },
+  );
 
   return (
     <section className="experience" aria-labelledby="experience-title">
       <div className="experience__container container">
         <div className="experience__title-wrapper" ref={containerRef}>
-          <h2 className="experience__title h2" id="experience-title" ref={titleRef}>Top Rated Experiences</h2>
+          <h2 className="experience__title h2" id="experience-title" ref={titleRef}>
+            Top Rated Experiences
+          </h2>
           <svg
             aria-hidden="true"
             focusable="false"
@@ -182,41 +188,44 @@ const Experience = () => {
           </svg>
         </div>
 
-        <ul className="experience-header__items">
-          {regions.map((el) => (
-            <li className="experience-header__item" key={el}>
-              <motion.button
-                type="button"
-                // Переключатель: скринридер прочитает «нажата / не нажата»
-                aria-pressed={activeRegion === el}
-                className={
-                  activeRegion === el
-                    ? 'experience-header__btn active'
-                    : 'experience-header__btn'
-                }
-                initial={{ color: '#79655e' }}
-                animate={{
-                  color: activeRegion === el ? '#0c0b10' : '#79655e',
-                }}
-                onClick={() => {
-                  setActiveRegion(el);
-                }}
-              >
-                {el}
-                {activeRegion === el && <ActiveLine />}
-              </motion.button>
-            </li>
-          ))}
-        </ul>
-        <MySlider items={productItems} className="experience" />
+        {/* strict: ошибка, если внутри остался обычный motion. вместо m. —
+            он бы снова затянул всю библиотеку в основной бандл */}
+        <LazyMotion features={loadMotionFeatures} strict>
+          <ul className="experience-header__items">
+            {REGIONS.map((el) => (
+              <li className="experience-header__item" key={el}>
+                <m.button
+                  type="button"
+                  // Переключатель: скринридер прочитает «нажата / не нажата»
+                  aria-pressed={activeRegion === el}
+                  className={
+                    activeRegion === el ? 'experience-header__btn active' : 'experience-header__btn'
+                  }
+                  initial={{ color: '#79655e' }}
+                  animate={{
+                    color: activeRegion === el ? '#0c0b10' : '#79655e',
+                  }}
+                  onClick={() => setActiveRegion(el)}
+                >
+                  {el}
+                  {activeRegion === el && <ActiveLine />}
+                </m.button>
+              </li>
+            ))}
+          </ul>
+        </LazyMotion>
+
+        <MySlider items={PRODUCT_ITEMS} className="experience" />
       </div>
     </section>
   );
 };
 
+// Подчёркивание активного региона. layoutId — Motion плавно переносит его
+// от старой кнопки к новой при смене региона
 function ActiveLine() {
   return (
-    <motion.div
+    <m.div
       className="experience__active-line"
       layoutId="activeLine"
       style={{
@@ -225,9 +234,9 @@ function ActiveLine() {
         position: 'absolute',
         left: 'calc(50% - 9px)',
         bottom: '-15px',
-        background: 'url(/images/slides/icon-active.svg)no-repeat center/cover',
+        background: 'url(/images/slides/icon-active.svg) no-repeat center/cover',
       }}
-    ></motion.div>
+    />
   );
 }
 

@@ -1,10 +1,22 @@
-// @font-face {
-//   font-family: 'Manrope';
-//   src: url('Manrope-Medium.woff2') format('woff2');
-//   font-weight: 500;
-//   font-style: normal;
-//   font-display: swap;
-// }
+// Шрифты лежат в public/fonts — пути не меняются при сборке,
+// поэтому их можно заранее загрузить через <link rel="preload"> в index.html.
+// font-display: swap — пока шрифт грузится, текст виден запасным шрифтом
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/Manrope-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/Manrope-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Manrope';
   src: url('/fonts/Manrope-Medium.woff2') format('woff2');
@@ -15,31 +27,15 @@
 
 @font-face {
   font-family: 'Manrope';
-  src: url('../assets/fonts/Manrope-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Manrope';
-  src: url('../assets/fonts/Manrope-SemiBold.woff2') format('woff2');
+  src: url('/fonts/Manrope-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Manrope';
-  src: url('../assets/fonts/Manrope-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'Forum';
-  src: url('../assets/fonts/Forum.woff2') format('woff2');
+  src: url('/fonts/Forum.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

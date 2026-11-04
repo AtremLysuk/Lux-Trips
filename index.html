@@ -9,6 +9,13 @@
       content="Lux Trips — luxury travel agency. Tailor-made itineraries, exclusive tours, private yachts and jets, villas and world-class hotels."
     />
 
+    <!-- Шрифты первого экрана: начинаем качать сразу, параллельно с JS,
+         чтобы заголовок не перерисовывался запасным шрифтом.
+         crossorigin обязателен даже для своего сайта — шрифты всегда грузятся в режиме CORS,
+         без него preload не совпадёт с настоящим запросом и шрифт скачается дважды -->
+    <link rel="preload" href="/fonts/Forum.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Manrope-Regular.woff2" as="font" type="font/woff2" crossorigin />
+
     <!-- Слои hero: начинаем качать сразу, не дожидаясь JS и React -->
     <link rel="preload" as="image" href="/bgtop/bg_top-3.webp" type="image/webp" fetchpriority="high" />
     <link rel="preload" as="image" href="/bgtop/bg_top-2.webp" type="image/webp" fetchpriority="high" />
