@@ -182,11 +182,13 @@ const Experience = () => {
           </svg>
         </div>
 
-        <ul className="experience-header__items" role="tablist">
+        <ul className="experience-header__items">
           {regions.map((el) => (
             <li className="experience-header__item" key={el}>
               <motion.button
-                role="tab"
+                type="button"
+                // Переключатель: скринридер прочитает «нажата / не нажата»
+                aria-pressed={activeRegion === el}
                 className={
                   activeRegion === el
                     ? 'experience-header__btn active'

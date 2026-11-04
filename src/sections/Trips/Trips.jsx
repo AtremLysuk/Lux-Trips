@@ -32,11 +32,13 @@ const Trips = () => {
   useGSAP(
     (context, contextSafe) => {
       // SplitText делит текст на строки по реальной ширине — нужны загруженные шрифты.
+      // aria: 'none' — не вешать aria-label на <p> (там он запрещён); при разбивке
+      // по строкам слова целые, скринридер и так прочитает текст нормально.
       // contextSafe: анимации создаются позже, в .then(), и без него useGSAP
       // не удалил бы их (и не вернул текст из строк обратно) при уходе со страницы
       const animate = contextSafe(() => {
         // Шапка: заголовок, строки текста, левая картинка
-        const headerLines = new SplitText(headerTextRef.current, { type: 'lines' }).lines;
+        const headerLines = new SplitText(headerTextRef.current, { type: 'lines', aria: 'none' }).lines;
 
         gsap
           .timeline({ scrollTrigger: { trigger: headerRef.current, start: 'top 80%' } })
@@ -45,7 +47,7 @@ const Trips = () => {
           .fromTo(imageLeftRef.current, BLUR_FROM, { ...BLUR_TO, duration: 2 }, '-=1.5');
 
         // Центр: подзаголовок, строки текста, правая картинка
-        const contentLines = new SplitText(contentTextRef.current, { type: 'lines' }).lines;
+        const contentLines = new SplitText(contentTextRef.current, { type: 'lines', aria: 'none' }).lines;
 
         gsap
           .timeline({ scrollTrigger: { trigger: contentRef.current, start: 'top 20%' } })
@@ -54,7 +56,7 @@ const Trips = () => {
           .fromTo(imageRightRef.current, BLUR_FROM, { ...BLUR_TO, duration: 2 }, '-=1');
 
         // Низ: строки по очереди поднимаются и проявляются
-        const bottomLines = new SplitText(bottomTextRef.current, { type: 'lines' }).lines;
+        const bottomLines = new SplitText(bottomTextRef.current, { type: 'lines', aria: 'none' }).lines;
 
         gsap.fromTo(
           bottomLines,

@@ -1,24 +1,29 @@
-import { useLocation } from 'react-router-dom'
-import { useLenis } from 'lenis/react'
-import { useEffect } from 'react'
-import ScrollTrigger from 'gsap/ScrollTrigger'
+import { useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useLenis } from 'lenis/react';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
+// При смене страницы — всегда наверх, до того как новая страница создаст свои анимации
 export default function ScrollToTop() {
-  const { pathname } = useLocation()
-  const lenis = useLenis()
+  const { pathname } = useLocation();
+  const lenis = useLenis();
 
-  useEffect(() => {
-    if (!lenis) return
+  // useLayoutEffect — срабатывает до отрисовки кадра и раньше эффектов страницы:
+  // ScrollTrigger новой страницы посчитает позиции уже от верха,
+  // и анимации первого экрана сыграют у тебя на глазах
+  useLayoutEffect(() => {
+    // force: true — сработать, даже если Lenis остановлен
+    // (бургер-меню или попап ещё закрываются)
+    lenis?.scrollTo(0, { immediate: true, force: true });
 
-    // 1. Сброс скролла
-    lenis.scrollTo(0, { immediate: true })
+    // Нативный сброс — на случай, если Lenis считает, что он уже наверху,
+    // и поэтому ничего не делает
+    window.scrollTo(0, 0);
 
-    // 2. Обновляем ScrollTrigger ПОСЛЕ рендера новой страницы
-    requestAnimationFrame(() => {
-      ScrollTrigger.refresh()
-    })
+    // Новая страница уже в DOM — пересчитываем позиции анимаций
+    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(id);
+  }, [pathname, lenis]);
 
-  }, [pathname, lenis])
-
-  return null
+  return null;
 }
