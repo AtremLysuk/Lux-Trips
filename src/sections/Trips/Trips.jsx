@@ -9,9 +9,13 @@ import SplitText from 'gsap/SplitText';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
-// Появление «из размытия» — общие значения для анимаций секции
-const BLUR_FROM = { opacity: 0, filter: 'blur(10px)' };
-const BLUR_TO = { opacity: 1, filter: 'blur(0px)', ease: 'power3.out' };
+// Крупные фразы: слова всплывают из размытия
+const WORDS_FROM = { yPercent: 60, autoAlpha: 0, filter: 'blur(10px)', duration: 1.6, stagger: 0.08 };
+// Мелкий текст: строки выезжают из-под маски
+const LINES_FROM = { yPercent: 100, duration: 1.2, stagger: 0.1 };
+// Картинки «проявляются» снизу вверх, как шторка
+const CLIP_HIDDEN = { clipPath: 'inset(100% 0% 0% 0%)' };
+const CLIP_SHOWN = { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut' };
 
 const Trips = () => {
   const sectionRef = useRef(null);
@@ -27,49 +31,62 @@ const Trips = () => {
   const imageRightRef = useRef(null);
 
   const bottomRef = useRef(null);
+  const bottomImageRef = useRef(null);
   const bottomTextRef = useRef(null);
+  const bottomLinkRef = useRef(null);
 
   useGSAP(
     (context, contextSafe) => {
-      // SplitText делит текст на строки по реальной ширине — нужны загруженные шрифты.
-      // aria: 'none' — не вешать aria-label на <p> (там он запрещён); при разбивке
-      // по строкам слова целые, скринридер и так прочитает текст нормально.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Параллакс: картинки по бокам едут при скролле с разной скоростью,
+      // поэтому кажутся на разном расстоянии от гор на фоне.
+      // Только шире 600px: на телефоне картинки стоят близко и наехали бы друг на друга.
+      // matchMedia сам уберёт анимации, когда ширина станет меньше
+      const parallax = (target, yPercent) =>
+        gsap.to(target, {
+          yPercent,
+          ease: 'none',
+          scrollTrigger: { trigger: contentRef.current, start: 'top bottom', end: 'bottom top', scrub: true },
+        });
+
+      gsap.matchMedia().add('(width > 600px)', () => {
+        parallax(imageLeftRef.current, -25);
+        parallax(imageRightRef.current, -50);
+      });
+
+      // SplitText делит текст по реальной ширине — нужны загруженные шрифты.
       // contextSafe: анимации создаются позже, в .then(), и без него useGSAP
-      // не удалил бы их (и не вернул текст из строк обратно) при уходе со страницы
+      // не удалил бы их при уходе со страницы
       const animate = contextSafe(() => {
-        // Шапка: заголовок, строки текста, левая картинка
-        const headerLines = new SplitText(headerTextRef.current, { type: 'lines', aria: 'none' }).lines;
+        // aria: 'none' — не вешать aria-label на <p>/<h2>: слова целые, скринридер прочитает
+        const words = (el) => SplitText.create(el, { type: 'words', aria: 'none' }).words;
+        // mask: 'lines' — каждая строка в обёртке с overflow: hidden, строка выезжает из-под неё
+        const lines = (el) => SplitText.create(el, { type: 'lines', mask: 'lines', aria: 'none' }).lines;
 
-        gsap
-          .timeline({ scrollTrigger: { trigger: headerRef.current, start: 'top 80%' } })
-          .fromTo(headerTitleRef.current, BLUR_FROM, { ...BLUR_TO, duration: 2 })
-          .fromTo(headerLines, { ...BLUR_FROM, y: 30 }, { ...BLUR_TO, y: 0, stagger: 0.3 }, '-=1.5')
-          .fromTo(imageLeftRef.current, BLUR_FROM, { ...BLUR_TO, duration: 2 }, '-=1.5');
+        const reveal = (trigger, start = 'top 80%') =>
+          gsap.timeline({ defaults: { ease: 'expo.out' }, scrollTrigger: { trigger, start } });
 
-        // Центр: подзаголовок, строки текста, правая картинка
-        const contentLines = new SplitText(contentTextRef.current, { type: 'lines', aria: 'none' }).lines;
+        // Шапка: заголовок по словам, текст по строкам
+        reveal(headerRef.current)
+          .from(words(headerTitleRef.current), WORDS_FROM)
+          .from(lines(headerTextRef.current), LINES_FROM, 0.2);
 
-        gsap
-          .timeline({ scrollTrigger: { trigger: contentRef.current, start: 'top 20%' } })
-          .fromTo(subtitleRef.current, BLUR_FROM, { ...BLUR_TO, duration: 1 })
-          .fromTo(contentLines, { ...BLUR_FROM, y: 30 }, { ...BLUR_TO, y: 0, duration: 1, stagger: 0.3 }, '-=0.7')
-          .fromTo(imageRightRef.current, BLUR_FROM, { ...BLUR_TO, duration: 2 }, '-=1');
+        // Левая картинка
+        reveal(contentRef.current, 'top 70%').fromTo(imageLeftRef.current, CLIP_HIDDEN, CLIP_SHOWN);
 
-        // Низ: строки по очереди поднимаются и проявляются
-        const bottomLines = new SplitText(bottomTextRef.current, { type: 'lines', aria: 'none' }).lines;
+        // Центр: фраза, текст, правая картинка
+        reveal(subtitleRef.current, 'top 85%')
+          .from(words(subtitleRef.current), WORDS_FROM)
+          .from(lines(contentTextRef.current), LINES_FROM, 0.2)
+          .fromTo(imageRightRef.current, CLIP_HIDDEN, CLIP_SHOWN, 0.1);
 
-        gsap.fromTo(
-          bottomLines,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: 'power3.out',
-            stagger: 0.15,
-            scrollTrigger: { trigger: bottomRef.current, start: 'top 70%' },
-          },
-        );
+        // Низ: фото открывается шторкой и чуть «отъезжает» внутри, потом текст и кнопка
+        reveal(bottomRef.current, 'top 75%')
+          .fromTo(bottomImageRef.current, CLIP_HIDDEN, CLIP_SHOWN)
+          .from(bottomImageRef.current.firstElementChild, { scale: 1.3, duration: 2 }, 0)
+          .from(words(bottomTextRef.current), WORDS_FROM, 0.4)
+          .from(bottomLinkRef.current, { y: 20, autoAlpha: 0, duration: 1 }, 1);
       });
 
       document.fonts.ready.then(animate);
@@ -110,7 +127,7 @@ const Trips = () => {
           </div>
 
           <div className="trips__content-bottom content-bottom" ref={bottomRef}>
-            <div className="content-bottom__image">
+            <div className="content-bottom__image" ref={bottomImageRef}>
               <img
                 src="/images/trips/image-bottom.webp"
                 alt="Couple relaxing in a wicker lounge on a terrace at sunset"
@@ -126,7 +143,7 @@ const Trips = () => {
                   attention to detail.
                 </p>
               </div>
-              <Link className="content-bottom__link" to="/request">
+              <Link className="content-bottom__link" to="/request" ref={bottomLinkRef}>
                 help me plan a trip
               </Link>
             </div>
