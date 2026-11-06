@@ -26,7 +26,6 @@
 }
 
 .layers {
-  --scrollTop: 0px;
   height: 110vh;
   display: flex;
   align-items: center;
@@ -54,20 +53,18 @@
       rgba(226, 211, 206, 0.35) 50%,
       rgba(226, 211, 206, 1) 100%
     );
-    // Выше переднего слоя гор (у него zIndex: 100 в Hero.jsx)
+    // Выше переднего слоя гор (у него z-index: 100)
     z-index: 101;
     // Градиент не должен перехватывать клики
     pointer-events: none;
   }
 
   &__base {
-    transform: translate3d(0, calc(var(--scrollTop) * 0.4), 0);
     z-index: 0;
   }
 
   &__subtitle {
     padding-top: 8%;
-    transform: translate3d(0, calc(var(--scrollTop) * 0.25), 0);
   }
 
   &__title {
@@ -97,20 +94,23 @@
       text-transform: uppercase;
       text-align: center;
       color: #fcfcfc;
-      will-change: transform;
-      transform: translate3d(0, calc(var(--scrollTop) * 0.5), 0);
 
       @media (width <= 380px) {
         font-size: 62px;
       }
     }
 
+    // Слово, разбитое SplitText на буквы, переносится только целиком.
+    // Отдельные буквы теряют кернинг, слово чуть шире, и без nowrap
+    // последняя буква могла уйти на новую строку («ORDINAR / Y»)
+    .hero-word {
+      white-space: nowrap;
+    }
+
     h1 {
       position: relative;
       margin-top: 125px;
       font-size: fluid(160, 70);
-      will-change: transform;
-      transform: translate3d(0, calc(var(--scrollTop) * -0.25), 0);
 
       @media (width <= 380px) {
         font-size: 62px;
@@ -119,13 +119,12 @@
   }
 
   &__middle {
-    transform: translate3d(0, calc(var(--scrollTop) * 0.35), 0);
     z-index: 1;
   }
 
   &__front {
-    transform: translate3d(0, calc(var(--scrollTop) * 0.15), 0);
-    z-index: 5;
+    // Передние горы выше заголовка: при скролле он уходит за них
+    z-index: 100;
   }
 }
 
@@ -144,7 +143,6 @@
   display: block;
   position: relative;
   margin-top: 15px;
-  transform: translate3d(0, calc(var(--scrollTop) * -0.05), 0);
 }
 
 .header-top {
@@ -162,9 +160,12 @@
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, 0.3);
 
+    // Логотип — файл <img>; svg оставлен, пока в Header.jsx не заменён inline-логотип
     .header-top__inner-logo {
-      svg {
+      svg,
+      img {
         height: 45px;
+        width: auto;
       }
     }
 
