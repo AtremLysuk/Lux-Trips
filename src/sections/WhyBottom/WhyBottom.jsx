@@ -2,49 +2,71 @@ import '@/scss/blocks/_why-bottom.scss';
 
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
-import { useGSAP } from '@gsap/react';
+import SplitText from 'gsap/SplitText';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
+
+// Мелкий текст: строки выезжают из-под маски — как в Trips и WhyTop
+const LINES_FROM = { yPercent: 100, duration: 1.2, stagger: 0.1, ease: 'expo.out' };
 
 const WhyBottom = () => {
   const containerRef = useRef(null);
   const textTopRef = useRef(null);
   const textCenterRef = useRef(null);
   const textBotRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useGSAP(
     (context, contextSafe) => {
-      // SplitText делит текст на строки по реальной ширине — нужны загруженные шрифты.
-      // aria: 'none' — не вешать aria-label на <p> (там он запрещён); при разбивке
-      // по строкам слова целые, скринридер и так прочитает текст нормально.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // SplitText делит текст по реальной ширине — нужны загруженные шрифты.
       // contextSafe: анимации создаются позже, в .then(), и без него useGSAP
-      // не удалил бы их (и не вернул текст из строк обратно) при уходе со страницы
+      // не удалил бы их (и не вернул текст обратно) при уходе со страницы
       const animate = contextSafe(() => {
-        const split = new SplitText([textTopRef.current, textBotRef.current], {
-          type: 'lines',
-          linesClass: 'split-line',
-          aria: 'none',
+        // aria: 'none' — не вешать aria-label на <p>: слова целые, скринридер прочитает
+        const lines = (el) => SplitText.create(el, { type: 'lines', mask: 'lines', aria: 'none' }).lines;
+
+        gsap.from(lines(textTopRef.current), {
+          ...LINES_FROM,
+          scrollTrigger: { trigger: textTopRef.current, start: 'top 85%' },
         });
 
-        gsap
-          .timeline({
-            scrollTrigger: { trigger: containerRef.current, start: 'top 55%', once: true },
-          })
-          .from(split.lines, {
-            y: 20,
-            opacity: 0,
-            stagger: 0.06,
-            ease: 'power4.out',
-            duration: 0.9,
-          })
-          .from(
-            textCenterRef.current,
-            { opacity: 0, y: 10, duration: 0.6, ease: 'power2.out' },
-            '-=0.4',
-          );
+        // Главная фраза «проявляется» по мере скролла: слова из бледных становятся
+        // чёрными одно за другим. scrub — прогресс привязан к скроллу, листаешь
+        // назад — слова снова бледнеют
+        const words = SplitText.create(textCenterRef.current, { type: 'words', aria: 'none' }).words;
+        gsap.fromTo(
+          words,
+          { opacity: 0.15 },
+          {
+            opacity: 1,
+            ease: 'none',
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: textCenterRef.current,
+              start: 'top 80%',
+              end: 'bottom 45%',
+              scrub: true,
+            },
+          },
+        );
+
+        gsap.from(lines(textBotRef.current), {
+          ...LINES_FROM,
+          scrollTrigger: { trigger: textBotRef.current, start: 'top 85%' },
+        });
+
+        gsap.from(buttonRef.current, {
+          y: 30,
+          autoAlpha: 0,
+          duration: 1.2,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: buttonRef.current, start: 'top 90%' },
+        });
       });
 
       document.fonts.ready.then(animate);
@@ -81,7 +103,7 @@ const WhyBottom = () => {
             </li>
           </ul>
 
-          <div className="customize__button">
+          <div className="customize__button" ref={buttonRef}>
             <Link className="customize__link" to="/contacts">
               Contact us
             </Link>
