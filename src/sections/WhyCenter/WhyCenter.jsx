@@ -4,11 +4,19 @@ import 'swiper/css';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import SplitText from 'gsap/SplitText';
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, DrawSVGPlugin);
+
+// Те же приёмы, что в остальных секциях, — чтобы сайт выглядел единым стилем
+const WORDS_FROM = { yPercent: 60, autoAlpha: 0, filter: 'blur(10px)', duration: 1.6, stagger: 0.08 };
+const LINES_FROM = { yPercent: 100, duration: 1.2, stagger: 0.1 };
+const CLIP_HIDDEN = { clipPath: 'inset(100% 0% 0% 0%)' };
+const CLIP_SHOWN = { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut' };
 
 const CENTER_ITEMS = [
   { dt: 'Luxury trips provided', dd: '985' },
@@ -33,41 +41,96 @@ const WhyCenter = () => {
   const cloudRightRef = useRef(null);
 
   useGSAP(
-    () => {
-      // Ромбы со статистикой появляются по одному, когда доходят до экрана
-      gsap.utils.toArray('.experiencee-center__item').forEach((item) => {
-        gsap.from(item, {
-          opacity: 0,
-          scale: 0,
-          duration: 1,
-          scrollTrigger: { trigger: item, start: 'bottom 80%' },
-        });
+    (context, contextSafe) => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Селектор, который ищет только внутри секции
+      const q = gsap.utils.selector(containerRef);
+
+      // Облака медленно расходятся в стороны по мере скролла — как будто камера
+      // пролетает сквозь них. scrub привязывает движение к скроллу
+      const drift = (target, xPercent) =>
+        gsap.fromTo(
+          target,
+          { xPercent: 0 },
+          {
+            xPercent,
+            ease: 'none',
+            scrollTrigger: { trigger: containerRef.current, start: 'top bottom', end: 'bottom top', scrub: true },
+          },
+        );
+      drift(cloudLeftRef.current, -40);
+      drift(cloudRightRef.current, 40);
+
+      // Ромбы со статистикой: контур рисуется линией, число «набегает» от нуля
+      q('.experiencee-center__item').forEach((item, index) => {
+        const number = item.querySelector('dd');
+
+        gsap
+          .timeline({
+            delay: index * 0.15,
+            defaults: { ease: 'expo.out' },
+            scrollTrigger: { trigger: item, start: 'top 85%' },
+          })
+          // drawSVG: 0 — линия контура нулевой длины, дальше дорисовывается до конца
+          .from(item.querySelector('path'), { drawSVG: 0, duration: 2, ease: 'power2.inOut' })
+          // textContent: 0 — счёт от нуля, snap — только целые числа
+          .from(number, { textContent: 0, snap: { textContent: 1 }, duration: 2 }, 0.3)
+          .from([number, item.querySelector('dt')], { autoAlpha: 0, y: 15, duration: 1, stagger: 0.1 }, 0.3);
       });
 
-      // Облака выплывают с боков — каждое по своему триггеру
-      gsap.from(cloudLeftRef.current, {
-        opacity: 0.1,
-        x: -100,
-        duration: 1.5,
-        scrollTrigger: { trigger: cloudLeftRef.current, start: 'top 80%' },
+      // SplitText делит текст по реальной ширине — нужны загруженные шрифты.
+      // contextSafe: анимации создаются позже, в .then(), и без него useGSAP
+      // не удалил бы их при уходе со страницы
+      const animate = contextSafe(() => {
+        // aria: 'none' — не вешать aria-label на <p>/<h3>: слова целые, скринридер прочитает
+        const words = (el) => SplitText.create(el, { type: 'words', aria: 'none' }).words;
+        const lines = (el) => SplitText.create(el, { type: 'lines', mask: 'lines', aria: 'none' }).lines;
+        const reveal = (trigger, start = 'top 80%') =>
+          gsap.timeline({ defaults: { ease: 'expo.out' }, scrollTrigger: { trigger, start } });
+
+        // Верх: заголовок по словам, текст по строкам
+        reveal(q('.experiencee-top'))
+          .from(words(q('.experiencee-top__title')), WORDS_FROM)
+          .from(lines(q('.experiencee-top__text p')), LINES_FROM, 0.2);
+
+        // Фраза и подзаголовок над фото
+        reveal(q('.experiencee-content__title'), 'top 85%')
+          .from(words(q('.experiencee-content__title')), WORDS_FROM)
+          .from(lines(q('.experiencee-content__descr')), LINES_FROM, 0.3);
+
+        // Фото шторкой, внутри лёгкий «отъезд»; рядом текст по строкам и кнопка
+        const image = q('.content__center-image')[0];
+        reveal(q('.content__center'), 'top 75%')
+          .fromTo(image, CLIP_HIDDEN, CLIP_SHOWN)
+          .from(image.firstElementChild, { scale: 1.3, duration: 2 }, 0)
+          .from(lines(q('.content__center-text p')), LINES_FROM, 0.4)
+          .from(q('.content__center-button-wrapper'), { y: 30, autoAlpha: 0, duration: 1.2 }, 0.8);
+
+        // Финальная фраза по словам
+        reveal(q('.experiencee-content__bottom-text'), 'top 85%').from(
+          words(q('.experiencee-content__bottom-text p')),
+          WORDS_FROM,
+        );
+
+        // Слайдер: карточки поднимаются по очереди, потом кнопка
+        reveal(q('.why-slider'), 'top 80%')
+          .from(q('.why-slide'), { y: 60, autoAlpha: 0, duration: 1.4, stagger: 0.12 })
+          .from(q('.why-slider .customize__button'), { y: 30, autoAlpha: 0, duration: 1.2 }, 0.4);
       });
 
-      gsap.from(cloudRightRef.current, {
-        opacity: 0.1,
-        x: 100,
-        duration: 1.5,
-        scrollTrigger: { trigger: cloudRightRef.current, start: 'center 60%' },
-      });
+      document.fonts.ready.then(animate);
     },
     { scope: containerRef },
   );
 
   return (
     <section className="experiencee" ref={containerRef} aria-labelledby="experiencee-title">
-      <div className="experiencee-cloud experiencee-cloud__left" ref={cloudLeftRef}>
+      {/* Декоративные облака: скринридеру читать не нужно */}
+      <div className="experiencee-cloud experiencee-cloud__left" ref={cloudLeftRef} aria-hidden="true">
         <img src="/images/why/cloud-left.webp" alt="" />
       </div>
-      <div className="experiencee-cloud experiencee-cloud__right" ref={cloudRightRef}>
+      <div className="experiencee-cloud experiencee-cloud__right" ref={cloudRightRef} aria-hidden="true">
         <img src="/images/why/cloud-center.webp" alt="" />
       </div>
 
