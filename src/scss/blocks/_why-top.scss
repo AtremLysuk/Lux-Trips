@@ -24,6 +24,17 @@
     }
   }
 
+  // Строки заголовка (раньше были разделены <br>)
+  &__title-line {
+    display: block;
+  }
+
+  // Слово, разбитое SplitText на буквы, переносится только целиком:
+  // без кернинга оно чуть шире и могло бы потерять последнюю букву
+  &__title-word {
+    white-space: nowrap;
+  }
+
   &__items {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
