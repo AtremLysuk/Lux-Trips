@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+# Серверная сборка для prerender (удаляется после build)
+dist-server
 *.local
 
 # Editor directories and files

@@ -2,15 +2,19 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
 // Очередь «свободных» моментов браузера. Секции встают в неё по порядку
-// и рисуются по одной, пока пользователь ещё смотрит первый экран
-const requestIdle = window.requestIdleCallback ?? ((callback) => setTimeout(callback, 200));
-const pageLoaded = new Promise((resolve) => {
-  if (document.readyState === 'complete') resolve();
-  else window.addEventListener('load', resolve, { once: true });
-});
-let idleQueue = pageLoaded;
+// и рисуются по одной, пока пользователь ещё смотрит первый экран.
+// Очередь создаётся при первом вызове, а не при импорте файла: при prerender
+// этот код выполняется в Node, где нет window и document
+let idleQueue = null;
 
 const waitForIdle = () => {
+  const requestIdle = window.requestIdleCallback ?? ((callback) => setTimeout(callback, 200));
+
+  idleQueue ??= new Promise((resolve) => {
+    if (document.readyState === 'complete') resolve();
+    else window.addEventListener('load', resolve, { once: true });
+  });
+
   idleQueue = idleQueue.then(
     () => new Promise((resolve) => requestIdle(resolve, { timeout: 1500 })),
   );
