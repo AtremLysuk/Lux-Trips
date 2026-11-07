@@ -48,9 +48,11 @@ const Hero = () => {
         // words — чтобы перенос строк не разрывал слово посередине
         // (класс hero-word запрещает перенос внутри слова, см. _Header.scss).
         // Без mask: у заголовка очень плотный line-height, маска обрезала бы низ букв
+        // aria: 'none' — название заголовка уже задано в разметке (aria-label у h1)
         const split = SplitText.create(titleRef.current.children, {
           type: 'words,chars',
           wordsClass: 'hero-word',
+          aria: 'none',
         });
 
         gsap
@@ -82,9 +84,15 @@ const Hero = () => {
         />
 
         <div ref={titleWrapRef} className="header__title layer layers__title">
-          <h1 ref={titleRef} id="hero-title">
-            <span className="h1">EXTRA ORDINARY</span>
-            <span className="header-title-places h1">PLACES</span>
+          {/* Буквы разбиты на отдельные элементы, поэтому скринридер получает
+              целое название из aria-label, а сами буквы от него скрыты */}
+          <h1 ref={titleRef} id="hero-title" aria-label="Extra ordinary places">
+            <span className="h1" aria-hidden="true">
+              EXTRA ORDINARY
+            </span>
+            <span className="header-title-places h1" aria-hidden="true">
+              PLACES
+            </span>
           </h1>
         </div>
 

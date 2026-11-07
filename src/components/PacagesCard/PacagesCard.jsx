@@ -18,13 +18,10 @@ const PacagesCard = ({ el }) => {
         {title}
       </h3>
 
-      <Link
-        className="packages-card__button"
-        to="/packages"
-        // В списке ссылок «12 places» без контекста непонятна.
-        // Подпись начинается с видимого текста — так её можно назвать голосом
-        aria-label={`${palacesCount} places in ${title}`}
-      >
+      {/* В списке ссылок «12 places» без контекста непонятна, поэтому название
+          направления добавлено скрытым текстом. Не aria-label: он заменил бы
+          видимый текст, а имя ссылки должно его содержать (для голосового управления) */}
+      <Link className="packages-card__button" to="/packages">
         <span className="packages-card__count">{palacesCount}</span>
 
         <span className="packages-card__button-link">
@@ -41,6 +38,8 @@ const PacagesCard = ({ el }) => {
             <path d="M0 4H12M12 4L8.5 1M12 4L8.5 7" stroke="white" />
           </svg>
         </span>
+
+        <span className="visually-hidden"> in {title}</span>
       </Link>
     </article>
   );
