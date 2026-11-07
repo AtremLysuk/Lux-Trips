@@ -39,8 +39,9 @@ const Hero = () => {
         .to(middleRef.current, { yPercent: 18 }, 0)
         .to(titleWrapRef.current, { yPercent: 45, autoAlpha: 0 }, 0);
 
-      // Заголовок прячем сразу, чтобы до загрузки шрифта не мелькал текст
-      gsap.set(titleRef.current, { autoAlpha: 0 });
+      // Стартовое состояние интро (заголовок размыт, слои смещены) задано в _Header.scss:
+      // главная приходит готовым HTML (prerender), и CSS применяется ещё до запуска JS.
+      // Если прятать заголовок из JS, он сначала мелькнёт, а потом исчезнет
 
       // Анимация появления. Свойства не пересекаются с параллаксом:
       // здесь scale и y (px), там yPercent — GSAP складывает их, а не перезаписывает
@@ -57,13 +58,16 @@ const Hero = () => {
 
         gsap
           .timeline({ defaults: { ease: 'expo.out' } })
-          .set(titleRef.current, { autoAlpha: 1 })
-          .from(baseRef.current, { scale: 1.2, duration: 2.6 }, 0)
-          .from(middleRef.current, { y: 80, duration: 2.4 }, 0)
-          .from(frontRef.current, { y: 160, duration: 2.2 }, 0)
+          // Снимаем стартовое размытие с h1 — дальше размытием управляют буквы
+          .set(titleRef.current, { opacity: 1, filter: 'none' })
+          // fromTo, а не from: стартовые значения уже стоят из CSS, и from
+          // принял бы их за конечные — слои остались бы смещёнными
+          .fromTo(baseRef.current, { scale: 1.2 }, { scale: 1, duration: 2.6 }, 0)
+          .fromTo(middleRef.current, { y: 80 }, { y: 0, duration: 2.4 }, 0)
+          .fromTo(frontRef.current, { y: 160 }, { y: 0, duration: 2.2 }, 0)
           .from(
             split.chars,
-            { yPercent: 40, autoAlpha: 0, filter: 'blur(12px)', duration: 1.8, stagger: 0.05 },
+            { yPercent: 40, opacity: 0.2, filter: 'blur(12px)', duration: 1.8, stagger: 0.05 },
             0.3,
           );
       });
